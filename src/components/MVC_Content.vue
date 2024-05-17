@@ -7,6 +7,9 @@
                         <span class="title">
                             영화 리뷰
                         </span>
+                        <span class="more">
+                            <a>+more</a>
+                        </span>
                     </div>
                     <div class="board-content">
                         <table>
@@ -167,6 +170,9 @@
                         <span class="title">
                             영화 토크
                         </span>
+                        <span class="more">
+                            <a>+more</a>
+                        </span>
                     </div>
                     <div class="board-content">
                         <table>
@@ -294,7 +300,7 @@
                                             <div class="inner_list">
                                                 <a href="#" class="article">
                                                     <span>
-                                                        범죄도시4 볼만하냐? 
+                                                        범죄도시4 볼만하냐?
                                                     </span>
                                                 </a>
                                                 <a href="#" class="cmt">
@@ -313,12 +319,15 @@
                                         <span class="">/</span>
                                         <span class="objc">80</span>
                                     </td>
-                                    <td class="date">16:29</td>
+                                    <td class="date">2024.05.18</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="star">
+
             </div>
         </div>
     </section>
