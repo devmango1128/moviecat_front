@@ -446,10 +446,33 @@ fieldset {
     margin-bottom: 10px !important;
 }
 
+.mg-b20 {
+    margin-bottom: 20px !important;
+}
+
 .mg-t10 {
     margin-top: 10px !important;
 }
 
+.mg-t20 {
+    margin-top: 20px !important;
+}
+
+.mg-r10 {
+    margin-right: 10px !important
+}
+
+.mg-l0 {
+    margin-left: 0px !important;
+}
+
+.mg-10 {
+    margin: 10px; 
+}
+
+.w-49p {
+    width: 49% !important;
+}
 /*header*/
 
 .header-element .top_info {
