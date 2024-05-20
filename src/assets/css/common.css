@@ -811,7 +811,7 @@ fieldset {
 }
 
 .board-contents .board-content table tbody tr.popularity td a.article span {
-    color: #ff4e59;
+   /* color: #ff4e59;*/
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
@@ -1007,7 +1007,7 @@ fieldset {
 }
 
 .board-contents .board-content table tbody tr.popularity td a.article span{
-    color: #ff4e59;
+    /*color: #ff4e59;*/
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
