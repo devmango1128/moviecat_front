@@ -5,8 +5,8 @@
         <p>영화 커뮤니티 무비캣입니다.</p>
         <div class="top_right_menu">
           <ul>
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
+            <li><router-link to="/login">로그인</router-link></li>
+            <li><router-link to="/join">회원가입</router-link></li>
           </ul>
         </div>
       </div>
@@ -14,9 +14,9 @@
     <div class="body-area">
       <div class="gnb-element">
         <h1 class="logo-area">
-          <a href="#">
+          <router-link to="/">
             <span class="movie">MOVIE</span><span class="cat">CAT</span>
-          </a>
+          </router-link>
         </h1>
         <ul class="gnb-area" id="gnb">
           <li class="gnb_menu menu1">

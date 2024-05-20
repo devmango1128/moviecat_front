@@ -260,7 +260,7 @@ template {
 
 body {
     width: 100%;
-    min-width: 320px;
+    min-width: 1280px;
     min-height: 100vh;
     font-family: var(--vt-font-family-base);
     letter-spacing: .2px;
@@ -435,6 +435,19 @@ select {
 fieldset {
     margin: 0;
     padding: 0
+}
+
+/*margin*/
+.mg-b5 {
+    margin-bottom:5px !important;
+}
+
+.mg-b10 {
+    margin-bottom: 10px !important;
+}
+
+.mg-t10 {
+    margin-top: 10px !important;
 }
 
 /*header*/
