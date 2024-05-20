@@ -1160,7 +1160,7 @@ fieldset {
     display: inline-block;
     width: 100%;
     font-size: 14px;
-    color: #838383;
+    color: #333;
     letter-spacing: 0;
     font-weight: bold;
 }
@@ -1173,6 +1173,21 @@ fieldset {
     letter-spacing: 0;
 }
 
+#footer .bot .inner>div.left span.github a{
+    margin-left:18px;
+}
+
+#footer .bot .inner>div.left span.github::before {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    vertical-align: middle;
+    content: "";
+    margin-top:5px;
+    background: url('/src/assets/github_icon.png') 0 0/cover no-repeat;
+}
+
 #footer .bot .inner>div.left span.mail {
     display: inline-block;
     width: 100%;
@@ -1180,3 +1195,19 @@ fieldset {
     color: #838383;
     letter-spacing: 0;
 }
+
+#footer .bot .inner>div.left span.mail a {
+    margin-left: 18px;
+}
+
+#footer .bot .inner>div.left span.mail::before {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    vertical-align: middle;
+    content: "";
+    margin-top: 5px;
+    background: url('/src/assets/email_icon.png') 0 0/cover no-repeat;
+}
+
