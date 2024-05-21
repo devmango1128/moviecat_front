@@ -450,6 +450,10 @@ fieldset {
     margin-bottom: 20px !important;
 }
 
+.mg-b210 {
+    margin-bottom: 210px !important;
+}
+
 .mg-t10 {
     margin-top: 10px !important;
 }
@@ -1191,10 +1195,8 @@ fieldset {
 /*footer*/
 #footer {
     border-top: 1px solid #d9d9d9;
-    height: 200px;
-    display: block;
-    margin: 0;
-    padding: 0;
+    height: 250px;
+    background-color: #f5f7fa;
 }
 
 #footer .top {
