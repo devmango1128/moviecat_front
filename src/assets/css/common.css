@@ -458,6 +458,10 @@ fieldset {
     margin-top: 20px !important;
 }
 
+.mg-t50 {
+    margin-top: 50px !important;
+}
+
 .mg-r10 {
     margin-right: 10px !important
 }
@@ -466,13 +470,79 @@ fieldset {
     margin-left: 0px !important;
 }
 
+.mg-l14{
+    margin-left: 14px !important;
+}
+
 .mg-10 {
     margin: 10px; 
+}
+
+.w-39p {
+    width: 39% !important;
 }
 
 .w-49p {
     width: 49% !important;
 }
+
+.w-70p {
+    width: 70% !important;
+}
+
+.w-95 {
+    width: 95px !important;
+}
+
+/* button */
+.btn-ln-blue {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #006ae2;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #006ae2;
+}
+
+.btn-fl-blue {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #006ae2;
+    background: #006ae2;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #fff;
+    width: 100px;
+    margin-top: 10px;
+}
+
+/* display */
+.dis-hide {
+    display: none !important;
+}
+
+.dis-show {
+    display: block !important;
+}
+
+/*text-align*/
+.ta-c {
+    text-align: center;
+}
+
+/*color*/
+.col-blue {
+    color: #006ae2
+}
+
+/*font*/
+.fw-b {
+    font-weight: bold;
+}
+
 /*header*/
 
 .header-element .top_info {
