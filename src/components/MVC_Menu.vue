@@ -20,16 +20,16 @@
         </h1>
         <ul class="gnb-area" id="gnb">
           <li class="gnb_menu menu1">
-            <a href="#">영화리뷰</a>
+            <router-link to="/movieboard/1">영화리뷰</router-link>
           </li>
           <li class="gnb_menu menu2">
-            <a href="#">영화토크</a>
+            <router-link to="/movieboard/2">영화토크</router-link>
           </li>
           <li class="gnb_menu menu3">
-            <a href="#">생활토크</a>
+            <router-link to="/movieboard/3">생활토크</router-link>
           </li>
           <li class="gnb_menu menu4">
-            <a href="#">영화평점</a>
+            <router-link to="/moviegrade">영화평점</router-link>
           </li>
         </ul>
         <div class="input-search">
