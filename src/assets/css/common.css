@@ -1321,6 +1321,13 @@ fieldset {
     box-sizing: border-box;
 }
 
+.contentsWrap .contents .total-cnt {
+    width: 100%;
+    text-align: right;
+    font-weight: 700;
+    font-size: 13px;
+}
+
 .contentsWrap .contents .cont-inner {
     max-width: 100%;
     padding-bottom: 50px;
