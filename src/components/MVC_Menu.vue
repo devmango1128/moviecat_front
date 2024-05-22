@@ -4,9 +4,14 @@
       <div class="top_inner">
         <p>영화 커뮤니티 무비캣입니다.</p>
         <div class="top_right_menu">
-          <ul>
+          <ul v-if="!isLogin">
             <li><router-link to="/login">로그인</router-link></li>
             <li><router-link to="/join">회원가입</router-link></li>
+          </ul>
+          <ul v-else>
+            <li><router-link to="/">홍길동님</router-link></li>
+            <li><router-link to="/">마이페이지</router-link></li>
+            <li><router-link to="/">로그아웃</router-link></li>
           </ul>
         </div>
       </div>
@@ -43,6 +48,9 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const isLogin = ref(false)
 
 </script>
 
