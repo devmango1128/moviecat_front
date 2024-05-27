@@ -1369,6 +1369,7 @@ fieldset {
 
 .contentsWrap .contents .cont-inner .tbl-list.border th {
     font-weight: bold;
+    text-align: center;
 }
 
 .contentsWrap .contents .cont-inner .tbl-list th {
@@ -1447,37 +1448,36 @@ fieldset {
 }
 
 .search-box {
+    display: flex;
     justify-content: center;
 }
 
 .search-box .input-inbox {
     padding: 0 14px;
-    margin-left: 20px;
+    margin-left: 10px;
     border: 1px solid #e3e3e3;
     position: relative;
     display: block;
     background: #fff;
-    height: auto;
-    line-height: inherit;
     height: 43px;
     line-height: 38px;
     font-size: 14px;
-    width: 50%;
+    width: 300px;
     float: left;
-    margin-right: 20px;
 }
 
 .search-box .form-select {
-    width: 20%;
+    width: 150px;
     float: left;
     line-height: 1.8;
+    border: 1px solid #e3e3e3;
+    border-radius: initial;
 }
 
-.search-box .btn-blue{
+.search-box .btn-blue {
     display: block;
-    width: 10%;
-    padding: 9px 0 9px;
-    border-radius: 6px;
+    width: 120px;
+    padding: 9px 0 8px;
     border: solid 1px rgba(0, 0, 0, .15);
     background-color: #006ae2;
     box-sizing: border-box;

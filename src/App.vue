@@ -21,4 +21,5 @@ export default {
  @import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
  @import './assets/css/common.css';
  @import './assets/css/login.css';
+ @import './assets/css/grade.css'
 </style>
