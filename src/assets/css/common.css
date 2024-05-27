@@ -1503,3 +1503,31 @@ fieldset {
     color: #fff;
     border-radius: 3px;
 }
+
+.declaration-area {
+    display: block;
+    width: 100%;
+}
+
+.declaration-area .detail-contents span {
+    font-size: 0.8rem;
+    width:100%;
+    display: block;
+}
+
+.declaration-area .declaration-list {
+    font-size: 0.8rem;
+    width: 100%;
+    display: block;
+    background-color: #e2e2e2;
+    padding:10px;
+}
+
+.declaration-area .declaration-list span {
+    font-size: 0.8rem;
+    display: block;
+}
+
+.declaration-area .declaration-list input[type=radio] {
+    margin-right: 5px;
+}
