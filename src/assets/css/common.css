@@ -2097,3 +2097,14 @@ textarea.comment_inbox_text {
     font: inherit;
     vertical-align: baseline;
 }
+
+.p-button {
+    color: #ffffff !important;
+    background: #10b981 !important;
+    border: 1px solid #10b981 !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1rem !important;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, outline-color 0.2s;
+    border-radius: 6px !important;
+    outline-color: transparent !important;
+}

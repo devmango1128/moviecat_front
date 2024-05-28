@@ -21,5 +21,9 @@ export default {
  @import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
  @import './assets/css/common.css';
  @import './assets/css/login.css';
- @import './assets/css/grade.css'
+ @import './assets/css/grade.css';
+
+ @import 'primevue/resources/themes/aura-light-green/theme.css';
+ @import 'primevue/resources/primevue.min.css';
+ @import 'primeicons/primeicons.css';
 </style>

@@ -221,8 +221,8 @@
                             </div>
                         </div>
                         <div class="btn-area mg-b50">
-                            <button class="list-btn">목록</button>
-                            <button class="reg-btn">수정</button>
+                            <button class="list-btn" @click="boardList">목록</button>
+                            <button class="reg-btn" @click="boardUpdate">수정</button>
                         </div>
                     </div>
                 </div>
@@ -231,9 +231,18 @@
     </section>
 </template>
 
-<script>
-export default {
+<script setup>
+import { useRouter, useRoute } from 'vue-router'
 
+const router = useRouter();
+const route = useRoute();
+
+const boardList = () => {
+    router.push(`/movieboard/${route.params.boardId}`)
+}
+
+const boardUpdate = () => {
+    router.push(`/movieboardUpt/${route.params.boardId}/${route.params.detailId}`)
 }
 </script>
 
