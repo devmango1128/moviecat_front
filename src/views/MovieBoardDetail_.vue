@@ -11,7 +11,8 @@
                             <div class="article_header">
                                 <div class="ArticleTitle">
                                     <div class="title_area">
-                                        <h3 class="title_text"><em class="sp">[스포]</em>범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!! </h3>
+                                        <h3 class="title_text"><em class="sp">[스포]</em>범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!!
+                                        </h3>
                                         <div class="WriterInfo">
                                             <div class="thumb_area">
                                                 <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
@@ -40,6 +41,27 @@
                                             바이커 군단의 폭군 ‘디멘투스’(크리스 헴스워스)의 손에 모든 것을 잃고 만다. 가족도 행복도 모두 빼앗기고 세상에 홀로 내던져진
                                             ‘퓨리오사’는 반드시 고향으로 돌아가겠다는 어머니와의 약속을 지키기 위해 인생 전부를 건 복수를 시작하는데... ‘매드맥스’ 시리즈의
                                             전설적인 사령관 ‘퓨리오사’의 대서사시 마침내 분노가 깨어난다!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="FileBox">
+                                    <div class="fileContent">
+                                        <div class="se-section se-section-file se-l-default se-section-align-">
+                                            <div class="se-module se-module-file">
+                                                <span class="se-file-icon">
+                                                    <strong class="se-blind">첨부파일</strong>
+                                                </span>
+                                                <div class="se-file-name-container">
+                                                    <span class="se-file-name">movie</span>
+                                                    <span class="se-file-extension">.pdf</span>
+                                                </div>
+                                                <a href="https://downapi.cafe.naver.com/v1.0/cafes/article/file/af99f911-dc28-11ee-a1b7-0050568d055f/download"
+                                                    class="se-file-save-button __se_link" role="button" target="_blank"
+                                                    data-linktype="file"
+                                                    data-linkdata="{&quot;link&quot;: &quot;https://downapi.cafe.naver.com/v1.0/cafes/article/file/af99f911-dc28-11ee-a1b7-0050568d055f/download&quot;}">
+                                                    <span class="se-blind">파일 다운로드</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

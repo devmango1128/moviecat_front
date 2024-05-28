@@ -1975,3 +1975,125 @@ textarea.comment_inbox_text {
     vertical-align: middle;
     margin-right: 5px;
 }
+
+.FileBox {
+    margin-top: 20px;
+}
+
+.FileBox .fileContent {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.FileBox .fileContent {
+    max-width: 620px;
+}
+
+.FileBox .se-section-file {
+    position: relative;
+    max-width: 450px;
+    vertical-align: top;
+}
+
+.FileBox .se-module-file {
+    min-height: 60px;
+    padding: 19px 70px 16px 55px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+    text-align: left;
+    box-sizing: border-box;
+    font-size: 0;
+}
+
+.FileBox .se-file-icon {
+    width: 21px;
+    height: 17px;
+    background-position: -23px -411px;
+    position: absolute;
+    top: 22px;
+    left: 20px;
+    background-image: url(/src/assets/se-sp-viewer.fc792692.png);
+    background-repeat: no-repeat;
+    background-size: 432px 428px;
+}
+
+.FileBox .se-file-name-container {
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.FileBox .se-file-name-container {
+    display: inline-block;
+    width: 100%;
+    font-size: 13px;
+    color: #333;
+    line-height: 1.69;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.FileBox .se-file-name {
+    line-height: 18px;
+    font-size: 14px;
+    color: #000;
+}
+
+.FileBox .se-file-name {
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    display: inline-block;
+    max-width: calc(100% - 26px);
+    vertical-align: middle;
+}
+
+.FileBox .se-file-extension {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.FileBox .se-file-save-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 66px;
+    height: 100%;
+}
+
+.FileBox .se-file-save-button:before {
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    background-position: -412px -20px;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-image: url(/src/assets/se-sp-viewer.fc792692.png);
+    background-repeat: no-repeat;
+    background-size: 432px 428px;
+}
+
+.FileBox .se-blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+    font: inherit;
+    vertical-align: baseline;
+}
