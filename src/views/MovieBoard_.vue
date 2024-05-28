@@ -33,11 +33,11 @@
                       <td class="tit">
                         <div class="board-list">
                           <div class="inner_list">
-                            <router-link :to="`/moveiboard/${$route.params.boardId}/${n}`">
+                            <router-link :to="`/movieboard/${$route.params.boardId}/${n}`">
                               <span class="article">
                                 <span class="list-new">N</span>
                                 <span>
-                                  범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!!
+                                  <em class="sp">[스포]</em>범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!!
                                 </span>
                               </span>
                               <span class="cmt">
@@ -59,7 +59,7 @@
               </div>
               <!--등록버튼-->
               <div class="reg-area">
-                <button class="btn-blue">등록</button>
+                <button class="btn-blue" @click="boardReg">등록</button>
               </div>
             </div>
             <!--paging-->
@@ -85,7 +85,14 @@
   </section>
 </template>
 
-<script>
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const boardReg = () => {
+  router.push('/movieboardReg');
+}
 </script>
 
 <style>

@@ -7,6 +7,7 @@ import FindIdPw from '../views/FindIdPw.vue'
 import MovieGrade from '../views/MovieGrade_.vue'
 import MovieBoard from '../views/MovieBoard_.vue'
 import MovieBoardDetail from '../views/MovieBoardDetail_.vue'
+import MovieBoardReg from '../views/MovieBoardReg.vue'
 
 const routes = [
   {
@@ -38,8 +39,12 @@ const routes = [
     component : MovieGrade
   },
   {
-    path:'/moveiboard/:boardId/:detailId',
+    path:'/movieboard/:boardId/:detailId',
     component : MovieBoardDetail
+  },
+  {
+    path:'/movieboardReg',
+    component : MovieBoardReg
   }
 ];
 

@@ -5,6 +5,205 @@
                 <div class="title" id="pageCont">
                     <h1>메뉴명</h1>
                 </div>
+                <div class="contentsWrap">
+                    <div class="contents">
+                        <div class="ArticleContentBox">
+                            <div class="article_header">
+                                <div class="ArticleTitle">
+                                    <div class="title_area">
+                                        <h3 class="title_text"><em class="sp">[스포]</em>범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!! </h3>
+                                        <div class="WriterInfo">
+                                            <div class="thumb_area">
+                                                <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
+                                                    alt="프로필 사진" width="36" height="36">
+                                            </div>
+                                            <div class="profile_area">
+                                                <div class="profile_info">
+                                                    <div class="nick_box">
+                                                        <button id="" class="nickname"> 서울남부강산</button>
+                                                    </div>
+                                                </div>
+                                                <div class="article_info">
+                                                    <span class="date">2024.05.27. 16:32</span>
+                                                    <span class="count">조회 69</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="article_container">
+                                <div class="article_viewer">
+                                    <div>
+                                        <div class="content CafeViewer">
+                                            문명 붕괴 45년 후, 황폐해진 세상 속 누구에게도 알려지지 않은 풍요가 가득한 ‘녹색의 땅’에서 자란 ‘퓨리오사’(안야 테일러-조이)는
+                                            바이커 군단의 폭군 ‘디멘투스’(크리스 헴스워스)의 손에 모든 것을 잃고 만다. 가족도 행복도 모두 빼앗기고 세상에 홀로 내던져진
+                                            ‘퓨리오사’는 반드시 고향으로 돌아가겠다는 어머니와의 약속을 지키기 위해 인생 전부를 건 복수를 시작하는데... ‘매드맥스’ 시리즈의
+                                            전설적인 사령관 ‘퓨리오사’의 대서사시 마침내 분노가 깨어난다!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ReplyBox">
+                                    <div class="box_left">
+                                        <div class="like_article">
+                                            <div class="cm_sympathy_area">
+                                                <button type="button" class="area_button_upvote  _btn_upvote">
+                                                    <span class="this_text_number _count_num">921</span>
+                                                </button>
+                                                <button type="button" class="area_button_downvote  _btn_downvote">
+                                                    <span class="this_text_number _count_num">70</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box_right">
+                                        <div class="report_article">
+                                            <a href="#" class="button_report">신고</a>
+                                        </div>
+                                    </div>
+                                    <div class="CommentBox">
+                                        <div class="comment_option">
+                                            <h3 class="comment_title"> 댓글 </h3>
+                                        </div>
+                                        <ul class="comment_list">
+                                            <li id="78075864" class="CommentItem">
+                                                <div class="comment_area">
+                                                    <a href="/ca-fe/cafes/29835300/members/fLBe6k9-K6w8xvJCdJLwrg"
+                                                        class="comment_thumb">
+                                                        <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
+                                                            alt="프로필 사진" width="36" height="36">
+                                                    </a>
+                                                    <div class="comment_box">
+                                                        <div data-v-326b2d52="" class="comment_nick_box">
+                                                            <div data-v-326b2d52="" class="comment_nick_info">
+                                                                <a data-v-326b2d52="" id="cih78075864" href="#"
+                                                                    role="button" aria-haspopup="true"
+                                                                    aria-expanded="false" class="comment_nickname"> 처기정
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment_text_box">
+                                                            <p class="comment_text_view">
+                                                                <span class="text_comment">보러갈까말까 고민중인데 솔직한 감상평
+                                                                    어때요???</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="comment_info_box">
+                                                            <span class="comment_info_date">2024.05.26. 12:57</span>
+                                                            <a href="#" role="button" class="comment_info_button">
+                                                                답글쓰기
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="78076014" class="CommentItem CommentItem--reply">
+                                                <div class="comment_area">
+                                                    <a href="/ca-fe/cafes/29835300/members/ml-ILJap4KnFnoBG2z2RBw"
+                                                        class="comment_thumb">
+                                                        <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMTA4MTlfMTg4/MDAxNjI5Mzc3MzM1MTc4.0H5o2BUv__cGRIS7N6t0V7wBLr3YDlJnaPF7c0PBVQ8g.VsT22ACmE734vXJY8dlFHqXx3Xck5rE7ri9OQ-kX61Ig.JPEG.wsg201/profileImage.jpg?type=c77_77"
+                                                            alt="프로필 사진" width="36" height="36">
+                                                    </a>
+                                                    <div class="comment_box">
+                                                        <div data-v-326b2d52="" class="comment_nick_box">
+                                                            <div data-v-326b2d52="" class="comment_nick_info">
+                                                                <a data-v-326b2d52="" id="cih78076014" href="#"
+                                                                    role="button" aria-haspopup="true"
+                                                                    aria-expanded="false" class="comment_nickname">
+                                                                    서울남부강산
+                                                                </a>
+                                                            </div>
+                                                            <em data-v-326b2d52="" class="comment_badge_writer">
+                                                                작성자
+                                                            </em>
+                                                        </div>
+                                                        <div class="comment_text_box">
+                                                            <p class="comment_text_view">
+                                                                <span class="text_comment">
+                                                                    전 괜찮았어요.<br>보러가보세요.</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="comment_info_box">
+                                                            <span class="comment_info_date">2024.05.26. 13:02</span>
+                                                            <a href="#" role="button" class="comment_info_button">
+                                                                답글쓰기</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="78076014" class="CommentItem CommentItem--reply">
+                                                <div class="comment_area">
+                                                    <a href="/ca-fe/cafes/29835300/members/ml-ILJap4KnFnoBG2z2RBw"
+                                                        class="comment_thumb">
+                                                        <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMjExMDlfMjU5/MDAxNjY3OTgyNjk3OTcx.R-h0abKBaY1gD7-7aOKdqodv-NRbhENxlwHFnDfQkFwg.oys1_BvKc933cBmcGUOVdPf6nK7OSgCXPh7MDDB0TvMg.JPEG.hojoon8019/KakaoTalk_20221109_173118967.jpg/KakaoTalk_20221109_173118967.jpg?type=c77_77"
+                                                            alt="프로필 사진" width="36" height="36">
+                                                    </a>
+                                                    <div class="comment_box">
+                                                        <div data-v-326b2d52="" class="comment_nick_box">
+                                                            <div data-v-326b2d52="" class="comment_nick_info">
+                                                                <a data-v-326b2d52="" id="cih78076014" href="#"
+                                                                    role="button" aria-haspopup="true"
+                                                                    aria-expanded="false" class="comment_nickname"> 홍길동
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment_text_box">
+                                                            <p class="comment_text_view">
+                                                                <a id="commentProfile77785895" href="#" role="button"
+                                                                    class="text_nickname">처기정</a>
+                                                                <span class="text_comment">
+                                                                    저도 괜찮았어요.<br>보러가보세요.</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="comment_info_box">
+                                                            <span class="comment_info_date">2024.05.26. 13:02</span>
+                                                            <a href="#" role="button" class="comment_info_button">
+                                                                답글쓰기</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="CommentItem CommentItem--reply">
+                                                <div class="CommentWriter">
+                                                    <div class="comment_inbox">
+                                                        <strong class="blind">댓글을 입력하세요</strong>
+                                                        <em class="comment_inbox_name">마동석</em>
+                                                        <textarea placeholder="처기정님께 답글쓰기" rows="1"
+                                                            class="comment_inbox_text"
+                                                            style="overflow: hidden; overflow-wrap: break-word; height: 17px;"></textarea>
+                                                    </div>
+                                                    <div class="comment_attach">
+                                                        <div class="register_box">
+                                                            <a href="#" role="button" class="button btn-cancel">취소</a>
+                                                            <a href="#" role="button" class="button btn-register">등록</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="CommentWriter">
+                                            <div class="comment_inbox">
+                                                <strong class="blind">댓글을 입력하세요</strong>
+                                                <em class="comment_inbox_name">서울남부강산</em>
+                                                <textarea placeholder="댓글을 남겨보세요" class="comment_inbox_text"
+                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"></textarea>
+                                            </div>
+                                            <div class="comment_attach">
+                                                <div class="register_box">
+                                                    <a href="#" role="button" class="button btn_register">등록</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-area mg-b50">
+                            <button class="list-btn">목록</button>
+                            <button class="reg-btn">수정</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
