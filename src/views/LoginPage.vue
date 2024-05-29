@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="btn_login_wrap">
-              <button type="submit" class="btn_login" id="log.login">
+              <button type="submit" class="btn_login" id="log.login" @click="goLogin">
                 <span class="btn_text">로그인</span>
               </button>
             </div>
@@ -62,9 +62,23 @@
   </section>
 </template>
 
-<script>
-export default {
+<script setup>
+import { useRouter } from 'vue-router';
+import { inject } from "vue";
 
+const router = useRouter()
+
+const isLogin = inject("isLogin")
+
+const goLogin = () => {
+
+  isLogin.value = true
+  
+  if(isLogin.value) {
+    router.push({
+      path: '/',
+    })
+  }
 }
 </script>
 

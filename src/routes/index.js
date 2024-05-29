@@ -11,9 +11,11 @@ import MovieBoardReg from '../views/MovieBoardReg.vue'
 import MovieBoardUpt from '../views/MovieBoardUpt_.vue'
 import MovieGradeReg from '../views/MovieGradeReg.vue'
 import MovieGradeUpt from '../views/MovieGradeUpt.vue'
+import MyPage from '../views/MyPage.vue'
 
 const routes = [
   {
+    name: 'main',
     path: '/',
     component: MainPage,
   },
@@ -60,6 +62,10 @@ const routes = [
   {
     path:'/moviegradeUpt',
     component : MovieGradeUpt
+  },
+  {
+    path:'/myPage',
+    component : MyPage
   }
 ];
 

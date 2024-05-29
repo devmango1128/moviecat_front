@@ -9,9 +9,11 @@
             <li><router-link to="/join">회원가입</router-link></li>
           </ul>
           <ul v-else>
-            <li><router-link to="/">홍길동님</router-link></li>
-            <li><router-link to="/">마이페이지</router-link></li>
-            <li><router-link to="/">로그아웃</router-link></li>
+            <li><span class="login-name">홍길동님</span></li>
+            <li><router-link to="/myPage">마이페이지</router-link></li>
+            <li @click="goLogout">
+              <span class="logout">로그아웃</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -48,9 +50,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 
-const isLogin = ref(false)
+import { useRouter } from 'vue-router';
+import { inject } from "vue";
+
+const router = useRouter()
+
+const isLogin = inject("isLogin")
+
+const goLogout = () => {
+
+  isLogin.value = false
+
+  if (!isLogin.value) {
+    router.push({
+      path: '/',
+    })
+  }
+}
 
 </script>
 

@@ -643,6 +643,11 @@ fieldset {
     outline-color: #fff;
 }
 
+.header-element .top_info .top_right_menu>ul>li span.login-name,
+.header-element .top_info .top_right_menu>ul>li span.logout {
+    line-height: 18px;
+}
+
 .body-area {
     position: relative;
     border-bottom: 1px solid #e2e5eb;
