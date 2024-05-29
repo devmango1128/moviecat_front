@@ -13,6 +13,7 @@ import MovieGradeReg from '../views/MovieGradeReg.vue'
 import MovieGradeUpt from '../views/MovieGradeUpt.vue'
 import MyPage from '../views/MyPage.vue'
 import MemberInfo from '../views/MemberInfo.vue'
+import MyPost from '../views/MyPost.vue'
 
 const routes = [
   {
@@ -72,6 +73,12 @@ const routes = [
         path: 'memberInfo',
         components: {
           myPageContents: MemberInfo
+        }
+      },
+      {
+        path: 'myPost',
+        components: {
+          myPageContents : MyPost
         }
       }]
   }
