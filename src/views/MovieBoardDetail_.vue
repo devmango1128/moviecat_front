@@ -80,7 +80,8 @@
                                     </div>
                                     <div class="box_right">
                                         <div class="report_article">
-                                            <a href="#" class="button_report">신고</a>
+                                            <a href="#" class="button_report" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop">신고</a>
                                         </div>
                                     </div>
                                     <div class="CommentBox">
@@ -229,6 +230,39 @@
             </div>
         </div>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">신고</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="declaration-area">
+                        <div class="detail-contents">
+                            <span>작성자: 서울남부강산</span>
+                            <span>제목: 범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!!</span>
+                        </div>
+                        <div class="declaration-list">
+                            <span>사유 선택 : 여러 사유에 해당될 경우, 대표적인 사유 1개를 선택.</span>
+                            <span><input type="radio" name="declaration" value="">부적절한 홍보 게시물</span>
+                            <span><input type="radio" name="declaration" value="">음란성 또는 청소년에게 북적합한 내용</span>
+                            <span><input type="radio" name="declaration" value="">명예훼손/사생활 침해 및 저작권침해 등</span>
+                            <span><input type="radio" name="declaration" value="">불법촬영물등 신고</span>
+                            <span><input type="radio" name="declaration" value="">기타(상세 신고 사유 작성)</span>
+                            <span><input type="text" class="declaration-text"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary">신고</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>

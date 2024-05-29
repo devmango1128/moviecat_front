@@ -9,6 +9,8 @@ import MovieBoard from '../views/MovieBoard_.vue'
 import MovieBoardDetail from '../views/MovieBoardDetail_.vue'
 import MovieBoardReg from '../views/MovieBoardReg.vue'
 import MovieBoardUpt from '../views/MovieBoardUpt_.vue'
+import MovieGradeReg from '../views/MovieGradeReg.vue'
+import MovieGradeUpt from '../views/MovieGradeUpt.vue'
 
 const routes = [
   {
@@ -50,6 +52,14 @@ const routes = [
   {
     path:'/movieboardUpt/:boardId/:detailId',
     component : MovieBoardUpt
+  },
+  {
+    path:'/moviegradeReg',
+    component : MovieGradeReg
+  },
+  {
+    path:'/moviegradeUpt',
+    component : MovieGradeUpt
   }
 ];
 

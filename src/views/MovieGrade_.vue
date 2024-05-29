@@ -53,6 +53,12 @@
                       <a href="#" class="this_play_btn _btn_report" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">신고</a>
                     </dd>
+                    <dd class="this_text_normal">
+                      <a href="#" class="this_play_btn _btn_report">삭제</a>
+                    </dd>
+                    <dd class="this_text_normal">
+                      <a href="#" class="this_play_btn _btn_report" @click="gradeUpt">수정</a>
+                    </dd>
                   </dl>
                   <div class="cm_sympathy_area">
                     <button type="button" class="area_button_upvote  _btn_upvote">
@@ -68,7 +74,7 @@
           </div>
           <!--등록버튼-->
           <div class="reg-area">
-            <button class="btn-blue">등록</button>
+            <button class="btn-blue" @click="gradeReg">등록</button>
           </div>
         </div>
         <!--paging-->
@@ -120,7 +126,17 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 
+const router = useRouter();
+
+const gradeReg = () => {
+  router.push("/moviegradeReg")
+}
+
+const gradeUpt = () => {
+  router.push("/moviegradeUpt")
+}
 </script>
 
 <style>

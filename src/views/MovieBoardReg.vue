@@ -46,7 +46,7 @@
                         </div>
                         <div class="btn-area mg-b50">
                             <button class="list-btn">목록</button>
-                            <button class="reg-btn">수정</button>
+                            <button class="reg-btn">등록</button>
                         </div>
                     </div>
                 </div>

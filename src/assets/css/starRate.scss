@@ -1,0 +1,53 @@
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.rating {
+    float: none;
+    width: 200px;
+    display: flex;
+
+    &__input {
+        display: none;
+    }
+
+    &__label {
+        width: 20px;
+        overflow: hidden;
+        cursor: pointer;
+
+        .star-icon {
+            width: 20px;
+            height: 40px;
+            display: block;
+            position: relative;
+            left: 0;
+            background-image: url('/src/assets/emptyStar.png');
+            background-repeat: no-repeat;
+            background-size: 40px;
+
+            &.filled {
+                background-image: url('/src/assets/fillStar.svg');
+            }
+        }
+
+        &--full .star-icon {
+            background-position: right;
+        }
+
+        &--half .star-icon {
+            background-position: left;
+        }
+    }
+
+    &.readonly {
+        .star-icon {
+            opacity: 0.7;
+            cursor: default;
+        }
+    }
+}

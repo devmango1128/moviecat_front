@@ -2108,3 +2108,9 @@ textarea.comment_inbox_text {
     border-radius: 6px !important;
     outline-color: transparent !important;
 }
+
+.declaration-text {
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    width: 100%;
+}
