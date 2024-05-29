@@ -10,7 +10,7 @@
           </ul>
           <ul v-else>
             <li><span class="login-name">홍길동님</span></li>
-            <li><router-link to="/myPage">마이페이지</router-link></li>
+            <li><router-link to="/myPage/memberInfo">마이페이지</router-link></li>
             <li @click="goLogout">
               <span class="logout">로그아웃</span>
             </li>
