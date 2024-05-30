@@ -1,0 +1,98 @@
+.search-result-area {
+    font-size: 13px;
+    color: #666;
+    line-height: 51px;
+    vertical-align: top;
+    width: 100%;
+    display: inline;
+}
+
+.search-result-area .search-result {
+    font-size: 13px;
+    color: #666;
+    line-height: 51px;
+    vertical-align: top;
+}
+
+.search-result-area .search-result .search-keyword {
+    overflow: hidden;
+    max-width: 310px;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    float: left;
+    font-weight: 600;
+}
+
+.search-result-area .search-result .search-number {
+    padding-left: 4px;
+    vertical-align: top;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.sc-board {
+    padding-bottom: 36px;
+    letter-spacing: -.3px;
+    width: 100%;
+    display: block;
+    unicode-bidi: isolate;
+}
+
+.sc-board .api_subject_bx {
+    position: relative;
+    border: 1px solid;
+    border-radius: 16px;
+    border-color: #e9e9ec;
+    border-color: rgba(233, 233, 236, 1);
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 1);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+}
+
+.sc-board .mod_title_area {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 19px 19px 16px;
+    line-height: 2.4rem;
+    letter-spacing: -.3px;
+}
+
+.sc-board .mod_title_area .title_wrap {
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 16px;
+    color: #222225;
+    color: rgba(var(--gray10), 1);
+    font-weight: 600;
+}
+
+.sc-board .mod_title_area .title_wrap .title {
+    display: block;
+    position: static;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.sc-board .group-board {
+    padding: 0 19px;
+}
