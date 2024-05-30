@@ -52,11 +52,16 @@
 <script setup>
 
 import { useRouter } from 'vue-router';
-import { inject } from "vue";
+import { inject, ref, onMounted } from "vue";
+import { getCurrentInstance } from 'vue';
 
+
+const { proxy } = getCurrentInstance();
 const router = useRouter()
 
 const isLogin = inject("isLogin")
+
+const menuList = ref({});
 
 const goLogout = () => {
 
@@ -74,6 +79,17 @@ const totalSearch = () => {
     path: '/totalSearch'
   })
 }
+
+onMounted(async() => {
+  try{
+    const res = await proxy.$axios.get('menuList')
+    menuList.value = res.data.data.menu_list
+    
+  } catch( err) {
+    console.log(err)
+  }
+});
+
 
 </script>
 
