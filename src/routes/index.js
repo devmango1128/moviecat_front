@@ -7,13 +7,15 @@ import FindIdPw from '../views/FindIdPw.vue'
 import MovieGrade from '../views/MovieGrade_.vue'
 import MovieBoard from '../views/MovieBoard_.vue'
 import MovieBoardDetail from '../views/MovieBoardDetail_.vue'
-import MovieBoardReg from '../views/MovieBoardReg.vue'
+import MovieBoardReg from '../views/MovieBoardReg_.vue'
 import MovieBoardUpt from '../views/MovieBoardUpt_.vue'
-import MovieGradeReg from '../views/MovieGradeReg.vue'
-import MovieGradeUpt from '../views/MovieGradeUpt.vue'
+import MovieGradeReg from '../views/MovieGradeReg_.vue'
+import MovieGradeUpt from '../views/MovieGradeUpt_.vue'
 import MyPage from '../views/MyPage.vue'
 import MemberInfo from '../views/MemberInfo.vue'
 import MyPost from '../views/MyPost.vue'
+import MyComment from '../views/MyComment.vue'
+import MyGrade from '../views/MyGrade.vue'
 
 const routes = [
   {
@@ -50,7 +52,7 @@ const routes = [
     component : MovieBoardDetail
   },
   {
-    path:'/movieboardReg',
+    path:'/movieboardReg/:boardId',
     component : MovieBoardReg
   },
   {
@@ -58,11 +60,11 @@ const routes = [
     component : MovieBoardUpt
   },
   {
-    path:'/moviegradeReg',
+    path:'/moviegradeReg/:boardId',
     component : MovieGradeReg
   },
   {
-    path:'/moviegradeUpt',
+    path:'/moviegradeUpt/:boardId',
     component : MovieGradeUpt
   },
   {
@@ -79,6 +81,18 @@ const routes = [
         path: 'myPost',
         components: {
           myPageContents : MyPost
+        }
+      },
+      {
+        path: 'myComment',
+        components: {
+          myPageContents : MyComment
+        }
+      },
+      {
+        path: 'myGrade',
+        components: {
+          myPageContents : MyGrade
         }
       }]
   }

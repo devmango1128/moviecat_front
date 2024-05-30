@@ -86,12 +86,13 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
 
 const boardReg = () => {
-  router.push('/movieboardReg');
+  router.push(`/movieboardReg/${route.params.boardId}`);
 }
 </script>
 

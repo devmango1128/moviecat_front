@@ -126,16 +126,17 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter();
+const route = useRoute();
 
 const gradeReg = () => {
-  router.push("/moviegradeReg")
+  router.push(`/moviegradeReg/${route.params.boardId}`)
 }
 
 const gradeUpt = () => {
-  router.push("/moviegradeUpt")
+  router.push(`/moviegradeUpt/${route.params.boardId}`)
 }
 </script>
 
