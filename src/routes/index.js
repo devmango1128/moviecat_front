@@ -16,6 +16,9 @@ import MemberInfo from '../views/MemberInfo.vue'
 import MyPost from '../views/MyPost.vue'
 import MyComment from '../views/MyComment.vue'
 import MyGrade from '../views/MyGrade.vue'
+import WithDrawal from '../views/WithDrawal.vue'
+import TotalSearch from '../views/TotalSearch.vue'
+import WithDrwalComp from '../views/WithDrwalComp.vue'
 
 const routes = [
   {
@@ -68,6 +71,14 @@ const routes = [
     component : MovieGradeUpt
   },
   {
+    path:'/totalSearch',
+    component : TotalSearch
+  },
+  {
+    path:'/withDrwalComp',
+    component : WithDrwalComp
+  },
+  {
     path:'/myPage',
     component : MyPage,
     children: [
@@ -93,6 +104,12 @@ const routes = [
         path: 'myGrade',
         components: {
           myPageContents : MyGrade
+        }
+      },
+      {
+        path: 'withdrawal',
+        components: {
+          myPageContents : WithDrawal
         }
       }]
   }

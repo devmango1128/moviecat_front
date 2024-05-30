@@ -42,7 +42,7 @@
         <div class="input-search">
           <input type="text" class="main-input-search-pc" name="" id="" placeholder="검색어를 입력하세요." title="검색어 입력"
             autocomplete="off">
-          <button type="submit" class="btn-search">검색버튼</button>
+          <button type="submit" class="btn-search" @click="totalSearch">검색버튼</button>
         </div>
       </div>
     </div>
@@ -67,6 +67,12 @@ const goLogout = () => {
       path: '/',
     })
   }
+}
+
+const totalSearch = () => {
+  router.push({
+    path: '/totalSearch'
+  })
 }
 
 </script>

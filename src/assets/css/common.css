@@ -522,6 +522,10 @@ fieldset {
     padding-right: 10px !important;
 }
 
+.pd-20 {
+    padding : 20px !important
+}
+
 /*width*/
 .w-39p {
     width: 39% !important;
@@ -533,6 +537,10 @@ fieldset {
 
 .w-70p {
     width: 70% !important;
+}
+
+.w-100p {
+    width: 100% !important;
 }
 
 .w-95 {
@@ -564,6 +572,19 @@ fieldset {
     margin-top: 10px;
 }
 
+.btn-fl-gray {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #686868;
+    background: #686868;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #fff;
+    width: 100px;
+    margin-top: 10px;
+}
+
 /* display */
 .dis-hide {
     display: none !important;
@@ -583,6 +604,10 @@ fieldset {
     color: #006ae2
 }
 
+.col-gray {
+    color: #686868 !important;
+}
+
 /*font*/
 .fw-b {
     font-weight: bold;
@@ -590,6 +615,19 @@ fieldset {
 
 .cs-p{
     cursor: pointer;
+}
+
+/*font-size*/
+.fs-15 {
+    font-size: 15px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-25 {
+    font-size: 25px;
 }
 
 /*header*/
@@ -2145,4 +2183,33 @@ textarea.comment_inbox_text {
     background-color: #fff;
     border: 1px solid #e2e2e2;
     width: 100%;
+}
+
+.withDrawal .input-inbox input {
+    height: 43px;
+    line-height: 38px;
+    font-size: 14px;
+    width: 50%;
+    padding: 10px
+}
+
+.withDrawal input[type=text] {
+    line-height: 27px;
+    float: left;
+    height: 27px;
+    padding: 20px 8px 20px 8px;
+    vertical-align: top;
+    color: #333;
+    border: 1px solid #ccc;
+    opacity: 1;
+}
+
+.withDrawal-input {
+    display: flex;
+    justify-content: center;
+}
+
+.withDrawal-area {
+    display: flex;
+    justify-content: center;
 }
