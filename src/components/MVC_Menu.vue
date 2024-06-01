@@ -26,17 +26,8 @@
           </router-link>
         </h1>
         <ul class="gnb-area" id="gnb">
-          <li class="gnb_menu menu1" :class="$route.params.boardId == 1 ? 'active' : ''">
-            <router-link to="/movieboard/1">영화리뷰</router-link>
-          </li>
-          <li class="gnb_menu menu2" :class="$route.params.boardId == 2 ? 'active' : ''">
-            <router-link to="/movieboard/2">영화토크</router-link>
-          </li>
-          <li class="gnb_menu menu3" :class="$route.params.boardId == 3 ? 'active' : ''">
-            <router-link to="/movieboard/3">생활토크</router-link>
-          </li>
-          <li class="gnb_menu menu4" :class="$route.params.boardId == 4 ? 'active' : ''">
-            <router-link to="/moviegrade/4">영화평점</router-link>
+          <li v-for="menu in menuList" :key="menu.menu_id" class="gnb_menu menu1" :class="{ active: $route.params.boardId == menu.menu_id }">
+            <router-link :to="`${menu.menu_path}/${menu.menu_id}`">{{ menu.menu_nm }}</router-link>
           </li>
         </ul>
         <div class="input-search">
@@ -84,7 +75,7 @@ onMounted(async() => {
   try{
     const res = await proxy.$axios.get('menuList')
     menuList.value = res.data.data.menu_list
-    
+    console.log(menuList)
   } catch( err) {
     console.log(err)
   }
