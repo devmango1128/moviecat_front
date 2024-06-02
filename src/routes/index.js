@@ -36,7 +36,8 @@ const routes = [
   },
   {
     path: '/join2',
-    component: JoinPage2,
+    name : 'JoinPage2',
+    component: JoinPage2
   },
   {
     path: '/findIdPw',

@@ -9,7 +9,7 @@
                     <div class="form_section">
                         <div class="check_terms">
                             <div class="check_wrap">
-                                <input type="checkbox" id="chk_all">
+                                <input type="checkbox" id="chk_all" @click="allClick" v-model="allChecked">
                                 <label for="chk_all">
                                     <span class="text check_all">전체 동의하기</span>
                                 </label>
@@ -19,8 +19,8 @@
                             <li class="terms_item">
                                 <div class="check_terms">
                                     <div class="check_wrap">
-                                        <input type="checkbox" id="termsService" class="blind">
-                                        <label for="termsService">
+                                        <input type="checkbox" id="trms_agre" name="trms_agre" class="blind" v-model="trmsAgre">
+                                        <label for="trms_agre">
                                             <em class="option point">[필수]</em>
                                             <div class="text_wrap">
                                                 <span class="text">무비캣 이용약관</span>
@@ -362,8 +362,8 @@
                             <li class="terms_item">
                                 <div class="check_terms">
                                     <div class="check_wrap">
-                                        <input type="checkbox" id="termsPrivacy" class="blind">
-                                        <label for="termsPrivacy">
+                                        <input type="checkbox" id="info_arge" name="info_arge" class="blind" v-model="infoAgre">
+                                        <label for="info_arge">
                                             <em class="option point">[필수]</em>
                                             <div class="text_wrap">
                                                 <span class="text">개인정보 수집 및 이용</span>
@@ -532,9 +532,8 @@
                             <li class="terms_item">
                                 <div class="check_terms">
                                     <div class="check_wrap">
-                                        <input type="checkbox" id="termsEmail" name="termsEmail" value="Y"
-                                            class="blind">
-                                        <label for="termsEmail">
+                                        <input type="checkbox" id="mark_agre" name="mark_agre" v-model="markAgre" class="blind">
+                                        <label for="mark_agre">
                                             <em class="option">[선택]</em>
                                             <div class="text_wrap">
                                                 <span class="text">마케팅 목적 개인정보 수집 및 이용에 동의합니다.</span>
@@ -545,7 +544,7 @@
                             </li>
                         </ul>
                         <div class="btn_submit_wrap">
-                            <button type="button" @click="goStep" class="btn_submit">다음</button>
+                            <button type="submit" :disabled="!trmsAgre || !infoAgre" class="btn_submit" @click="goNextStep">다음</button>
                         </div>
                     </div>
                 </div>
@@ -554,14 +553,41 @@
     </section>
 </template>
 
-<script>
-export default {
-    methods: {
-        goStep() {
-            this.$router.push('/join2');
-        }
-    }
+<script setup>
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useJoinStore } from '@/store/join';
+
+const router = useRouter()
+const joinStore = useJoinStore()
+
+const allChecked = ref(false)
+const trmsAgre = ref(false)
+const infoAgre = ref(false)
+const markAgre = ref(false)
+
+//전체체크
+const allClick = () => {
+    
+    const isAllChecked = !allChecked.value;
+    allChecked.value = isAllChecked;
+    trmsAgre.value = isAllChecked
+    infoAgre.value = isAllChecked
+    markAgre.value = isAllChecked
 }
+
+watch([trmsAgre, infoAgre, markAgre], ([new_trms_agre, new_info_agre, new_mark_agre]) => {
+    allChecked.value = new_trms_agre && new_info_agre && new_mark_agre;
+});
+
+// 다음 스텝
+const goNextStep = () => {
+    joinStore.setMarkAgre(markAgre.value)
+    router.push({
+        name: 'JoinPage2',
+    });
+};
+
 </script>
 
 <style>

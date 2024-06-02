@@ -4,6 +4,7 @@
             <div class="login_box">
                 <div class="title" id="pageCont">
                     <h1>회원가입</h1>
+    <p>마케팅 목적 개인정보 수집 및 이용 동의: {{ markAgre }}</p>
                 </div>
                 <div class="form_content join_content mg-t20 mg-b20">
                     <div class="form_section">
@@ -159,10 +160,14 @@
     </section>
 </template>
 
-<script>
-export default {
+<script setup>
+import { computed } from 'vue';
+import { useJoinStore } from '@/store/join';
 
-}
+const joinStore = useJoinStore();
+const markAgre = computed(() => joinStore.markAgre);
+
+console.log('Received markAgre from store:', markAgre.value);
 </script>
 
 <style>

@@ -71,11 +71,11 @@ const totalSearch = () => {
   })
 }
 
+//컴포넌트가 DOM에 마운트된 직후
 onMounted(async() => {
   try{
     const res = await proxy.$axios.get('menuList')
     menuList.value = res.data.data.menu_list
-    console.log(menuList)
   } catch( err) {
     console.log(err)
   }

@@ -5,6 +5,7 @@ import common from '@/assets/js/common.js';
 import Paginate from "vuejs-paginate-next";
 import PrimeVue from 'primevue/config';
 import axios from '@/axios'
+import pinia from './store';  
 
 const app = createApp(App);
 
@@ -12,7 +13,7 @@ const isLogin = ref(false);
 app.config.globalProperties.$axios = axios
 app.provide('isLogin', isLogin)
 
-app.use(routes).use(common).use(PrimeVue)
+app.use(routes).use(common).use(PrimeVue).use(pinia)
 app.component('paginate', Paginate)
 app.mount('#app')
 
