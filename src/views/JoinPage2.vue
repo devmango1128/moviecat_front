@@ -4,7 +4,6 @@
             <div class="login_box">
                 <div class="title" id="pageCont">
                     <h1>회원가입</h1>
-    <p>마케팅 목적 개인정보 수집 및 이용 동의: {{ markAgre }}</p>
                 </div>
                 <div class="form_content join_content mg-t20 mg-b20">
                     <div class="form_section">
@@ -24,7 +23,7 @@
                                         <div class="tdcell">
                                             <div class="profile_photo">
                                                 <img id="imgThumb"
-                                                    src="https://static.nid.naver.com/images/web/user/default.png?type=s160"
+                                                    :src="previewImage"
                                                     width="100" height="100">
                                                 <span class="mask"></span>
                                             </div>
@@ -34,9 +33,9 @@
                                                         <b id="btnChangeProfile" class="btn2">사진변경</b>
                                                     </label>
                                                     <input type="file" id="inputImage" name="profileImage"
-                                                        accept="image/*">
+                                                        accept="image/*" @change="onImageChange">
                                                 </span>
-                                                <a href="#" class="btn_model">
+                                                <a href="#" class="btn_model" @click.prevent="removeImage">
                                                     <b id="btnDelete" class="btn2 btn_disable">삭제</b>
                                                 </a>
                                             </div>
@@ -150,6 +149,7 @@
                             </tbody>
                         </table>
                         <div class="btn_submit_wrap mg-l0">
+                            <input type="hidden" name="markAgre" id="markAgre" :value="markAgre" />
                             <button type="button" class="btn_cancel w-49p mg-r10">취소</button>
                             <button type="button" class="btn_submit w-49p">등록</button>
                         </div>
@@ -161,13 +161,36 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useJoinStore } from '@/store/join';
 
 const joinStore = useJoinStore();
-const markAgre = computed(() => joinStore.markAgre);
+//마케팅 동의 값 
+const markAgre = computed(() => joinStore.markAgre)
+const previewImage = ref('https://static.nid.naver.com/images/web/user/default.png')
 
-console.log('Received markAgre from store:', markAgre.value);
+//이미지 변경 핸들러
+const onImageChange = (e) => {
+ 
+    const file = e.target.files[0]
+
+    if(file && file.type.startsWith('image/')) {
+        const reader = new FileReader()
+
+        reader.onload = (e2) => {
+            previewImage.value = e2.target.result
+        }
+        reader.readAsDataURL(file)
+    }
+}
+
+//이미지 삭제 핸들러
+const removeImage = () => {
+    previewImage.value = 'https://static.nid.naver.com/images/web/user/default.png'
+    document.getElementById('inputImage').value= ''
+}
+
+
 </script>
 
 <style>
