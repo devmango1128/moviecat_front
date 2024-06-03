@@ -29,10 +29,10 @@
                                             </div>
                                             <div class="btn_area_btm">
                                                 <span class="btn_file">
-                                                    <label for="inputImage" class="btn_model">
+                                                    <label for="profileImage" class="btn_model">
                                                         <b id="btnChangeProfile" class="btn2">사진변경</b>
                                                     </label>
-                                                    <input type="file" id="inputImage" name="profileImage"
+                                                    <input type="file" id="profileImage" name="profileImage"
                                                         accept="image/*" @change="onImageChange">
                                                 </span>
                                                 <a href="#" class="btn_model" @click.prevent="removeImage">
@@ -45,41 +45,44 @@
                                 <tr>
                                     <th scope="row">
                                         <div class="thcell required">
-                                            <label for="">아이디</label>
+                                            <label for="mbr_id">아이디</label>
                                         </div>
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="w-70p" name="" minlength="5" maxlength="20"
-                                                placeholder="아이디를 입력하세요" class="" />
-                                            <span class="info-txt dis-hide">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+                                            <input type="text" id="mbr_id" name="mbr_id" minlength="5" maxlength="20"
+                                                placeholder="아이디를 입력하세요" class="w-70p" v-model="mbr_id" @input="validMbrId"/>
+                                            <span class="info-txt" :class="{'dis-hide' : !isMbrIdValid}" v-if="isMbrIdValid">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
                                                 가능합니다.</span>
-                                            <span class="error-txt">사용할 수 없는 아이디입니다.</span>
+                                            <span class="error-txt" v-else>사용할 수 없는 아이디입니다.</span>
                                         </div>
                                     </td>
                                     <th scope="row">
                                         <div class="thcell required">
-                                            <label for="">이름</label>
+                                            <label for="mbr_nm">이름</label>
                                         </div>
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="" name="" maxlength="20" placeholder="이름을 입력하세요"
-                                                class="">
+                                            <input type="text" id="mbr_nm" name="mbr_nm" maxlength="20" placeholder="이름을 입력하세요" class="" v-model="mbr_nm" @input="validMbrNm">
+                                            <span class="info-txt" :class="{'dis-hide' : !isMbrNmValid}" v-if="isMbrNmValid">최대 20자의 한글만 사용
+                                                가능합니다.</span>
+                                            <span class="error-txt" v-else>사용할 수 없는 이름입니다.</span>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">
                                         <div class="thcell required">
-                                            <label for="">비밀번호</label>
+                                            <label for="pswd">비밀번호</label>
                                         </div>
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="password" id="" name="" maxlength="16"
-                                                placeholder="비밀번호를 입력하세요" class="">
-                                            <span class="info-txt">6자리 이상, 영문 + 숫자 + 특수문자만 사용 가능합니다.</span>
+                                            <input type="password" id="pswd" name="pswd" minlength="6" maxlength="20"
+                                                placeholder="비밀번호를 입력하세요" class="" v-model="pswd" @input="validPswd">
+                                            <span class="info-txt" :class="{'dis-hide' : !isPswdValid}" v-if="isPswdValid">6~20자의 영문 + 숫자 + 특수문자 조합으로 사용 가능합니다.</span>
+                                            <span class="error-txt" v-else>사용할 수 없는 비밀번호입니다.</span>
                                         </div>
                                     </td>
                                     <th scope="row">
@@ -89,7 +92,7 @@
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="password" id="" name="" maxlength="16"
+                                            <input type="password" id="pswd_confirm" maxlength="16"
                                                 placeholder="비밀번호 확인을 입력하세요" class="">
                                         </div>
                                     </td>
@@ -102,7 +105,7 @@
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="" name="" maxlength="16" placeholder="닉네임을 입력하세요"
+                                            <input type="text" id="nick_nm" name="nick_nm" maxlength="16" placeholder="닉네임을 입력하세요"
                                                 class="">
                                             <span class="info-txt">2~6자 사이의 한글, 영문, 숫자, 특수기호(_),(-)만 사용 가능합니다.</span>
                                         </div>
@@ -114,7 +117,7 @@
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="" name="" maxlength="16" placeholder="휴대폰번호를 입력하세요"
+                                            <input type="text" id="phone_no" name="phone_no" maxlength="16" placeholder="휴대폰번호를 입력하세요"
                                                 class="">
                                         </div>
                                     </td>
@@ -127,7 +130,7 @@
                                     </th>
                                     <td colspan="3">
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="" name="" maxlength="16" placeholder="이메일을 입력하세요"
+                                            <input type="text" id="email" name="email" maxlength="16" placeholder="이메일을 입력하세요"
                                                 class="w-39p">
                                         </div>
                                     </td>
@@ -140,7 +143,7 @@
                                     </th>
                                     <td colspan="3">
                                         <div class="mg-10 area_textarea_box _input_wrap">
-                                            <textarea placeholder="자기소개는 최대 200자까지 등록 가능합니다."
+                                            <textarea id="intr_intrcn" name="intr_intrcn" placeholder="자기소개는 최대 200자까지 등록 가능합니다."
                                                 class="this_textarea _textarea_box"></textarea>
                                             <p class="this_numbering _count_num">(0/200)</p>
                                         </div>
@@ -167,7 +170,18 @@ import { useJoinStore } from '@/store/join';
 const joinStore = useJoinStore();
 //마케팅 동의 값 
 const markAgre = computed(() => joinStore.markAgre)
+//이미지 기본값
 const previewImage = ref('https://static.nid.naver.com/images/web/user/default.png')
+//회원 아이디 & 유효성 검사
+const mbr_id = ref('')
+const isMbrIdValid = ref(true)
+//회원 이름 & 유효성 검사
+const mbr_nm = ref('')
+const isMbrNmValid = ref(true)
+//비밀번호 & 유효성 검사
+const pswd = ref('')
+const isPswdValid = ref(true)
+
 
 //이미지 변경 핸들러
 const onImageChange = (e) => {
@@ -190,6 +204,32 @@ const removeImage = () => {
     document.getElementById('inputImage').value= ''
 }
 
+//아이디 valid
+const validMbrId = () => {
+    const regex = /^[a-z0-9_-]{5,20}$/;
+
+    isMbrIdValid.value = regex.test(mbr_id.value)
+
+    if(mbr_id.value === '') isMbrIdValid.value = true
+}
+
+//이름 valid
+const validMbrNm = () => {
+    const regex = /^[가-힣]{1,20}$/;
+
+    isMbrNmValid.value = regex.test(mbr_nm.value)
+
+    if(mbr_nm.value === '') isMbrNmValid.value = true
+}
+
+//패스워드 valid
+const validPswd = () => {
+    const regex = /^[a-z0-9]{1,20}$/;
+
+    isPswdValid.value = regex.test(pswd.value)
+
+    if(pswd.value === '') isPswdValid.value = true
+}
 
 </script>
 
