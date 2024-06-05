@@ -92,8 +92,9 @@
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="password" id="pswd_confirm" maxlength="16"
-                                                placeholder="비밀번호 확인을 입력하세요" class="">
+                                            <input type="password" id="pswd_confirm" minlength="6" maxlength="20"
+                                                placeholder="비밀번호 확인을 입력하세요" class="" v-model="confirmPswd" @input="validConfirmPswd">
+                                            <span class="error-txt" :class="{'dis-hide' : !isConfirmPswdValid}" v-if="isConfirmPswdValid">비밀번호가 일치하지 않습니다.</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -105,9 +106,10 @@
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="nick_nm" name="nick_nm" maxlength="16" placeholder="닉네임을 입력하세요"
+                                            <input type="text" id="nick_nm" name="nick_nm" minlength="2" maxlength="6" placeholder="닉네임을 입력하세요" v-model="nick_nm" @input="validNickNm"
                                                 class="">
-                                            <span class="info-txt">2~6자 사이의 한글, 영문, 숫자, 특수기호(_),(-)만 사용 가능합니다.</span>
+                                            <span class="info-txt" :class="{'dis-hide' : !isNickNmValid}" v-if="isNickNmValid">2~6자 사이의 한글, 영문, 숫자, 특수기호(_),(-)만 사용 가능합니다.</span>
+                                            <span class="error-txt" v-else>사용할 수 없는 닉네임입니다.</span>
                                         </div>
                                     </td>
                                     <th scope="row">
@@ -117,8 +119,8 @@
                                     </th>
                                     <td>
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="phone_no" name="phone_no" maxlength="16" placeholder="휴대폰번호를 입력하세요"
-                                                class="">
+                                            <input type="text" id="phone_no" name="phone_no" maxlength="13" placeholder="휴대폰번호를 입력하세요"
+                                                class="" v-model="phone_no" @input="validPhoneNo">
                                         </div>
                                     </td>
                                 </tr>
@@ -181,7 +183,14 @@ const isMbrNmValid = ref(true)
 //비밀번호 & 유효성 검사
 const pswd = ref('')
 const isPswdValid = ref(true)
-
+//비밀번호 확인 & 유효성 검사
+const confirmPswd = ref('')
+const isConfirmPswdValid = ref(false)
+//닉네임 & 유효성 검사
+const nick_nm = ref('')
+const isNickNmValid = ref(true)
+//휴대폰번호 & 유효성 검사
+const phone_no = ref('010-')
 
 //이미지 변경 핸들러
 const onImageChange = (e) => {
@@ -215,7 +224,7 @@ const validMbrId = () => {
 
 //이름 valid
 const validMbrNm = () => {
-    const regex = /^[가-힣]{1,20}$/;
+    const regex = /^[가-힣]{2,20}$/;
 
     isMbrNmValid.value = regex.test(mbr_nm.value)
 
@@ -224,11 +233,51 @@ const validMbrNm = () => {
 
 //패스워드 valid
 const validPswd = () => {
-    const regex = /^[a-z0-9]{1,20}$/;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,20}$/;
+  
+    if (pswd.value === '') {
+        isPswdValid.value = true;
+    } else {
+        isPswdValid.value = regex.test(pswd.value);
+    }
+}
 
-    isPswdValid.value = regex.test(pswd.value)
+//패스워드 확인 valid
+const validConfirmPswd = () => {
+    
+    isConfirmPswdValid.value = pswd.value === confirmPswd.value ? false : true
 
-    if(pswd.value === '') isPswdValid.value = true
+    if(confirmPswd.value === '') isConfirmPswdValid.value = false
+}
+
+//닉네임 확인 valid
+const validNickNm = () => {
+
+    const regex = /^[가-힣A-Za-z0-9_-]{2,6}$/;
+
+    isNickNmValid.value = regex.test(nick_nm.value)
+
+    if(nick_nm.value === '') isNickNmValid.value = true
+}
+
+//휴대폰 번호 valid
+const validPhoneNo = () => {
+    let number = phone_no.value.replace(/\D/g, '')
+
+    // 010으로 시작하게 강제
+    if (!number.startsWith('010')) {
+        number = '010'
+    }
+
+    if (number.length <= 3) {
+        phone_no.value = number
+    } else if (number.length <= 7) {
+        phone_no.value = number.slice(0, 3) + '-' + number.slice(3)
+    } else if (number.length <= 11) {
+        phone_no.value = number.slice(0, 3) + '-' + number.slice(3, 7) + '-' + number.slice(7)
+    } else {
+        phone_no.value = number.slice(0, 3) + '-' + number.slice(3, 7) + '-' + number.slice(7, 11)
+    }
 }
 
 </script>
