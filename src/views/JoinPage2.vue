@@ -51,7 +51,7 @@
                                     <td>
                                         <div class="tdcell input-inbox">
                                             <input type="text" id="mbr_id" name="mbr_id" minlength="5" maxlength="20"
-                                                placeholder="아이디를 입력하세요" class="w-70p" v-model="mbr_id" @input="validMbrId"/>
+                                                placeholder="아이디를 입력하세요" class="" v-model="mbr_id" @input="validMbrId"/>
                                             <span class="info-txt" :class="{'dis-hide' : !isMbrIdValid}" v-if="isMbrIdValid">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
                                                 가능합니다.</span>
                                             <span class="error-txt" v-else>사용할 수 없는 아이디입니다.</span>
@@ -132,8 +132,11 @@
                                     </th>
                                     <td colspan="3">
                                         <div class="tdcell input-inbox">
-                                            <input type="text" id="email" name="email" maxlength="16" placeholder="이메일을 입력하세요"
-                                                class="w-39p">
+                                            <div class="w-100p dis-inb">
+                                            <input type="text" id="email" name="email" maxlength="30" placeholder="이메일을 입력하세요"
+                                                class="w-39p" v-model="email" @input="validEmail">
+                                            </div>
+                                            <span class="error-txt" :class="{'dis-hide' : !isEmailValid}" v-if="isEmailValid">유효한 이메일 주소를 입력하세요.</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -146,8 +149,8 @@
                                     <td colspan="3">
                                         <div class="mg-10 area_textarea_box _input_wrap">
                                             <textarea id="intr_intrcn" name="intr_intrcn" placeholder="자기소개는 최대 200자까지 등록 가능합니다."
-                                                class="this_textarea _textarea_box"></textarea>
-                                            <p class="this_numbering _count_num">(0/200)</p>
+                                                class="this_textarea _textarea_box" maxlength="200" v-model="intr_intrcn" @input="validIntr"></textarea>
+                                            <p class="this_numbering _count_num">({{ intr_intrcn.length }}/200)</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -191,6 +194,11 @@ const nick_nm = ref('')
 const isNickNmValid = ref(true)
 //휴대폰번호 & 유효성 검사
 const phone_no = ref('010-')
+//이메일 & 유효성 검사
+const email = ref('')
+const isEmailValid = ref(false)
+//자기소개 & 유효성검사
+const intr_intrcn = ref('')
 
 //이미지 변경 핸들러
 const onImageChange = (e) => {
@@ -280,6 +288,22 @@ const validPhoneNo = () => {
     }
 }
 
+//이메일 유효성검사
+const validEmail = () => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    
+    isEmailValid.value = !regex.test(email.value)
+
+    if (email.value === '') isEmailValid.value = false
+}
+
+//자기소개 유효성검사
+const validIntr = () => {
+    
+    if(intr_intrcn.value.length > 200) {
+        intr_intrcn.value = intr_intrcn.value.slice(0, 200)
+    }
+}
 </script>
 
 <style>

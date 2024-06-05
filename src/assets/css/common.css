@@ -594,6 +594,10 @@ fieldset {
     display: block !important;
 }
 
+.dis-inb {
+    display: inline-block !important;
+}
+
 /*text-align*/
 .ta-c {
     text-align: center;
