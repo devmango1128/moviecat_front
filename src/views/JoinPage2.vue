@@ -7,160 +7,162 @@
                 </div>
                 <div class="form_content join_content mg-t20 mg-b20">
                     <div class="form_section">
-                        <table class="tbl_model">
-                            <colgroup>
-                                <col style="width:15%">
-                                <col>
-                                <col style="width:15%">
-                                <col>
-                            </colgroup>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="thcell">프로필 사진</div>
-                                    </th>
-                                    <td colspan="3">
-                                        <div class="tdcell">
-                                            <div class="profile_photo">
-                                                <img id="imgThumb"
-                                                    :src="previewImage"
-                                                    width="100" height="100">
-                                                <span class="mask"></span>
+                        <form>
+                            <table class="tbl_model">
+                                <colgroup>
+                                    <col style="width:15%">
+                                    <col>
+                                    <col style="width:15%">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="thcell">프로필 사진</div>
+                                        </th>
+                                        <td colspan="3">
+                                            <div class="tdcell">
+                                                <div class="profile_photo">
+                                                    <img id="imgThumb"
+                                                        :src="previewImage"
+                                                        width="100" height="100">
+                                                    <span class="mask"></span>
+                                                </div>
+                                                <div class="btn_area_btm">
+                                                    <span class="btn_file">
+                                                        <label for="profileImage" class="btn_model">
+                                                            <b id="btnChangeProfile" class="btn2">사진변경</b>
+                                                        </label>
+                                                        <input type="file" id="profileImage" name="profileImage"
+                                                            accept="image/*" @change="onImageChange">
+                                                    </span>
+                                                    <a href="#" class="btn_model" @click.prevent="removeImage">
+                                                        <b id="btnDelete" class="btn2 btn_disable">삭제</b>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="btn_area_btm">
-                                                <span class="btn_file">
-                                                    <label for="profileImage" class="btn_model">
-                                                        <b id="btnChangeProfile" class="btn2">사진변경</b>
-                                                    </label>
-                                                    <input type="file" id="profileImage" name="profileImage"
-                                                        accept="image/*" @change="onImageChange">
-                                                </span>
-                                                <a href="#" class="btn_model" @click.prevent="removeImage">
-                                                    <b id="btnDelete" class="btn2 btn_disable">삭제</b>
-                                                </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="thcell required">
+                                                <label for="mbr_id">아이디</label>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="thcell required">
-                                            <label for="mbr_id">아이디</label>
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div class="tdcell input-inbox">
-                                            <input type="text" id="mbr_id" name="mbr_id" minlength="5" maxlength="20"
-                                                placeholder="아이디를 입력하세요" class="" v-model="mbr_id" @input="validMbrId"/>
-                                            <span class="info-txt" :class="{'dis-hide' : !isMbrIdValid}" v-if="isMbrIdValid">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
-                                                가능합니다.</span>
-                                            <span class="error-txt" v-else>사용할 수 없는 아이디입니다.</span>
-                                        </div>
-                                    </td>
-                                    <th scope="row">
-                                        <div class="thcell required">
-                                            <label for="mbr_nm">이름</label>
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div class="tdcell input-inbox">
-                                            <input type="text" id="mbr_nm" name="mbr_nm" maxlength="20" placeholder="이름을 입력하세요" class="" v-model="mbr_nm" @input="validMbrNm">
-                                            <span class="info-txt" :class="{'dis-hide' : !isMbrNmValid}" v-if="isMbrNmValid">최대 20자의 한글만 사용
-                                                가능합니다.</span>
-                                            <span class="error-txt" v-else>사용할 수 없는 이름입니다.</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="thcell required">
-                                            <label for="pswd">비밀번호</label>
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div class="tdcell input-inbox">
-                                            <input type="password" id="pswd" name="pswd" minlength="6" maxlength="20"
-                                                placeholder="비밀번호를 입력하세요" class="" v-model="pswd" @input="validPswd">
-                                            <span class="info-txt" :class="{'dis-hide' : !isPswdValid}" v-if="isPswdValid">6~20자의 영문 + 숫자 + 특수문자 조합으로 사용 가능합니다.</span>
-                                            <span class="error-txt" v-else>사용할 수 없는 비밀번호입니다.</span>
-                                        </div>
-                                    </td>
-                                    <th scope="row">
-                                        <div class="thcell required">
-                                            <label for="">비밀번호 확인</label>
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div class="tdcell input-inbox">
-                                            <input type="password" id="pswd_confirm" minlength="6" maxlength="20"
-                                                placeholder="비밀번호 확인을 입력하세요" class="" v-model="confirmPswd" @input="validConfirmPswd">
-                                            <span class="error-txt" :class="{'dis-hide' : !isConfirmPswdValid}" v-if="isConfirmPswdValid">비밀번호가 일치하지 않습니다.</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="thcell required">
-                                            <label for="">닉네임</label>
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div class="tdcell input-inbox">
-                                            <input type="text" id="nick_nm" name="nick_nm" minlength="2" maxlength="6" placeholder="닉네임을 입력하세요" v-model="nick_nm" @input="validNickNm"
-                                                class="">
-                                            <span class="info-txt" :class="{'dis-hide' : !isNickNmValid}" v-if="isNickNmValid">2~6자 사이의 한글, 영문, 숫자, 특수기호(_),(-)만 사용 가능합니다.</span>
-                                            <span class="error-txt" v-else>사용할 수 없는 닉네임입니다.</span>
-                                        </div>
-                                    </td>
-                                    <th scope="row">
-                                        <div class="thcell">
-                                            <label for="">휴대폰번호</label>
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div class="tdcell input-inbox">
-                                            <input type="text" id="phone_no" name="phone_no" maxlength="13" placeholder="휴대폰번호를 입력하세요"
-                                                class="" v-model="phone_no" @input="validPhoneNo">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="thcell required">
-                                            <label for="">이메일</label>
-                                        </div>
-                                    </th>
-                                    <td colspan="3">
-                                        <div class="tdcell input-inbox">
-                                            <div class="w-100p dis-inb">
-                                            <input type="text" id="email" name="email" maxlength="30" placeholder="이메일을 입력하세요"
-                                                class="w-39p" v-model="email" @input="validEmail">
+                                        </th>
+                                        <td>
+                                            <div class="tdcell input-inbox">
+                                                <input type="text" id="mbr_id" name="mbr_id" minlength="5" maxlength="20"
+                                                    placeholder="아이디를 입력하세요" class="" v-model="mbr_id" @input="validMbrId" required/>
+                                                <span class="info-txt" :class="{'dis-hide' : !isMbrIdValid}" v-if="isMbrIdValid">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+                                                    가능합니다.</span>
+                                                <span class="error-txt" v-else>사용할 수 없는 아이디입니다.</span>
                                             </div>
-                                            <span class="error-txt" :class="{'dis-hide' : !isEmailValid}" v-if="isEmailValid">유효한 이메일 주소를 입력하세요.</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="thcell">
-                                            <label for="">자기소개</label>
-                                        </div>
-                                    </th>
-                                    <td colspan="3">
-                                        <div class="mg-10 area_textarea_box _input_wrap">
-                                            <textarea id="intr_intrcn" name="intr_intrcn" placeholder="자기소개는 최대 200자까지 등록 가능합니다."
-                                                class="this_textarea _textarea_box" maxlength="200" v-model="intr_intrcn" @input="validIntr"></textarea>
-                                            <p class="this_numbering _count_num">({{ intr_intrcn.length }}/200)</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="btn_submit_wrap mg-l0">
-                            <input type="hidden" name="markAgre" id="markAgre" :value="markAgre" />
-                            <button type="button" class="btn_cancel w-49p mg-r10">취소</button>
-                            <button type="button" class="btn_submit w-49p">등록</button>
-                        </div>
+                                        </td>
+                                        <th scope="row">
+                                            <div class="thcell required">
+                                                <label for="mbr_nm">이름</label>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <div class="tdcell input-inbox">
+                                                <input type="text" id="mbr_nm" name="mbr_nm" maxlength="20" placeholder="이름을 입력하세요" class="" v-model="mbr_nm" @input="validMbrNm">
+                                                <span class="info-txt" :class="{'dis-hide' : !isMbrNmValid}" v-if="isMbrNmValid" required>최대 20자의 한글만 사용
+                                                    가능합니다.</span>
+                                                <span class="error-txt" v-else>사용할 수 없는 이름입니다.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="thcell required">
+                                                <label for="pswd">비밀번호</label>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <div class="tdcell input-inbox">
+                                                <input type="password" id="pswd" name="pswd" minlength="6" maxlength="20"
+                                                    placeholder="비밀번호를 입력하세요" class="" v-model="pswd" @input="validPswd" required>
+                                                <span class="info-txt" :class="{'dis-hide' : !isPswdValid}" v-if="isPswdValid">6~20자의 영문 + 숫자 + 특수문자 조합으로 사용 가능합니다.</span>
+                                                <span class="error-txt" v-else>사용할 수 없는 비밀번호입니다.</span>
+                                            </div>
+                                        </td>
+                                        <th scope="row">
+                                            <div class="thcell required">
+                                                <label for="">비밀번호 확인</label>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <div class="tdcell input-inbox">
+                                                <input type="password" id="pswd_confirm" minlength="6" maxlength="20"
+                                                    placeholder="비밀번호 확인을 입력하세요" class="" v-model="confirmPswd" @input="validConfirmPswd" required>
+                                                <span class="error-txt" :class="{'dis-hide' : !isConfirmPswdValid}" v-if="isConfirmPswdValid">비밀번호가 일치하지 않습니다.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="thcell required">
+                                                <label for="">닉네임</label>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <div class="tdcell input-inbox">
+                                                <input type="text" id="nick_nm" name="nick_nm" minlength="2" maxlength="6" placeholder="닉네임을 입력하세요" v-model="nick_nm" @input="validNickNm"
+                                                    class="" required>
+                                                <span class="info-txt" :class="{'dis-hide' : !isNickNmValid}" v-if="isNickNmValid">2~6자 사이의 한글, 영문, 숫자, 특수기호(_),(-)만 사용 가능합니다.</span>
+                                                <span class="error-txt" v-else>사용할 수 없는 닉네임입니다.</span>
+                                            </div>
+                                        </td>
+                                        <th scope="row">
+                                            <div class="thcell">
+                                                <label for="">휴대폰번호</label>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <div class="tdcell input-inbox">
+                                                <input type="text" id="phone_no" name="phone_no" maxlength="13" placeholder="휴대폰번호를 입력하세요"
+                                                    class="" v-model="phone_no" @input="validPhoneNo">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="thcell required">
+                                                <label for="">이메일</label>
+                                            </div>
+                                        </th>
+                                        <td colspan="3">
+                                            <div class="tdcell input-inbox">
+                                                <div class="w-100p dis-inb">
+                                                <input type="text" id="email" name="email" maxlength="30" placeholder="이메일을 입력하세요"
+                                                    class="w-39p" v-model="email" @input="validEmail" required>
+                                                </div>
+                                                <span class="error-txt" :class="{'dis-hide' : !isEmailValid}" v-if="isEmailValid">유효한 이메일 주소를 입력하세요.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="thcell">
+                                                <label for="">자기소개</label>
+                                            </div>
+                                        </th>
+                                        <td colspan="3">
+                                            <div class="mg-10 area_textarea_box _input_wrap">
+                                                <textarea id="intr_intrcn" name="intr_intrcn" placeholder="자기소개는 최대 200자까지 등록 가능합니다."
+                                                    class="this_textarea _textarea_box" maxlength="200" v-model="intr_intrcn" @input="validIntr"></textarea>
+                                                <p class="this_numbering _count_num">({{ intr_intrcn.length }}/200)</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn_submit_wrap mg-l0">
+                                <input type="hidden" name="markAgre" id="markAgre" :value="markAgre" />
+                                <button type="button" class="btn_cancel w-49p mg-r10" @click="$router.push('/join')">취소</button>
+                                <button type="button" class="btn_submit w-49p" @click="joinSubmit">등록</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -290,7 +292,7 @@ const validPhoneNo = () => {
 
 //이메일 유효성검사
 const validEmail = () => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const regex = /^[A-Za-z0-9_-]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/
     
     isEmailValid.value = !regex.test(email.value)
 
@@ -299,9 +301,50 @@ const validEmail = () => {
 
 //자기소개 유효성검사
 const validIntr = () => {
-    
+
     if(intr_intrcn.value.length > 200) {
         intr_intrcn.value = intr_intrcn.value.slice(0, 200)
+    }
+}
+
+//등록
+const joinSubmit = () => {
+    
+    //필수 체크
+    if(mbr_id.value === '' || !isMbrIdValid.value) {
+        alert('회원아이디를 확인해주세요.')
+        document.getElementById('mbr_id').focus()
+        return
+    }
+
+    if(mbr_nm.value === '' || !isMbrNmValid.value) {
+        alert('회원이름을 확인해주세요.')
+        document.getElementById('mbr_nm').focus()
+        return
+    }
+
+    if(pswd.value === '' || !isPswdValid.value) {
+        alert('비밀번호를 확인해주세요.')
+        document.getElementById('pswd').focus()
+        return
+    }
+
+    if(confirmPswd.value === '' || isConfirmPswdValid.value) {
+        alert('비밀번호를 확인해주세요.')
+        document.getElementById('pswd_confirm').focus()
+        return
+    }
+
+    if(nick_nm.value === '' || !isNickNmValid.value) {
+        alert('닉네임을 확인해주세요.')
+        document.getElementById('nick_nm').focus()
+        return
+    }
+
+    if(email.value === '' || isEmailValid.value) {
+        alert('이메일을 확인해주세요.')
+        document.getElementById('email').focus()
+        return
     }
 }
 </script>
