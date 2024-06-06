@@ -46,7 +46,6 @@ import { useRouter } from 'vue-router';
 import { inject, ref, onMounted } from "vue";
 import { getCurrentInstance } from 'vue';
 
-
 const { proxy } = getCurrentInstance();
 const router = useRouter()
 
