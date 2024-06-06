@@ -158,9 +158,9 @@
                                 </tbody>
                             </table>
                             <div class="btn_submit_wrap mg-l0">
-                                <input type="hidden" name="markAgre" id="markAgre" :value="markAgre ? 'Y' : 'N'" />
-                                <input type="hidden" name="trmsAgre" id="trmsAgre" value="Y" />
-                                <input type="hidden" name="infoAgre" id="infoAgre" value="Y" />
+                                <input type="hidden" name="markAgre" id="markAgre" :value="markAgre" />
+                                <input type="hidden" name="trmsAgre" id="trmsAgre" :value="trmsAgre" />
+                                <input type="hidden" name="infoAgre" id="infoAgre" :value="infoAgre" />
                                 <button type="button" class="btn_cancel w-49p mg-r10" @click="$router.push('/join')">취소</button>
                                 <button type="submit" class="btn_submit w-49p">등록</button>
                             </div>
@@ -173,15 +173,29 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { useJoinStore } from '@/store/join';
-import { getCurrentInstance } from 'vue';
+import { computed, ref, onBeforeUnmount } from 'vue'
+import { useJoinStore } from '@/store/join'
+import { useRouter } from 'vue-router'
+import { getCurrentInstance } from 'vue'
 
-const { proxy } = getCurrentInstance();
+const router = useRouter()
+const { proxy } = getCurrentInstance()
 
-const joinStore = useJoinStore();
-//마케팅 동의 값 
-const markAgre = computed(() => joinStore.markAgre)
+const joinStore = useJoinStore()
+
+onBeforeUnmount(() => {
+  joinStore.resetJoin2Access();
+});
+
+//동의 값 
+const agreements = computed(() => ({
+   markAgre: joinStore.markAgre,
+   trmsAgre: joinStore.trmsAgre,
+   infoAgre: joinStore.infoAgre
+}))
+
+const { markAgre, trmsAgre, infoAgre} = agreements.value
+
 //이미지 기본값
 const previewImage = ref('https://static.nid.naver.com/images/web/user/default.png')
 //회원 아이디 & 유효성 검사
@@ -338,8 +352,13 @@ const joinSubmit = async () => {
     const formData = new FormData(formElement);
 
     try {
-        await proxy.$axios.post('/join', formData);
-        // 성공 시 처리 로직 추가
+
+        const result = await proxy.$axios.post('/join', formData);
+        if (result.status === 200) {
+            alert("회원가입이 완료되었습니다.")
+            router.push({ name: 'Login' }); // 'Login'은 라우터에서 로그인 페이지의 이름입니다.
+        }
+
     } catch (error) {
         console.error('There was an error!', error);
     }

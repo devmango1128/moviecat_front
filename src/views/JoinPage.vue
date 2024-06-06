@@ -556,7 +556,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useJoinStore } from '@/store/join';
+import { useJoinStore } from '@/store/join'
 
 const router = useRouter()
 const joinStore = useJoinStore()
@@ -582,9 +582,14 @@ watch([trmsAgre, infoAgre, markAgre], ([new_trms_agre, new_info_agre, new_mark_a
 
 // 다음 스텝
 const goNextStep = () => {
-    joinStore.setMarkAgre(markAgre.value)
+    joinStore.setMarkAgre(markAgre.value ? 'Y' : 'N')
+    joinStore.setInfoAgre(infoAgre.value ? 'Y' : 'N')
+    joinStore.setTrmsAgre(trmsAgre.value ? 'Y' : 'N')
+    
+    joinStore.allowJoin2Access()
+    
     router.push({
-        name: 'JoinPage2',
+        name: 'Join2',
     });
 };
 

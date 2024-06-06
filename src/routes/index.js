@@ -19,27 +19,42 @@ import MyGrade from '../views/MyGrade.vue'
 import WithDrawal from '../views/WithDrawal.vue'
 import TotalSearch from '../views/TotalSearch.vue'
 import WithDrwalComp from '../views/WithDrwalComp.vue'
+import { useJoinStore } from '@/store/join.js'
 
 const routes = [
   {
-    name: 'main',
+    name: 'Main',
     path: '/',
     component: MainPage,
   },
   {
+    name : 'Login',
     path: '/login',
     component: LoginPage,
   },
   {
+    name : 'Join',
     path: '/join',
     component: JoinPage,
   },
   {
+    name : 'Join2',
     path: '/join2',
-    name : 'JoinPage2',
-    component: JoinPage2
+    component: JoinPage2,
+    beforeEnter: (to, from, next) => {
+
+      const accessStore = useJoinStore()
+
+      if (accessStore.canAccessJoin2) {
+        next()
+      } else {
+        alert("잘못된 접근방법입니다.")
+        next('/')
+      }
+    }
   },
   {
+    name : 'FindIdPw',
     path: '/findIdPw',
     component : FindIdPw
   },
