@@ -243,12 +243,28 @@ const removeImage = () => {
 }
 
 //아이디 valid
-const validMbrId = () => {
+const validMbrId = async () => {
     const regex = /^[a-z0-9_-]{5,20}$/;
 
     isMbrIdValid.value = regex.test(mbrId.value)
 
     if(mbrId.value === '') isMbrIdValid.value = true
+
+    //유효성 검증 통과한 경우
+    if(isMbrIdValid.value) {
+        try {
+
+            const result = await proxy.$axios.get('/mbrIdDupCheck', {params : {mbrId : mbrId.value}});
+            
+            //사용가능 id
+            if (result.status === 200) {
+                isMbrIdValid.value = true
+            }
+
+        } catch (error) {
+            isMbrIdValid.value = false
+        }
+    }
 }
 
 //이름 valid
@@ -280,13 +296,35 @@ const validConfirmPswd = () => {
 }
 
 //닉네임 확인 valid
-const validNickNm = () => {
+const validNickNm = async () => {
 
     const regex = /^[가-힣A-Za-z0-9_-]{2,6}$/;
 
     isNickNmValid.value = regex.test(nickNm.value)
 
     if(nickNm.value === '') isNickNmValid.value = true
+
+    //유효성 검증 통과한 경우
+    if(isNickNmValid.value) {
+        try {
+
+            const result = await proxy.$axios.get('/nickNmDupCheck', {params : {nickNm : nickNm.value}});
+            //사용가능 id
+            if (result.status === 200) {
+                isNickNmValid.value = true
+            }
+
+        } catch (error) {
+
+            console.log('error.response', error.response);
+            //중복 id
+            if(error.response && error.response.status === 409) {
+                isNickNmValid.value = false
+            }
+
+            return Promise.reject(error);
+        }
+    }
 }
 
 //휴대폰 번호 valid
