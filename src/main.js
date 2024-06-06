@@ -1,4 +1,4 @@
-import { createApp, ref } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import routes from './routes/index'
 import common from '@/assets/js/common.js'
@@ -9,9 +9,7 @@ import pinia from '@/store'
 
 const app = createApp(App);
 
-const isLogin = ref(false);
 app.config.globalProperties.$axios = axios
-app.provide('isLogin', isLogin)
 
 app.use(routes).use(common).use(PrimeVue).use(pinia)
 app.component('paginate', Paginate)

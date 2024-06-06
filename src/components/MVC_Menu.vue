@@ -4,7 +4,7 @@
       <div class="top_inner">
         <p>영화 커뮤니티 무비캣입니다.</p>
         <div class="top_right_menu">
-          <ul v-if="!isLogin">
+          <ul v-if="isLoggedIn">
             <li><router-link to="/login">로그인</router-link></li>
             <li><router-link to="/join">회원가입</router-link></li>
           </ul>
@@ -43,25 +43,21 @@
 <script setup>
 
 import { useRouter } from 'vue-router';
-import { inject, ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { getCurrentInstance } from 'vue';
 
 const { proxy } = getCurrentInstance();
 const router = useRouter()
 
-const isLogin = inject("isLogin")
-
 const menuList = ref({});
+const token = ref(localStorage.getItem('token'))
+
+const isLoggedIn = computed(() => !!token.value)
 
 const goLogout = () => {
-
-  isLogin.value = false
-
-  if (!isLogin.value) {
-    router.push({
+  router.push({
       path: '/',
-    })
-  }
+  })
 }
 
 const totalSearch = () => {
@@ -79,7 +75,6 @@ onMounted(async() => {
     console.log(err)
   }
 });
-
 
 </script>
 

@@ -7,30 +7,32 @@
         </div>
         <div class="scanContents">
           <div class="login-box-wrap">
-            <div class="login-inbox">
-              <div>
-                <div class="input-inbox mg-b5">
-                  <label for="userId" class="">아이디</label>
-                  <input type="text" id="userId" name="userId" maxlength="16" placeholder="아이디를 입력하세요" class="">
+            <form @submit.prevent="goLogin">
+              <div class="login-inbox">
+                <div>
+                  <div class="input-inbox mg-b5">
+                    <label for="mbrId" class="">아이디</label>
+                    <input type="text" id="mbrId" name="mbrId" v-model="mbrId" maxlength="20" placeholder="아이디를 입력하세요" class="">
+                  </div>
+                  <div class="input-inbox">
+                    <label for="pswd" class="">비밀번호</label>
+                    <input type="password" id="pswd" name="pswd" maxlength="20" placeholder="비밀번호를 입력하세요"
+                      class="">
+                  </div>
                 </div>
-                <div class="input-inbox">
-                  <label for="password" class="">비밀번호</label>
-                  <input type="password" id="password" name="password" maxlength="16" placeholder="비밀번호를 입력하세요"
-                    class="">
+                <div>
+                  <p class="ipt_bottom_info mg-t10">
+                    <input type="checkbox" class="id-save-chk" v-model="saveId">
+                    <label for="idSaveFlag" class="id-save-chk">아이디 저장</label>
+                  </p>
                 </div>
               </div>
-              <div>
-                <p class="ipt_bottom_info mg-t10">
-                  <input type="checkbox" class="id-save-chk">
-                  <label for="idSaveFlag" class="id-save-chk">아이디 저장</label>
-                </p>
+              <div class="btn_login_wrap">
+                <button type="submit" class="btn_login" id="log.login">
+                  <span class="btn_text">로그인</span>
+                </button>
               </div>
-            </div>
-            <div class="btn_login_wrap">
-              <button type="submit" class="btn_login" id="log.login" @click="goLogin">
-                <span class="btn_text">로그인</span>
-              </button>
-            </div>
+            </form>
             <div>
               <ul class="find_wrap" id="find_wrap">
                 <li><span class="find_text"><router-link to="/findIdPw">아이디 찾기</router-link></span></li>
@@ -63,21 +65,46 @@
 </template>
 
 <script setup>
+import { ref, getCurrentInstance, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
-import { inject } from "vue";
 
 const router = useRouter()
+const { proxy } = getCurrentInstance()
+const mbrId = ref('')
+const saveId = ref(false)
 
-const isLogin = inject("isLogin")
+onMounted(() => {
 
-const goLogin = () => {
+  const savedId = localStorage.getItem('savedId')
+  console.log(savedId)
+  if(savedId) {
+    mbrId.value = savedId
+    saveId.value = true
+  }
+})
 
-  isLogin.value = true
-  
-  if(isLogin.value) {
+const goLogin = async () => {
+
+  try {
+
+    //데이터 전송
+    const formElement = document.querySelector('form');
+    const formData = new FormData(formElement);
+
+    const res = await proxy.$axios.post('/login', formData)
+
+    localStorage.setItem('token', res.data.token)
+
+    //아이디 저장
+    if(saveId.value) localStorage.setItem('savedId', mbrId.value)
+    else localStorage.removeItem('savedId')
+
     router.push({
       path: '/',
     })
+
+  } catch ( error ) {
+    console.error('Login failed', error)
   }
 }
 </script>

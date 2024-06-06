@@ -316,13 +316,10 @@ const validNickNm = async () => {
 
         } catch (error) {
 
-            console.log('error.response', error.response);
-            //중복 id
+            //중복 닉넴
             if(error.response && error.response.status === 409) {
                 isNickNmValid.value = false
             }
-
-            return Promise.reject(error);
         }
     }
 }
