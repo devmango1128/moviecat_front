@@ -309,43 +309,60 @@ const validIntr = () => {
 
 //등록
 const joinSubmit = () => {
+
+    const fields = [
+        { value: mbr_id, isValid: isMbrIdValid.value, message: '회원아이디를 확인해주세요.', id: 'mbr_id' },
+        { value: mbr_nm, isValid: isMbrNmValid.value, message: '회원이름을 확인해주세요.', id: 'mbr_nm' },
+        { value: pswd, isValid: isPswdValid.value, message: '비밀번호를 확인해주세요.', id: 'pswd' },
+        { value: confirmPswd, isValid : !isConfirmPswdValid.value, message: '비밀번호를 확인해주세요.', id: 'pswd_confirm' },
+        { value: nick_nm, isValid: isNickNmValid.value, message: '닉네임을 확인해주세요.', id: 'nick_nm' },
+        { value: email, isValid : !isEmailValid.value, message: '이메일을 확인해주세요.', id: 'email' }
+    ]
+
+    for (let field of fields) {
+        if (field.value.value === '' || !field.isValid) {
+            alert(field.message)
+            document.getElementById(field.id).focus()
+            return
+        }
+    }
     
     //필수 체크
-    if(mbr_id.value === '' || !isMbrIdValid.value) {
-        alert('회원아이디를 확인해주세요.')
-        document.getElementById('mbr_id').focus()
-        return
-    }
+    // if(mbr_id.value === '' || !isMbrIdValid.value) {
+    //     alert('회원아이디를 확인해주세요.')
+    //     document.getElementById('mbr_id').focus()
+    //     return
+    // }
 
-    if(mbr_nm.value === '' || !isMbrNmValid.value) {
-        alert('회원이름을 확인해주세요.')
-        document.getElementById('mbr_nm').focus()
-        return
-    }
+    // if(mbr_nm.value === '' || !isMbrNmValid.value) {
+    //     alert('회원이름을 확인해주세요.')
+    //     document.getElementById('mbr_nm').focus()
+    //     return
+    // }
 
-    if(pswd.value === '' || !isPswdValid.value) {
-        alert('비밀번호를 확인해주세요.')
-        document.getElementById('pswd').focus()
-        return
-    }
+    // if(pswd.value === '' || !isPswdValid.value) {
+    //     alert('비밀번호를 확인해주세요.')
+    //     document.getElementById('pswd').focus()
+    //     return
+    // }
 
-    if(confirmPswd.value === '' || isConfirmPswdValid.value) {
-        alert('비밀번호를 확인해주세요.')
-        document.getElementById('pswd_confirm').focus()
-        return
-    }
+    // if(confirmPswd.value === '' || isConfirmPswdValid.value) {
+    //     alert('비밀번호를 확인해주세요.')
+    //     document.getElementById('pswd_confirm').focus()
+    //     return
+    // }
 
-    if(nick_nm.value === '' || !isNickNmValid.value) {
-        alert('닉네임을 확인해주세요.')
-        document.getElementById('nick_nm').focus()
-        return
-    }
+    // if(nick_nm.value === '' || !isNickNmValid.value) {
+    //     alert('닉네임을 확인해주세요.')
+    //     document.getElementById('nick_nm').focus()
+    //     return
+    // }
 
-    if(email.value === '' || isEmailValid.value) {
-        alert('이메일을 확인해주세요.')
-        document.getElementById('email').focus()
-        return
-    }
+    // if(email.value === '' || isEmailValid.value) {
+    //     alert('이메일을 확인해주세요.')
+    //     document.getElementById('email').focus()
+    //     return
+    // }
 }
 </script>
 
