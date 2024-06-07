@@ -399,7 +399,7 @@ const joinSubmit = async () => {
         const result = await proxy.$axios.post('/join', formData);
         if (result.status === 200) {
             alert("회원가입이 완료되었습니다.")
-            router.push({ name: 'Login' }); // 'Login'은 라우터에서 로그인 페이지의 이름입니다.
+            router.push({ name: 'Login' });
         }
 
     } catch (error) {

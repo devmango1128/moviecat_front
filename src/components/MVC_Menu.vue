@@ -9,7 +9,7 @@
             <li><router-link to="/join">회원가입</router-link></li>
           </ul>
           <ul v-else>
-            <li><span class="login-name">홍길동님</span></li>
+            <li><span class="login-name">{{ user.nickNm }}님</span></li>
             <li><router-link to="/myPage/memberInfo">마이페이지</router-link></li>
             <li @click="goLogout">
               <span class="logout">로그아웃</span>
@@ -52,18 +52,16 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const menuList = ref({});
-const token = ref(localStorage.getItem('token'))
 
+const user = computed(() => authStore.getUser)
 const isLoggedIn = computed(() => authStore.isLoggedIn)
 
 const goLogout = () => {
 
   authStore.clearToken()
-  token.value = null
+  authStore.clearUser()
 
-  router.push({
-      path: '/',
-  })
+  router.push({name: 'Main'})
 }
 
 const totalSearch = () => {

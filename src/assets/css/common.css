@@ -708,6 +708,10 @@ fieldset {
     line-height: 18px;
 }
 
+.header-element .top_info .top_right_menu>ul>li span.logout {
+    cursor: pointer;
+}
+
 .body-area {
     position: relative;
     border-bottom: 1px solid #e2e5eb;

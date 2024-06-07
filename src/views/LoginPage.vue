@@ -16,7 +16,7 @@
                   </div>
                   <div class="input-inbox">
                     <label for="pswd" class="">비밀번호</label>
-                    <input type="password" id="pswd" name="pswd" maxlength="20" placeholder="비밀번호를 입력하세요"
+                    <input type="password" id="pswd" name="pswd" v-model="pswd" maxlength="20" placeholder="비밀번호를 입력하세요"
                       class="">
                   </div>
                 </div>
@@ -50,10 +50,10 @@
                       </span>
                     </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="#" class="naver border_round sns_shadow">
                       <span class="naver_img">네이버 로그인</span></a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -72,6 +72,7 @@ import { useAuthStore } from '@/store/auth'
 const router = useRouter()
 const { proxy } = getCurrentInstance()
 const mbrId = ref('')
+const pswd = ref('')
 const saveId = ref(false)
 const authStore = useAuthStore()
 
@@ -87,6 +88,18 @@ onMounted(() => {
 
 const goLogin = async () => {
 
+  if(mbrId.value === '') {
+    alert('아이디를 입력해주세요.')
+    document.getElementById('mbrId').focus()
+    return
+  }
+
+  if(pswd.value === '') {
+    alert('비밀번호를 입력해주세요.')
+    document.getElementById('pswd').focus()
+    return
+  }
+
   try {
 
     //데이터 전송
@@ -95,18 +108,26 @@ const goLogin = async () => {
 
     const res = await proxy.$axios.post('/login', formData)
 
-    authStore.setToken(res.data.token)
+    if(typeof res.data.token !== 'undefined') {
 
-    //아이디 저장
-    if(saveId.value) localStorage.setItem('savedId', mbrId.value)
-    else localStorage.removeItem('savedId')
+      authStore.setToken(res.data.token)
 
-    router.push({
-      path: '/',
-    })
+      authStore.setUser({
+        mbrId: res.data.mbrId,
+        nickNm: res.data.nickNm,
+        atchFileUrl : res.data.atchFileUrl
+      });
+
+      //아이디 저장
+      if(saveId.value) localStorage.setItem('savedId', mbrId.value)
+      else localStorage.removeItem('savedId')
+
+      router.push({ name: 'Main' });
+    }
 
   } catch ( error ) {
-    console.error('Login failed', error)
+    alert('회원정보가 일치하지 않습니다.')
+    return
   }
 }
 </script>

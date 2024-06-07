@@ -5,12 +5,17 @@ import common from '@/assets/js/common.js'
 import Paginate from "vuejs-paginate-next"
 import PrimeVue from 'primevue/config'
 import axios from '@/axios'
-import pinia from '@/store'
+import piniaStore from '@/store'
+import piniaPersistPlugin from '@/plugins/piniaPersist'
+import { createPinia } from 'pinia'
 
-const app = createApp(App);
+const pinia = createPinia()
+pinia.use(piniaPersistPlugin)
+
+const app = createApp(App)
 
 app.config.globalProperties.$axios = axios
 
-app.use(routes).use(common).use(PrimeVue).use(pinia)
+app.use(routes).use(common).use(PrimeVue).use(piniaStore).use(pinia)
 app.component('paginate', Paginate)
 app.mount('#app')

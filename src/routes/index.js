@@ -134,15 +134,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
-  if (to.matched.some(record => record.meta.requiresAuth) && !token) {
+  if (to.matched.some(record => record.meta.requiresAuth) && !token && typeof token !== 'undefined') {
     next('/');
   } else {
     next();
   }
-})
+});
 
-export default router
+export default router;
