@@ -66,17 +66,19 @@
 
 <script setup>
 import { ref, getCurrentInstance, onMounted } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
 const { proxy } = getCurrentInstance()
 const mbrId = ref('')
 const saveId = ref(false)
+const authStore = useAuthStore()
 
 onMounted(() => {
 
   const savedId = localStorage.getItem('savedId')
-  console.log(savedId)
+
   if(savedId) {
     mbrId.value = savedId
     saveId.value = true
@@ -93,7 +95,7 @@ const goLogin = async () => {
 
     const res = await proxy.$axios.post('/login', formData)
 
-    localStorage.setItem('token', res.data.token)
+    authStore.setToken(res.data.token)
 
     //아이디 저장
     if(saveId.value) localStorage.setItem('savedId', mbrId.value)

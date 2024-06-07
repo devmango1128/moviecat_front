@@ -198,6 +198,8 @@ const { markAgre, trmsAgre, infoAgre} = agreements.value
 
 //이미지 기본값
 const previewImage = ref('https://static.nid.naver.com/images/web/user/default.png')
+// 선택된 파일을 저장할 변수
+let selectedFile = ref(null); 
 //회원 아이디 & 유효성 검사
 const mbrId = ref('')
 const isMbrIdValid = ref(true)
@@ -233,6 +235,7 @@ const onImageChange = (e) => {
             previewImage.value = e2.target.result
         }
         reader.readAsDataURL(file)
+        selectedFile.value = file
     }
 }
 
@@ -240,6 +243,7 @@ const onImageChange = (e) => {
 const removeImage = () => {
     previewImage.value = 'https://static.nid.naver.com/images/web/user/default.png'
     document.getElementById('inputImage').value= ''
+    selectedFile.value = null
 }
 
 //아이디 valid
@@ -385,6 +389,10 @@ const joinSubmit = async () => {
     //데이터 전송
     const formElement = document.querySelector('form');
     const formData = new FormData(formElement);
+
+    if (selectedFile.value) {
+        formData.append('profileImage', selectedFile.value);
+    }
 
     try {
 
