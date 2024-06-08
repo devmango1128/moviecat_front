@@ -19,3 +19,5 @@ app.config.globalProperties.$axios = axios
 app.use(routes).use(common).use(PrimeVue).use(piniaStore).use(pinia)
 app.component('paginate', Paginate)
 app.mount('#app')
+
+window.Kakao.init('220487c658165a7581e93ad39a54d80b')

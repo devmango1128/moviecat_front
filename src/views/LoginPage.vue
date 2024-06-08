@@ -44,7 +44,7 @@
               <div class="sns-login">
                 <ul class="sns-top-area">
                   <li>
-                    <a href="#" class="kakao border_round sns_shadow">
+                    <a href="#" class="kakao border_round sns_shadow" @click.prevent="snsLogin">
                       <span class="kakao_img">
                         카카오 로그인
                       </span>
@@ -66,15 +66,17 @@
 
 <script setup>
 import { ref, getCurrentInstance, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
+const route = useRoute()
 const { proxy } = getCurrentInstance()
 const mbrId = ref('')
 const pswd = ref('')
 const saveId = ref(false)
 const authStore = useAuthStore()
+const code = ref('')
 
 onMounted(() => {
 
@@ -110,19 +112,13 @@ const goLogin = async () => {
 
     if(typeof res.data.token !== 'undefined') {
 
-      authStore.setToken(res.data.token)
-
-      authStore.setUser({
-        mbrId: res.data.mbrId,
-        nickNm: res.data.nickNm,
-        atchFileUrl : res.data.atchFileUrl
-      });
+      setAuthStore(res)
 
       //아이디 저장
       if(saveId.value) localStorage.setItem('savedId', mbrId.value)
       else localStorage.removeItem('savedId')
 
-      router.push({ name: 'Main' });
+      router.push({ name: 'Main' })
     }
 
   } catch ( error ) {
@@ -130,6 +126,52 @@ const goLogin = async () => {
     return
   }
 }
+
+//snsLogin
+const snsLogin = () => {
+  getSnsCode()
+}
+
+//인가 코드 조회
+const getSnsCode = () => {
+  window.Kakao.Auth.authorize({
+    redirectUri: 'http://localhost:8080/login'
+  });
+}
+
+const setAuthStore = (res) => {
+  authStore.setToken(res.data.token)
+
+  authStore.setUser({
+    mbrId: res.data.mbrId,
+    nickNm: res.data.nickNm,
+    atchFileUrl : res.data.atchFileUrl
+  });
+}
+
+onMounted(async() => {
+  
+  code.value = route.query.code
+
+  if (code.value) {
+    try{
+      
+      const res = await proxy.$axios.get('/snsLogin',{params : {code : code.value}})
+      
+      if(typeof res.data.token !== 'undefined') {
+        
+        setAuthStore(res)
+        
+        router.push({ name: 'Main' })
+      }
+    } catch(err) {
+      alert("에러가 발생하였습니다. 다시 시도해주세요.")
+      return
+    }
+    
+  }
+})
+
 </script>
 
 <style>

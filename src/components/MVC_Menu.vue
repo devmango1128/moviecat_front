@@ -56,12 +56,12 @@ const menuList = ref({});
 const user = computed(() => authStore.getUser)
 const isLoggedIn = computed(() => authStore.isLoggedIn)
 
-const goLogout = () => {
+const goLogout = async () => {
+    
+    authStore.clearToken()
+    authStore.clearUser()
 
-  authStore.clearToken()
-  authStore.clearUser()
-
-  router.push({name: 'Main'})
+    router.push({name: 'Main'})
 }
 
 const totalSearch = () => {
@@ -72,11 +72,15 @@ const totalSearch = () => {
 
 //컴포넌트가 DOM에 마운트된 직후
 onMounted(async() => {
+  
   try{
+
     const res = await proxy.$axios.get('menuList')
     menuList.value = res.data.data.menu_list
+  
   } catch( err) {
-    console.log(err)
+    alert("에러가 발생하였습니다. 다시 시도해주세요.")
+    return
   }
 });
 
