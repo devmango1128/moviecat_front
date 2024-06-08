@@ -35,9 +35,9 @@
             </form>
             <div>
               <ul class="find_wrap" id="find_wrap">
-                <li><span class="find_text"><router-link to="/findIdPw">아이디 찾기</router-link></span></li>
-                <li><span class="find_text"><router-link to="/findIdPw">비밀번호 찾기</router-link></span></li>
-                <li><span class="find_text"><router-link to="/join">회원가입</router-link></span></li>
+                <li><span class="find_text"><router-link :to="{name : 'FindIdPw'}">아이디 찾기</router-link></span></li>
+                <li><span class="find_text"><router-link :to="{name : 'FindIdPw'}">비밀번호 찾기</router-link></span></li>
+                <li><span class="find_text"><router-link :to="{name : 'Join'}">회원가입</router-link></span></li>
               </ul>
             </div>
             <div>
@@ -144,6 +144,7 @@ const setAuthStore = (res) => {
 
   authStore.setUser({
     mbrId: res.data.mbrId,
+    mbrNm: res.data.mbrNm,
     nickNm: res.data.nickNm,
     email: res.data.email,
     atchFileUrl : res.data.atchFileUrl
