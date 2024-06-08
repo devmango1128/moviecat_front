@@ -145,6 +145,7 @@ const setAuthStore = (res) => {
   authStore.setUser({
     mbrId: res.data.mbrId,
     nickNm: res.data.nickNm,
+    email: res.data.email,
     atchFileUrl : res.data.atchFileUrl
   });
 }
