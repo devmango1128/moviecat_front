@@ -55,8 +55,9 @@ const routes = [
   },
   {
     name : 'FindIdPw',
-    path: '/findIdPw',
-    component : FindIdPw
+    path: '/findIdPw/:div',
+    component: FindIdPw,
+    props: true
   },
   {
     path: '/movieboard/:boardId',

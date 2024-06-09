@@ -17,8 +17,8 @@
                             <div v-if="isIdFindActive" class="id-find-area">
                                 <div v-if="!isIdResult">
                                     <div class="input-inbox mg-b5 mg-t50">
-                                        <label for="userId" class="">이름</label>
-                                        <input type="text" id="userNm" name="userNm" maxlength="16"
+                                        <label for="mbrNm" class="">이름</label>
+                                        <input type="text" id="mbrNm" name="mbrNm" maxlength="16"
                                             placeholder="이름을 입력하세요" class="">
                                     </div>
                                     <div class="input-inbox">
@@ -44,13 +44,13 @@
                             <div v-else class="pw-find-area">
                                 <div v-if="!isPwResult">
                                     <div class="input-inbox mg-b5 mg-t50">
-                                        <label for="userId" class="">아이디</label>
-                                        <input type="text" id="userId" name="userId" maxlength="16"
+                                        <label for="mbrId" class="">아이디</label>
+                                        <input type="text" id="mbrId" name="mbrId" maxlength="16"
                                             placeholder="아이디를 입력하세요" class="">
                                     </div>
                                     <div class="input-inbox mg-b5">
-                                        <label for="userId" class="">이름</label>
-                                        <input type="text" id="userNm" name="userNm" maxlength="16"
+                                        <label for="mbrNm" class="">이름</label>
+                                        <input type="text" id="mbrNm" name="mbrNm" maxlength="16"
                                             placeholder="이름을 입력하세요" class="">
                                     </div>
                                     <div class="input-inbox">
@@ -82,7 +82,20 @@
 
 <script setup>
 
-    import { ref } from 'vue'
+    import { ref, defineProps, onMounted } from 'vue'
+
+    const props = defineProps({
+        div: {
+            type: [String, String],
+            required: true
+        }
+    })
+
+    onMounted(() => {
+       if(props.div === 'PW') {
+            getPwFind()
+       }
+    })
 
     const isIdFindActive = ref(true)
     const isPwFindActive = ref(false)

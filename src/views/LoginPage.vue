@@ -35,8 +35,8 @@
             </form>
             <div>
               <ul class="find_wrap" id="find_wrap">
-                <li><span class="find_text"><router-link :to="{name : 'FindIdPw'}">아이디 찾기</router-link></span></li>
-                <li><span class="find_text"><router-link :to="{name : 'FindIdPw'}">비밀번호 찾기</router-link></span></li>
+                <li><span class="find_text"><router-link :to="{name : 'FindIdPw', params: {'div' : 'ID'}}">아이디 찾기</router-link></span></li>
+                <li><span class="find_text"><router-link :to="{name : 'FindIdPw', params: {'div' : 'PW'}}">비밀번호 찾기</router-link></span></li>
                 <li><span class="find_text"><router-link :to="{name : 'Join'}">회원가입</router-link></span></li>
               </ul>
             </div>
