@@ -18,12 +18,12 @@
                                 <div v-if="!isIdResult">
                                     <div class="input-inbox mg-b5 mg-t50">
                                         <label for="mbrNm" class="">이름</label>
-                                        <input type="text" id="mbrNm" name="mbrNm" maxlength="16"
+                                        <input type="text" id="mbrNm" name="mbrNm" v-model="mbrNm" maxlength="20"
                                             placeholder="이름을 입력하세요" class="">
                                     </div>
                                     <div class="input-inbox">
                                         <label for="email" class="">이메일</label>
-                                        <input type="text" id="email" name="email" maxlength="16"
+                                        <input type="text" id="email" name="email" v-model="email" maxlength="30"
                                             placeholder="이메일을 입력하세요" class="">
                                     </div>
                                     <div class="ta-c">
@@ -32,11 +32,14 @@
                                 </div>
                                 <!--아이디 result-->
                                 <div v-else class="id-find-result">
-                                    <div class="mg-b5 mg-t50 ta-c fw-b">
-                                        회원님의 아이디는 <span class="col-blue">movie***</span>입니다.
+                                    <div class="mg-b5 mg-t50 ta-c fw-b" v-if="findIdOk">
+                                        회원님의 아이디는 <span class="col-blue">{{ findMbrId }}</span>입니다.
+                                    </div>
+                                    <div class="mg-b5 mg-t50 ta-c fw-b" v-else>
+                                        해당 정보로 조회되는 아이디가 없습니다.
                                     </div>
                                     <div class="ta-c">
-                                        <button class="btn-fl-blue">확인</button>
+                                        <button class="btn-fl-blue" @click.prevent="$router.push('/login')">로그인</button>
                                     </div>
                                 </div>
                             </div>
@@ -45,17 +48,17 @@
                                 <div v-if="!isPwResult">
                                     <div class="input-inbox mg-b5 mg-t50">
                                         <label for="mbrId" class="">아이디</label>
-                                        <input type="text" id="mbrId" name="mbrId" maxlength="16"
+                                        <input type="text" id="mbrId" name="mbrId" v-model="mbrId" maxlength="20"
                                             placeholder="아이디를 입력하세요" class="">
                                     </div>
                                     <div class="input-inbox mg-b5">
                                         <label for="mbrNm" class="">이름</label>
-                                        <input type="text" id="mbrNm" name="mbrNm" maxlength="16"
+                                        <input type="text" id="mbrNm" name="mbrNm" v-model="mbrNm" maxlength="20"
                                             placeholder="이름을 입력하세요" class="">
                                     </div>
                                     <div class="input-inbox">
                                         <label for="email" class="">이메일</label>
-                                        <input type="text" id="email" name="email" maxlength="16"
+                                        <input type="text" id="email" name="email" v-model="email" maxlength="30"
                                             placeholder="이메일을 입력하세요" class="">
                                     </div>
                                     <div class="ta-c">
@@ -82,7 +85,9 @@
 
 <script setup>
 
-    import { ref, defineProps, onMounted } from 'vue'
+    import { ref, defineProps, onMounted, getCurrentInstance } from 'vue'
+
+    const { proxy } = getCurrentInstance()
 
     const props = defineProps({
         div: {
@@ -101,6 +106,13 @@
     const isPwFindActive = ref(false)
     const isIdResult = ref(false)
     const isPwResult = ref(false)
+
+    const mbrId = ref('')
+    const mbrNm = ref('')
+    const email = ref('')
+
+    const findIdOk = ref(false)
+    const findMbrId = ref('')
     
     //아이디 찾기 클릭
     const getIdFind = () => {
@@ -115,7 +127,35 @@
     }
 
     //아이디 조회해오기
-    const getId = () => {
+    const getId = async () => {
+
+        if(mbrNm.value === '') {
+            alert('이름을 입력해주세요.')
+            document.getElementById('mbrNm').focus()
+            return
+        }
+
+        if(email.value === '') {
+            alert('이메일을 입력해주세요.')
+            document.getElementById('email').focus()
+            return
+        }
+
+        try{
+            const result = await proxy.$axios.get('/findId', {params : {'mbrNm' : mbrNm.value, 'email' : email.value}})
+
+            //사용가능 id
+            if(result.status === 200) {
+                findIdOk.value = true
+                findMbrId.value = result.data
+            }
+        } catch(error) {
+            //id 없는 경우
+            if(error.response && error.response.status === 404) {
+                findIdOk.value = false
+            }
+        }
+        
         isIdResult.value = true        
     }
 

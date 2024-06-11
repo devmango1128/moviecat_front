@@ -312,7 +312,7 @@ const validNickNm = async () => {
     if(isNickNmValid.value) {
         try {
 
-            const result = await proxy.$axios.get('/nickNmDupCheck', {params : {nickNm : nickNm.value}});
+            const result = await proxy.$axios.get('/nickNmDupCheck', {params : {nickNm : nickNm.value}})
             //사용가능 id
             if (result.status === 200) {
                 isNickNmValid.value = true
