@@ -33,7 +33,7 @@
                                                         <label for="profileImage" class="btn_model">
                                                             <b id="btnChangeProfile" class="btn2">사진변경</b>
                                                         </label>
-                                                        <input type="file" id="profileImage" name="profileImage"
+                                                        <input type="file" id="profileImage"
                                                             accept="image/*" @change="onImageChange">
                                                     </span>
                                                     <a href="#" class="btn_model" @click.prevent="removeImage">
@@ -396,7 +396,11 @@ const joinSubmit = async () => {
 
     try {
 
-        const result = await proxy.$axios.post('/join', formData);
+        const result = await proxy.$axios.post('/join', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
         if (result.status === 200) {
             alert("회원가입이 완료되었습니다.")
             router.push({ name: 'Login' });
