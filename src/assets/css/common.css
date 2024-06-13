@@ -634,6 +634,12 @@ fieldset {
     font-size: 25px;
 }
 
+/*height*/
+.h_48 {
+    height:48px !important;
+}
+
+
 /*header*/
 
 .header-element .top_info {

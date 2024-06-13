@@ -60,10 +60,12 @@ const routes = [
     props: true
   },
   {
+    name: 'movieBoard',
     path: '/movieboard/:boardId',
     component : MovieBoard
   },
   {
+    name: 'movieGrade',
     path: '/moviegrade/:boardId',
     component : MovieGrade
   },

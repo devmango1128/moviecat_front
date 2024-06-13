@@ -58,7 +58,7 @@
                 </table>
               </div>
               <!--등록버튼-->
-              <div class="reg-area">
+              <div class="reg-area" v-if="isLoggedIn">
                 <button class="btn-blue" @click="boardReg">등록</button>
               </div>
             </div>
@@ -86,10 +86,15 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
+const authStore = useAuthStore()
+
+const isLoggedIn = computed(() => authStore.isLoggedIn)
 
 const boardReg = () => {
   router.push(`/movieboardReg/${route.params.boardId}`);

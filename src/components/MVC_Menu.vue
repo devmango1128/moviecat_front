@@ -42,16 +42,20 @@
 
 <script setup>
 
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ref, onMounted, computed } from "vue"
-import { getCurrentInstance } from 'vue'
-import { useAuthStore } from '@/store/auth';
+import { getCurrentInstance, watch } from 'vue'
+import { useAuthStore } from '@/store/auth'
+import { usePathStore } from '@/store/path'
+
+const route = useRoute()
+const pathStore = usePathStore()
 
 const { proxy } = getCurrentInstance()
 const router = useRouter()
 const authStore = useAuthStore()
 
-const menuList = ref({});
+const menuList = ref({})
 
 const user = computed(() => authStore.getUser)
 const isLoggedIn = computed(() => authStore.isLoggedIn)
@@ -77,13 +81,22 @@ onMounted(async() => {
 
     const res = await proxy.$axios.get('menuList')
     menuList.value = res.data.data.menu_list
-  
+
+    if (route.name === 'movieBoard' || route.name === 'movieGrade') {
+      pathStore.setCurrentPath(route.fullPath)
+    }
   } catch( err) {
     alert("에러가 발생하였습니다. 다시 시도해주세요.")
     return
   }
-});
+})
 
+watch(() => route.fullPath, (newPath) => {
+    if (route.name === 'movieBoard' || route.name === 'movieGrade') {
+      pathStore.setCurrentPath(newPath)
+      pathStore.setMenuId(route.params.boardId)
+    }
+})
 </script>
 
 <style>

@@ -387,11 +387,11 @@ const joinSubmit = async () => {
     }
     
     //데이터 전송
-    const formElement = document.querySelector('form');
-    const formData = new FormData(formElement);
+    const formElement = document.querySelector('form')
+    const formData = new FormData(formElement)
 
     if (selectedFile.value) {
-        formData.append('profileImage', selectedFile.value);
+        formData.append('profileImage', selectedFile.value)
     }
 
     try {
