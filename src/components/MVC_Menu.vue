@@ -79,7 +79,7 @@ onMounted(async() => {
   
   try{
 
-    const res = await proxy.$axios.get('menuList')
+    const res = await proxy.$axios.get('/api/menuList')
     menuList.value = res.data.data.menu_list
 
     if (route.name === 'movieBoard' || route.name === 'movieGrade') {

@@ -108,7 +108,7 @@ const goLogin = async () => {
     const formElement = document.querySelector('form');
     const formData = new FormData(formElement);
 
-    const res = await proxy.$axios.post('/login', formData)
+    const res = await proxy.$axios.post('/api/login', formData)
 
     if(typeof res.data.token !== 'undefined') {
 
@@ -158,7 +158,7 @@ onMounted(async() => {
   if (code.value) {
     try{
       
-      const res = await proxy.$axios.get('/snsLogin',{params : {code : code.value}})
+      const res = await proxy.$axios.get('/api/snsLogin',{params : {code : code.value}})
       
       if(typeof res.data.token !== 'undefined') {
         

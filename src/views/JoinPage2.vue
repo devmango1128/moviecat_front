@@ -396,7 +396,7 @@ const joinSubmit = async () => {
 
     try {
 
-        const result = await proxy.$axios.post('/join', formData, {
+        const result = await proxy.$axios.post('/api/join', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

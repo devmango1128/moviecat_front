@@ -140,7 +140,7 @@ const boardReg = async() => {
 
     try {
 
-        const result = await proxy.$axios.post('/bbsWritePost', formData, {
+        const result = await proxy.$axios.post('/api/bbsWritePost', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

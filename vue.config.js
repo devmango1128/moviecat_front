@@ -6,11 +6,11 @@ module.exports = defineConfig({
   lintOnSave: false,
   devServer: {
     proxy: {
-      '/': {
-        target: 'http://localhost:8081',
+      '/api': {
+        target: 'http://localhost:8081', // Spring Boot 서버 주소
         changeOrigin: true,
-        pathRewrite: { '^/': '' },
+        pathRewrite: { '^/api': '/' },
       }
-    }
-  }
+    },
+  },
 });

@@ -163,7 +163,7 @@
         }
 
         try{
-            const result = await proxy.$axios.get('/findId', {params : {'mbrNm' : mbrNm.value, 'email' : email.value}})
+            const result = await proxy.$axios.get('/api/findId', {params : {'mbrNm' : mbrNm.value, 'email' : email.value}})
 
             //사용가능 id
             if(result.status === 200) {
@@ -203,7 +203,7 @@
 
         try{
            
-            const result = await proxy.$axios.get('/findPswd', {params : {'mbrId': mbrId.value, 'mbrNm' : mbrNm.value, 'email' : email.value}})
+            const result = await proxy.$axios.get('/api/findPswd', {params : {'mbrId': mbrId.value, 'mbrNm' : mbrNm.value, 'email' : email.value}})
         
             if(result.status === 200) {
                 findPswdOk.value = true
