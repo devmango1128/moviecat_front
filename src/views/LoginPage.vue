@@ -143,6 +143,7 @@ const setAuthStore = (res) => {
   authStore.setToken(res.data.token)
 
   authStore.setUser({
+    mvcId: res.data.mvcId,
     mbrId: res.data.mbrId,
     mbrNm: res.data.mbrNm,
     nickNm: res.data.nickNm,
