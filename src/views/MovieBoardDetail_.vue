@@ -11,22 +11,20 @@
                             <div class="article_header">
                                 <div class="ArticleTitle">
                                     <div class="title_area">
-                                        <h3 class="title_text"><em class="sp">[스포]</em>범죄도시4 완전 재밌게 봤음!!! 니네들도 꼭 봐!!
+                                        <h3 class="title_text"><em class="sp" v-if="spoYn === 'Y'">[스포]</em>{{ ttl }}
                                         </h3>
                                         <div class="WriterInfo">
                                             <div class="thumb_area">
-                                                <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
-                                                    alt="프로필 사진" width="36" height="36">
+                                                <img :src="profileUrl" alt="프로필 사진" width="36" height="36">
                                             </div>
                                             <div class="profile_area">
                                                 <div class="profile_info">
                                                     <div class="nick_box">
-                                                        <button id="" class="nickname"> 서울남부강산</button>
+                                                        <button id="" class="nickname"> {{nickNm}}</button>
                                                     </div>
                                                 </div>
                                                 <div class="article_info">
-                                                    <span class="date">2024.05.27. 16:32</span>
-                                                    <span class="count">조회 69</span>
+                                                    <span class="date">{{ rgstDate }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -37,10 +35,7 @@
                                 <div class="article_viewer">
                                     <div>
                                         <div class="content CafeViewer">
-                                            문명 붕괴 45년 후, 황폐해진 세상 속 누구에게도 알려지지 않은 풍요가 가득한 ‘녹색의 땅’에서 자란 ‘퓨리오사’(안야 테일러-조이)는
-                                            바이커 군단의 폭군 ‘디멘투스’(크리스 헴스워스)의 손에 모든 것을 잃고 만다. 가족도 행복도 모두 빼앗기고 세상에 홀로 내던져진
-                                            ‘퓨리오사’는 반드시 고향으로 돌아가겠다는 어머니와의 약속을 지키기 위해 인생 전부를 건 복수를 시작하는데... ‘매드맥스’ 시리즈의
-                                            전설적인 사령관 ‘퓨리오사’의 대서사시 마침내 분노가 깨어난다!
+                                            {{ cn }}
                                         </div>
                                     </div>
                                 </div>
@@ -70,20 +65,20 @@
                                         <div class="like_article">
                                             <div class="cm_sympathy_area">
                                                 <button type="button" class="area_button_upvote  _btn_upvote">
-                                                    <span class="this_text_number _count_num">921</span>
+                                                    <span class="this_text_number _count_num">{{ rcmd }}</span>
                                                 </button>
-                                                <button type="button" class="area_button_downvote  _btn_downvote">
+                                                <!-- <button type="button" class="area_button_downvote  _btn_downvote">
                                                     <span class="this_text_number _count_num">70</span>
-                                                </button>
+                                                </button> -->
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="box_right">
+                                    <!-- <div class="box_right">
                                         <div class="report_article">
                                             <a href="#" class="button_report" data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">신고</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="CommentBox">
                                         <div class="comment_option">
                                             <h3 class="comment_title"> 댓글 </h3>
@@ -231,7 +226,7 @@
         </div>
     </section>
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -262,14 +257,41 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
+import { ref, getCurrentInstance } from 'vue'
 
 const router = useRouter();
 const route = useRoute();
+const { proxy } = getCurrentInstance()
+
+const ttl = ref('')
+const spoYn = ref('N')
+const cn = ref('')
+const nickNm = ref('')
+const profileUrl = ref('https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77')
+const rgstDate = ref('')
+const rcmd = ref(0) 
+
+onMounted(async() => {
+    //TODO. 리스트 만든 후 하드코딩 수정하기
+    const res = await proxy.$axios.get('/api/movieboard/1/1')
+
+    const data = res.data;
+
+    ttl.value = data.ttl
+    spoYn.value = data.spoYn
+    cn.value = data.cn
+    nickNm.value = data.nickNm
+    profileUrl.value = data.profileUrl !== '' ? data.profileUrl : profileUrl.value
+    rgstDate.value = data.rgstDate
+    rcmd.value = data.rcmd
+})
+
 
 const boardList = () => {
     router.push(`/movieboard/${route.params.boardId}`)

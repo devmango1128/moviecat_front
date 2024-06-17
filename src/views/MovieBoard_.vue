@@ -22,7 +22,7 @@
                     <tr>
                       <th scope="col" class="hide-cell">번호</th>
                       <th scope="col" class="hide-line">제목</th>
-                      <th scope="col" class="hide-line">추천/반대</th>
+                      <th scope="col" class="hide-line">좋아요</th>
                       <th scope="col" class="hide-line">작성자</th>
                       <th scope="col" class="hide-cell">작성일</th>
                     </tr>
@@ -33,7 +33,7 @@
                       <td class="tit">
                         <div class="board-list">
                           <div class="inner_list">
-                            <router-link :to="`/movieboard/${$route.params.boardId}/${n}`">
+                            <router-link :to="`/movieboard/${$route.params.boardId}/36`">
                               <span class="article">
                                 <span class="list-new">N</span>
                                 <span>
@@ -48,8 +48,7 @@
                         </div>
                       </td>
                       <td class="ro hide-line">
-                        <span class="rcmdtn">999+</span><span class="">/</span>
-                        <span class="objc">80</span>
+                        <span class="rcmdtn">999+</span>
                       </td>
                       <td class="hide-line">서울남부강산</td>
                       <td class="hide-cell">2024.05.22</td>
