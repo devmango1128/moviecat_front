@@ -1774,6 +1774,10 @@ fieldset {
     background-position: -124px -22px;
 }
 
+.ReplyBox .cm_sympathy_area .area_button_upvote.state_on .this_text_number {
+    color: #006ae2;
+}
+
 .ReplyBox .cm_sympathy_area .this_text_number {
     position: relative;
     font-size: 0.8rem;

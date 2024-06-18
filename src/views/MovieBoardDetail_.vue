@@ -11,7 +11,8 @@
                             <div class="article_header">
                                 <div class="ArticleTitle">
                                     <div class="title_area">
-                                        <h3 class="title_text"><em class="sp" v-if="spoYn === 'Y'">[스포]</em>{{ ttl }}
+                                        <h3 class="title_text">
+                                            <em class="sp" v-if="spoYn === 'Y'">[스포]</em>{{ ttl }}
                                         </h3>
                                         <div class="WriterInfo">
                                             <div class="thumb_area">
@@ -20,7 +21,7 @@
                                             <div class="profile_area">
                                                 <div class="profile_info">
                                                     <div class="nick_box">
-                                                        <button id="" class="nickname"> {{nickNm}}</button>
+                                                        <span id="" class="nickname"> {{nickNm}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="article_info">
@@ -34,12 +35,10 @@
                             <div class="article_container">
                                 <div class="article_viewer">
                                     <div>
-                                        <div class="content CafeViewer">
-                                            {{ cn }}
-                                        </div>
+                                        <div class="content CafeViewer" v-html="cn"></div>
                                     </div>
                                 </div>
-                                <div class="FileBox">
+                                <div class="FileBox" v-for="file in fileLists" :key="file.fileId">
                                     <div class="fileContent">
                                         <div class="se-section se-section-file se-l-default se-section-align-">
                                             <div class="se-module se-module-file">
@@ -47,13 +46,11 @@
                                                     <strong class="se-blind">첨부파일</strong>
                                                 </span>
                                                 <div class="se-file-name-container">
-                                                    <span class="se-file-name">movie</span>
-                                                    <span class="se-file-extension">.pdf</span>
+                                                    <span class="se-file-name">{{file.fileName}}</span>
+                                                    <span class="se-file-extension">{{file.fileExtn}}</span>
                                                 </div>
-                                                <a href="https://downapi.cafe.naver.com/v1.0/cafes/article/file/af99f911-dc28-11ee-a1b7-0050568d055f/download"
-                                                    class="se-file-save-button __se_link" role="button" target="_blank"
-                                                    data-linktype="file"
-                                                    data-linkdata="{&quot;link&quot;: &quot;https://downapi.cafe.naver.com/v1.0/cafes/article/file/af99f911-dc28-11ee-a1b7-0050568d055f/download&quot;}">
+                                                <a :href="'/api/download/' + file.fileUrl  + '/' + file.fileName"
+                                                    class="se-file-save-button __se_link" role="button">
                                                     <span class="se-blind">파일 다운로드</span>
                                                 </a>
                                             </div>
@@ -64,7 +61,7 @@
                                     <div class="box_left">
                                         <div class="like_article">
                                             <div class="cm_sympathy_area">
-                                                <button type="button" class="area_button_upvote  _btn_upvote">
+                                                <button type="button" class="area_button_upvote  _btn_upvote" @click="rcmdClick">
                                                     <span class="this_text_number _count_num">{{ rcmd }}</span>
                                                 </button>
                                                 <!-- <button type="button" class="area_button_downvote  _btn_downvote">
@@ -264,10 +261,14 @@
 import { onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { ref, getCurrentInstance } from 'vue'
+import { useAuthStore } from '@/store/auth'
+import { usePathStore } from '@/store/path'
 
 const router = useRouter();
 const route = useRoute();
 const { proxy } = getCurrentInstance()
+const authStore = useAuthStore()
+const pathStore = usePathStore()
 
 const ttl = ref('')
 const spoYn = ref('N')
@@ -276,10 +277,11 @@ const nickNm = ref('')
 const profileUrl = ref('https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77')
 const rgstDate = ref('')
 const rcmd = ref(0) 
+const fileLists = ref([])
 
 onMounted(async() => {
     //TODO. 리스트 만든 후 하드코딩 수정하기
-    const res = await proxy.$axios.get('/api/movieboard/1/1')
+    const res = await proxy.$axios.get('/api/movieboard/1/28')
 
     const data = res.data;
 
@@ -290,8 +292,27 @@ onMounted(async() => {
     profileUrl.value = data.profileUrl !== '' ? data.profileUrl : profileUrl.value
     rgstDate.value = data.rgstDate
     rcmd.value = data.rcmd
+
+    getFileList()
 })
 
+const getFileList = async() => {
+    //url 하드코딩 수정하기
+    const res = await proxy.$axios.get('/api/movieboard/1/28/files')
+    fileLists.value = res.data.data
+}
+
+const rcmdClick = async() => {
+    const res = await proxy.$axios.post('/api/recommend', {
+        rcmdtnSeId: pathStore.menuId,
+        rcmdtnSe : 0,
+        boardId : 28,
+        mbrId: authStore.user.mbrId,
+        mbrNm: authStore.user.mbrNm
+    })
+    console.log(res)
+    //TODO. 결과 받아서 처리하기
+}
 
 const boardList = () => {
     router.push(`/movieboard/${route.params.boardId}`)
