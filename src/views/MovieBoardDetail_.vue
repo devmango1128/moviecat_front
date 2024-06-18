@@ -49,7 +49,7 @@
                                                     <span class="se-file-name">{{file.fileName}}</span>
                                                     <span class="se-file-extension">{{file.fileExtn}}</span>
                                                 </div>
-                                                <a :href="'/api/download/' + file.fileUrl  + '/' + file.fileName"
+                                                <a @click="fileDownload(file.fileUrl, file.fileName + file.fileExtn)"
                                                     class="se-file-save-button __se_link" role="button">
                                                     <span class="se-blind">파일 다운로드</span>
                                                 </a>
@@ -61,7 +61,8 @@
                                     <div class="box_left">
                                         <div class="like_article">
                                             <div class="cm_sympathy_area">
-                                                <button type="button" class="area_button_upvote  _btn_upvote" @click="rcmdClick">
+                                                <button type="button" class="area_button_upvote  _btn_upvote"
+                                                    :class="{'state_on' : likeDelYn === 'N'}" @click="rcmdClick">
                                                     <span class="this_text_number _count_num">{{ rcmd }}</span>
                                                 </button>
                                                 <!-- <button type="button" class="area_button_downvote  _btn_downvote">
@@ -278,6 +279,7 @@ const profileUrl = ref('https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe
 const rgstDate = ref('')
 const rcmd = ref(0) 
 const fileLists = ref([])
+const likeDelYn = ref('Y')
 
 onMounted(async() => {
     //TODO. 리스트 만든 후 하드코딩 수정하기
@@ -302,16 +304,40 @@ const getFileList = async() => {
     fileLists.value = res.data.data
 }
 
+const fileDownload = async (fileUrl, fileName) => {
+    
+    try {
+        const response = await proxy.$axios.get('/api/download', {
+            params: {
+                fileUrl: fileUrl,
+                fileName: fileName
+            },
+            responseType: 'blob'
+        })
+
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement('a')
+        link.href = url;
+        link.setAttribute('download', fileName)
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    
+    } catch (error) {
+        console.error('파일 다운로드 중 오류 발생:', error)
+    }
+}
+
 const rcmdClick = async() => {
     const res = await proxy.$axios.post('/api/recommend', {
-        rcmdtnSeId: pathStore.menuId,
-        rcmdtnSe : 0,
-        boardId : 28,
+        rcmdtnSeId: 28,
+        menuId: pathStore.menuId,
         mbrId: authStore.user.mbrId,
         mbrNm: authStore.user.mbrNm
     })
-    console.log(res)
-    //TODO. 결과 받아서 처리하기
+
+    likeDelYn.value = res.data.deltYn
+    rcmd.value = res.data.total
 }
 
 const boardList = () => {
