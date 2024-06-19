@@ -16,7 +16,9 @@
                                         </h3>
                                         <div class="WriterInfo">
                                             <div class="thumb_area">
-                                                <img :src="profileUrl" alt="프로필 사진" width="36" height="36">
+                                                <div class="thumb">
+                                                    <img :src="profileUrl" alt="프로필 사진" width="36" height="36">
+                                                </div>
                                             </div>
                                             <div class="profile_area">
                                                 <div class="profile_info">
@@ -217,7 +219,8 @@
                         </div>
                         <div class="btn-area mg-b50">
                             <button class="list-btn" @click="boardList">목록</button>
-                            <button class="reg-btn" v-if="isLoggedIn && sessionMvcId === mvcId" @click=" boardUpdate">수정</button>
+                            <button class="reg-btn" v-if="isLoggedIn && sessionMvcId === mvcId"
+                                @click=" boardUpdate">수정</button>
                         </div>
                     </div>
                 </div>
@@ -272,8 +275,8 @@ const { proxy } = getCurrentInstance()
 const authStore = useAuthStore()
 const pathStore = usePathStore()
 
-const isLoggedIn = ref('N')
-const sessionMvcId = ref('')
+const isLoggedIn = computed(() => authStore.isLoggedIn)
+const sessionMvcId = computed(() => authStore.getUser.mvcId)
 
 const ttl = ref('')
 const spoYn = ref('N')
@@ -288,9 +291,6 @@ const myRcmdYn = ref(false)
 const mvcId = ref('')
 
 onMounted(async() => {
-
-    isLoggedIn.value = computed(authStore.isLoggedIn)
-    sessionMvcId.value = computed(authStore.getUser.mvcId)
 
     const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}`)
     const data = res.data;
@@ -310,8 +310,12 @@ onMounted(async() => {
 
 const getFileList = async() => {
 
-    const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/files`)
-    fileLists.value = res.data.data
+    try{
+        const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/files`)
+        fileLists.value = res.data.data
+    } catch(error) {
+        console.log('file 데이터 없음')
+    }
 }
 
 const getRcmdYn = async() => {

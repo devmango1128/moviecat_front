@@ -37,7 +37,7 @@
                               <router-link :to="`/movieboard/${$route.params.boardId}/${board.pstId}`">
                                 <span class="article">
                                   <span class="list-new" v-if="board.new === 'Y'">N</span>
-                                  <span>
+                                  <span class="list-title">
                                     <em class="sp" v-if="board.spoYn === 'Y'">[스포]</em>{{ board.ttl }}
                                   </span>
                                 </span>
@@ -65,7 +65,7 @@
             </div>
             <!--paging-->
             <div class="mg-b50 cs-p">
-              <paginate :page-count="getPageCount" :page-range="3" :margin-pages="2" :click-handler="clickCallback"
+              <paginate v-model="currentPage" :page-count="pageCount" :page-range="3" :margin-pages="2" :click-handler="clickCallback"
                 :prev-text="'＜'" :next-text="'＞'" :container-class="'pagination'" :page-class="'page-item'">
               </paginate>
             </div>
@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, getCurrentInstance, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 
@@ -102,13 +102,17 @@ const boardList = ref([])
 const totalCnt = ref(0)
 const isLoading = ref(true)
 
-onMounted(async() => {
+const currentPage = ref(1)
+const itemsPerPage = ref(10)
+const pageCount = computed(() => Math.ceil(totalCnt.value / itemsPerPage.value))
+
+const fetchBoardData = async(page) => {
   try{
 
     const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}`,{
-      params: { page: 1 }
+      params: { page: page, limit: itemsPerPage.value }
     })
-  
+
     boardList.value = res.data.data
     totalCnt.value = res.data.total
 
@@ -117,7 +121,19 @@ onMounted(async() => {
   } finally {
     isLoading.value = false // 데이터 로드가 완료되면 로딩 상태를 false로 설정
   }
+}
+
+fetchBoardData(currentPage.value)
+
+watch(() => route.params.boardId, () => {
+  currentPage.value = 1
+  fetchBoardData(currentPage.value)
 })
+
+const clickCallback = (pageNum) => {
+  currentPage.value = pageNum
+  fetchBoardData(pageNum)
+}
 
 const boardReg = () => {
   router.push(`/movieboardReg/${route.params.boardId}`);

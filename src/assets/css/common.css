@@ -1064,8 +1064,6 @@ fieldset {
     margin-right: 3px;
 }
 
-
-
 .board-contents .board-content table tbody tr.popularity td .cmt span,
 .board-contents .board-content table tbody tr.general td .cmt span{
     color: #ff4e59;
@@ -1512,6 +1510,16 @@ fieldset {
     vertical-align: -2px !important;
 }
 
+.contentsWrap .contents .cont-inner .tbl-list tr td a span.list-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    line-height: 24px;
+    height: 18px;
+    display: inline-block;
+}
+
 .contentsWrap .contents .cont-inner .tbl-list tr td .cmt span {
     color: #ff4e59;
     font-weight: bold;
@@ -1673,17 +1681,21 @@ fieldset {
     margin-right: 10px;
 }
 
-.WriterInfo .thumb_area:after {
+.WriterInfo .thumb_area .thumb {
+    position: relative;
+    display: block;
+    width: 36px;
+    height: 36px;
+}
+
+.WriterInfo .thumb_area .thumb:after {
     content: "";
     border: 1px solid #e2e2e2;
     border-radius: 50%;
     position: absolute;
-    top: 57px;
+    top: 0;
     left: 0;
     right: 0;
-    display: block;
-    width: 36px;
-    height: 36px;
     bottom: 0;
 }
 
@@ -2015,8 +2027,15 @@ textarea.comment_inbox_text {
     color: #fff;
 }
 
-.sp, .sp-chk {
+.sp {
+    color: #959595;
+}
+
+.sp-chk {
     color: #ff4e59;
+}
+
+.sp, .sp-chk {
     font-style: normal;
     font-weight: bold;
 }
