@@ -67,7 +67,7 @@ const router = useRouter()
 const { proxy } = getCurrentInstance()
 
 const ttl = ref('')
-const spoYn = ref('N')
+const spoYn = ref(false)
 const editor = ref(null);
 const cn = ref('')
 const files = ref([])
