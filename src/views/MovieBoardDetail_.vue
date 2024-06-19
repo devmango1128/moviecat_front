@@ -2,9 +2,6 @@
     <section class="board-contents">
         <div class="inner-wrap">
             <div class="login_box">
-                <div class="title" id="pageCont">
-                    <h1>메뉴명</h1>
-                </div>
                 <div class="contentsWrap">
                     <div class="contents">
                         <div class="ArticleContentBox">
@@ -63,11 +60,15 @@
                                     <div class="box_left">
                                         <div class="like_article">
                                             <div class="cm_sympathy_area">
-                                                <button type="button" class="area_button_upvote  _btn_upvote"
-                                                    :class="{ 'state_on': likeDelYn === 'N' || myRcmdYn}"
-                                                    @click="rcmdClick">
-                                                    <span class="this_text_number _count_num">{{ rcmd }}</span>
-                                                </button>
+                                                <a href="#" data-ishiddenlabel="false" role="button" data-type="like"
+                                                    @click.prevent="rcmdClick" title="이 글 좋아요 클릭"
+                                                    class="like_no u_likeit_list_btn _button"
+                                                    :class="{'on': likeDelYn === 'N' || myRcmdYn }"
+                                                    aria-pressed=" true">
+                                                    <span class="u_ico _icon"></span>
+                                                    <em class="u_txt _label">좋아요</em>
+                                                    <em class="u_cnt _count">{{ rcmd }}</em>
+                                                </a>
                                                 <!-- <button type="button" class="area_button_downvote  _btn_downvote">
                                                     <span class="this_text_number _count_num">70</span>
                                                 </button> -->
@@ -304,8 +305,9 @@ onMounted(async() => {
     rcmd.value = data.rcmd
     mvcId.value = data.mvcId
 
-    getFileList()
+    if (data.atchFileId) getFileList()
     getRcmdYn()
+    getCommentList()
 })
 
 const getFileList = async() => {
@@ -329,6 +331,11 @@ const getRcmdYn = async() => {
     })
 
     myRcmdYn.value = res.data
+}
+
+const getCommentList = async() => {
+    const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/cmnt`)
+    console.log(res.data)
 }
 
 const fileDownload = async (fileUrl, fileName) => {
@@ -364,6 +371,7 @@ const rcmdClick = async() => {
     })
 
     likeDelYn.value = res.data.deltYn
+    myRcmdYn.value = false
     rcmd.value = res.data.total
 }
 

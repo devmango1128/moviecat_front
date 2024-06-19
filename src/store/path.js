@@ -4,11 +4,13 @@ import { ref } from 'vue'
 export const usePathStore = defineStore('pathStore', {
     state: () => ({
         currentPath : ref(''),
-        menuId: false
+        menuId: false,
+        menuName: ref('')
     }),
     getters: {
         getCurrentPath: (state) =>state.currentPath,
         getMenuId : (state) => state.menuId,
+        getMenuName : (state) => state.menuName,
     },
     actions: {
         setCurrentPath(currentPath) {
@@ -16,6 +18,9 @@ export const usePathStore = defineStore('pathStore', {
         },
         setMenuId(value) {
             this.menuId = value
+        },
+        setMenuName(value) {
+            this.menuName = value
         }
     },
 })

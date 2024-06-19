@@ -2,9 +2,6 @@
   <section class="board-contents movie-grade">
     <div class="inner-wrap">
       <div class="login_box">
-        <div class="title" id="pageCont">
-          <h1>영화평점</h1>
-        </div>
         <div class="contentsWrap">
           <div class="contents">
             <div class="total-cnt">총 100건</div>

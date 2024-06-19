@@ -2,7 +2,7 @@
     <div class="member_content mg-b20">
         <div class="form_section">
             <div class="contentsWrap">
-                <div class="contents pd-t0">
+                <div class="contents pd-t0"> 
                     <div class="cont-inner">
                         <div class="tbl-list border">
                             <table>

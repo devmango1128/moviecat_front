@@ -1778,16 +1778,38 @@ fieldset {
     vertical-align: middle;
     content: "";
 }
-.ReplyBox .cm_sympathy_area .area_button_upvote {
-    margin-right: 10px;
+
+.ReplyBox .like_article .u_ico {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
 }
 
-.ReplyBox .cm_sympathy_area .area_button_upvote:before {
-    background-position: -124px -22px;
+.ReplyBox .like_article .u_ico {
+    width: 17px;
+    height: 17px;
+    margin-right: 6px;
+    background: url(https://ca-fe.pstatic.net/web-section/static/img/ico-post-like-f-53535.svg?a37a11006a542ce9949c0dd6779345b8=) no-repeat
 }
 
-.ReplyBox .cm_sympathy_area .area_button_upvote.state_on .this_text_number {
-    color: #006ae2;
+.ReplyBox .like_article .on .u_ico {
+    background: url(https://ca-fe.pstatic.net/web-section/static/img/ico-post-like-on-f-53535.svg?7eb6be9a4989d32af686acf09a07747d=) no-repeat
+}
+
+.ReplyBox .like_article .u_txt {
+    line-height: 19px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ReplyBox .like_article .u_cnt {
+    display: inline;
+    margin-left: 4px;
+    font-family: arial, sans-serif;
+    font-weight: 700;
+    line-height: 18px;
+    vertical-align: baseline;
+    font-style: normal;
 }
 
 .ReplyBox .cm_sympathy_area .this_text_number {
