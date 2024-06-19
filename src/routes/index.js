@@ -70,7 +70,8 @@ const routes = [
     component : MovieGrade
   },
   {
-    path:'/movieboard/:boardId/:detailId',
+    name : 'movieDetail',
+    path:'/movieboard/:boardId/:pstId',
     component : MovieBoardDetail
   },
   {
@@ -78,7 +79,7 @@ const routes = [
     component : MovieBoardReg
   },
   {
-    path:'/movieboardUpt/:boardId/:detailId',
+    path:'/movieboardUpt/:boardId/:pstId',
     component : MovieBoardUpt
   },
   {

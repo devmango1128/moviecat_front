@@ -62,7 +62,8 @@
                                         <div class="like_article">
                                             <div class="cm_sympathy_area">
                                                 <button type="button" class="area_button_upvote  _btn_upvote"
-                                                    :class="{'state_on' : likeDelYn === 'N'}" @click="rcmdClick">
+                                                    :class="{ 'state_on': likeDelYn === 'N' || myRcmdYn}"
+                                                    @click="rcmdClick">
                                                     <span class="this_text_number _count_num">{{ rcmd }}</span>
                                                 </button>
                                                 <!-- <button type="button" class="area_button_downvote  _btn_downvote">
@@ -216,7 +217,7 @@
                         </div>
                         <div class="btn-area mg-b50">
                             <button class="list-btn" @click="boardList">목록</button>
-                            <button class="reg-btn" @click="boardUpdate">수정</button>
+                            <button class="reg-btn" v-if="isLoggedIn && sessionMvcId === mvcId" @click=" boardUpdate">수정</button>
                         </div>
                     </div>
                 </div>
@@ -259,7 +260,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { ref, getCurrentInstance } from 'vue'
 import { useAuthStore } from '@/store/auth'
@@ -271,6 +272,9 @@ const { proxy } = getCurrentInstance()
 const authStore = useAuthStore()
 const pathStore = usePathStore()
 
+const isLoggedIn = ref('N')
+const sessionMvcId = ref('')
+
 const ttl = ref('')
 const spoYn = ref('N')
 const cn = ref('')
@@ -280,11 +284,15 @@ const rgstDate = ref('')
 const rcmd = ref(0) 
 const fileLists = ref([])
 const likeDelYn = ref('Y')
+const myRcmdYn = ref(false)
+const mvcId = ref('')
 
 onMounted(async() => {
-    //TODO. 리스트 만든 후 하드코딩 수정하기
-    const res = await proxy.$axios.get('/api/movieboard/1/28')
 
+    isLoggedIn.value = computed(authStore.isLoggedIn)
+    sessionMvcId.value = computed(authStore.getUser.mvcId)
+
+    const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}`)
     const data = res.data;
 
     ttl.value = data.ttl
@@ -294,14 +302,29 @@ onMounted(async() => {
     profileUrl.value = data.profileUrl !== '' ? data.profileUrl : profileUrl.value
     rgstDate.value = data.rgstDate
     rcmd.value = data.rcmd
+    mvcId.value = data.mvcId
 
     getFileList()
+    getRcmdYn()
 })
 
 const getFileList = async() => {
-    //url 하드코딩 수정하기
-    const res = await proxy.$axios.get('/api/movieboard/1/28/files')
+
+    const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/files`)
     fileLists.value = res.data.data
+}
+
+const getRcmdYn = async() => {
+
+    const res = await proxy.$axios.get('/api/rcmdYn', {
+        params : {
+            menuId: route.params.boardId,
+            rcmdtnSeId: route.params.pstId,
+            mbrId: authStore.getUser.mbrId
+        }
+    })
+
+    myRcmdYn.value = res.data
 }
 
 const fileDownload = async (fileUrl, fileName) => {
@@ -330,7 +353,7 @@ const fileDownload = async (fileUrl, fileName) => {
 
 const rcmdClick = async() => {
     const res = await proxy.$axios.post('/api/recommend', {
-        rcmdtnSeId: 28,
+        rcmdtnSeId: route.params.pstId,
         menuId: pathStore.menuId,
         mbrId: authStore.user.mbrId,
         mbrNm: authStore.user.mbrNm
