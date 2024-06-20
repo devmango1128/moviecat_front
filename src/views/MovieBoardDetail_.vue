@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <template>
     <section class="board-contents">
         <div class="inner-wrap">
@@ -85,103 +86,70 @@
                                         <div class="comment_option">
                                             <h3 class="comment_title"> 댓글 </h3>
                                         </div>
-                                        <ul class="comment_list">
-                                            <li id="78075864" class="CommentItem">
-                                                <div class="comment_area">
-                                                    <a href="/ca-fe/cafes/29835300/members/fLBe6k9-K6w8xvJCdJLwrg"
-                                                        class="comment_thumb">
+                                        <ul class="comment_list" v-if="commentLength > 0">
+                                            <li v-for="clist in commentList" :key="clist.cmntId" class="CommentItem">
+                                                <div class="comment_area" v-if="clist.cmntLyr === 0">
+                                                    <div class="comment_thumb">
                                                         <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
                                                             alt="프로필 사진" width="36" height="36">
-                                                    </a>
+                                                    </div>
                                                     <div class="comment_box">
                                                         <div data-v-326b2d52="" class="comment_nick_box">
                                                             <div data-v-326b2d52="" class="comment_nick_info">
                                                                 <a data-v-326b2d52="" id="cih78075864" href="#"
                                                                     role="button" aria-haspopup="true"
-                                                                    aria-expanded="false" class="comment_nickname"> 처기정
+                                                                    aria-expanded="false" class="comment_nickname"> {{ clist.nickNm }}
                                                                 </a>
                                                             </div>
                                                         </div>
                                                         <div class="comment_text_box">
                                                             <p class="comment_text_view">
-                                                                <span class="text_comment">보러갈까말까 고민중인데 솔직한 감상평
-                                                                    어때요???</span>
+                                                                <span class="text_comment">{{ clist.cn }}</span>
                                                             </p>
                                                         </div>
                                                         <div class="comment_info_box">
-                                                            <span class="comment_info_date">2024.05.26. 12:57</span>
-                                                            <a href="#" role="button" class="comment_info_button">
+                                                            <span class="comment_info_date">{{ clist.rgstDay }}</span>
+                                                            <a href="#" role="button" class="comment_info_button" v-if="isLoggedIn">
                                                                 답글쓰기
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li id="78076014" class="CommentItem CommentItem--reply">
-                                                <div class="comment_area">
-                                                    <a href="/ca-fe/cafes/29835300/members/ml-ILJap4KnFnoBG2z2RBw"
-                                                        class="comment_thumb">
-                                                        <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMTA4MTlfMTg4/MDAxNjI5Mzc3MzM1MTc4.0H5o2BUv__cGRIS7N6t0V7wBLr3YDlJnaPF7c0PBVQ8g.VsT22ACmE734vXJY8dlFHqXx3Xck5rE7ri9OQ-kX61Ig.JPEG.wsg201/profileImage.jpg?type=c77_77"
-                                                            alt="프로필 사진" width="36" height="36">
-                                                    </a>
-                                                    <div class="comment_box">
-                                                        <div data-v-326b2d52="" class="comment_nick_box">
-                                                            <div data-v-326b2d52="" class="comment_nick_info">
-                                                                <a data-v-326b2d52="" id="cih78076014" href="#"
-                                                                    role="button" aria-haspopup="true"
-                                                                    aria-expanded="false" class="comment_nickname">
-                                                                    서울남부강산
-                                                                </a>
-                                                            </div>
-                                                            <em data-v-326b2d52="" class="comment_badge_writer">
-                                                                작성자
-                                                            </em>
-                                                        </div>
-                                                        <div class="comment_text_box">
-                                                            <p class="comment_text_view">
-                                                                <span class="text_comment">
-                                                                    전 괜찮았어요.<br>보러가보세요.</span>
-                                                            </p>
-                                                        </div>
-                                                        <div class="comment_info_box">
-                                                            <span class="comment_info_date">2024.05.26. 13:02</span>
-                                                            <a href="#" role="button" class="comment_info_button">
-                                                                답글쓰기</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li id="78076014" class="CommentItem CommentItem--reply">
-                                                <div class="comment_area">
-                                                    <a href="/ca-fe/cafes/29835300/members/ml-ILJap4KnFnoBG2z2RBw"
-                                                        class="comment_thumb">
-                                                        <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMjExMDlfMjU5/MDAxNjY3OTgyNjk3OTcx.R-h0abKBaY1gD7-7aOKdqodv-NRbhENxlwHFnDfQkFwg.oys1_BvKc933cBmcGUOVdPf6nK7OSgCXPh7MDDB0TvMg.JPEG.hojoon8019/KakaoTalk_20221109_173118967.jpg/KakaoTalk_20221109_173118967.jpg?type=c77_77"
-                                                            alt="프로필 사진" width="36" height="36">
-                                                    </a>
-                                                    <div class="comment_box">
-                                                        <div data-v-326b2d52="" class="comment_nick_box">
-                                                            <div data-v-326b2d52="" class="comment_nick_info">
-                                                                <a data-v-326b2d52="" id="cih78076014" href="#"
-                                                                    role="button" aria-haspopup="true"
-                                                                    aria-expanded="false" class="comment_nickname"> 홍길동
-                                                                </a>
+                                                <ul>
+                                                    <li class="CommentItem CommentItem--reply" v-if="clist.cmntLyr === 1 || clist.cmntLyr === 2">
+                                                        <div class="comment_area">
+                                                            <a href="/ca-fe/cafes/29835300/members/ml-ILJap4KnFnoBG2z2RBw"
+                                                                class="comment_thumb">
+                                                                <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMTA4MTlfMTg4/MDAxNjI5Mzc3MzM1MTc4.0H5o2BUv__cGRIS7N6t0V7wBLr3YDlJnaPF7c0PBVQ8g.VsT22ACmE734vXJY8dlFHqXx3Xck5rE7ri9OQ-kX61Ig.JPEG.wsg201/profileImage.jpg?type=c77_77"
+                                                                    alt="프로필 사진" width="36" height="36">
+                                                            </a>
+                                                            <div class="comment_box">
+                                                                <div data-v-326b2d52="" class="comment_nick_box">
+                                                                    <div data-v-326b2d52="" class="comment_nick_info">
+                                                                        <a data-v-326b2d52="" id="cih78076014" href="#"
+                                                                            role="button" aria-haspopup="true"
+                                                                            aria-expanded="false"
+                                                                            class="comment_nickname">
+                                                                            {{ clist.nickNm }}
+                                                                        </a>
+                                                                    </div>
+                                                                    <em data-v-326b2d52="" class="comment_badge_writer">
+                                                                        작성자
+                                                                    </em>
+                                                                </div>
+                                                                <div class="comment_text_box">
+                                                                    <p class="comment_text_view">
+                                                                        <span class="text_comment">{{ clist.cn }}</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="comment_info_box">
+                                                                    <span class="comment_info_date">{{ clist.rgstDay }}</span>
+                                                                    <a href="#" role="button" class="comment_info_button" v-if="isLoggedIn">답글쓰기</a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="comment_text_box">
-                                                            <p class="comment_text_view">
-                                                                <a id="commentProfile77785895" href="#" role="button"
-                                                                    class="text_nickname">처기정</a>
-                                                                <span class="text_comment">
-                                                                    저도 괜찮았어요.<br>보러가보세요.</span>
-                                                            </p>
-                                                        </div>
-                                                        <div class="comment_info_box">
-                                                            <span class="comment_info_date">2024.05.26. 13:02</span>
-                                                            <a href="#" role="button" class="comment_info_button">
-                                                                답글쓰기</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    </li>
+                                                </ul>
                                             </li>
                                             <li class="CommentItem CommentItem--reply">
                                                 <div class="CommentWriter">
@@ -203,14 +171,16 @@
                                         </ul>
                                         <div class="CommentWriter">
                                             <div class="comment_inbox">
-                                                <strong class="blind">댓글을 입력하세요</strong>
-                                                <em class="comment_inbox_name">서울남부강산</em>
+                                                <strong class="blind">댓글을 입력하세요.</strong>
+                                                <em class="comment_inbox_name">{{ sessionMbrNickNm }}</em>
                                                 <textarea placeholder="댓글을 남겨보세요" class="comment_inbox_text"
-                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"></textarea>
+                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
+                                                    v-model="commentCn"></textarea>
                                             </div>
                                             <div class="comment_attach">
                                                 <div class="register_box">
-                                                    <a href="#" role="button" class="button btn_register">등록</a>
+                                                    <a href="#" role="button" class="button btn_register"
+                                                        @click="commentReg()">등록</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -278,6 +248,7 @@ const pathStore = usePathStore()
 
 const isLoggedIn = computed(() => authStore.isLoggedIn)
 const sessionMvcId = computed(() => authStore.getUser.mvcId)
+const sessionMbrNickNm = computed(() => authStore.getUser.nickNm)
 
 const ttl = ref('')
 const spoYn = ref('N')
@@ -290,36 +261,49 @@ const fileLists = ref([])
 const likeDelYn = ref('Y')
 const myRcmdYn = ref(false)
 const mvcId = ref('')
+const commentLength = ref(0)
+const commentList = ref([])
+const commentCn = ref('')
 
 onMounted(async() => {
 
-    const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}`)
-    const data = res.data;
+    try{
+        //상세 페이지 내용 조회
+        const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}`)
+        const data = res.data;
 
-    ttl.value = data.ttl
-    spoYn.value = data.spoYn
-    cn.value = data.cn
-    nickNm.value = data.nickNm
-    profileUrl.value = data.profileUrl !== '' ? data.profileUrl : profileUrl.value
-    rgstDate.value = data.rgstDate
-    rcmd.value = data.rcmd
-    mvcId.value = data.mvcId
+        ttl.value = data.ttl
+        spoYn.value = data.spoYn
+        cn.value = data.cn
+        nickNm.value = data.nickNm
+        profileUrl.value = data.profileUrl !== '' ? data.profileUrl : profileUrl.value
+        rgstDate.value = data.rgstDate
+        rcmd.value = data.rcmd
+        mvcId.value = data.mvcId
 
-    if (data.atchFileId) getFileList()
-    getRcmdYn()
-    getCommentList()
+        if (data.atchFileId) getFileList()
+        getRcmdYn()
+        getCommentList()
+
+    } catch(error) {
+        alert('게시글 조회 중 에러가 발생하였습니다.')
+    }
 })
 
+//파일 리스트 조회
 const getFileList = async() => {
 
     try{
+        
         const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/files`)
         fileLists.value = res.data.data
+
     } catch(error) {
         console.log('file 데이터 없음')
     }
 }
 
+//좋아요 클릭 여부
 const getRcmdYn = async() => {
 
     const res = await proxy.$axios.get('/api/rcmdYn', {
@@ -333,11 +317,21 @@ const getRcmdYn = async() => {
     myRcmdYn.value = res.data
 }
 
+//댓글 리스트
 const getCommentList = async() => {
-    const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/cmnt`)
-    console.log(res.data)
+
+    try{
+        const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}/${route.params.pstId}/cmnt`)
+
+        commentLength.value = res.data.total
+        commentList.value = res.data.data
+
+    } catch(error) {
+        alert('댓글 조회 중 에러가 발생하였습니다.')
+    }
 }
 
+//파일 다운로드
 const fileDownload = async (fileUrl, fileName) => {
     
     try {
@@ -362,23 +356,53 @@ const fileDownload = async (fileUrl, fileName) => {
     }
 }
 
+//좋아요 클릭
 const rcmdClick = async() => {
-    const res = await proxy.$axios.post('/api/recommend', {
-        rcmdtnSeId: route.params.pstId,
-        menuId: pathStore.menuId,
-        mbrId: authStore.user.mbrId,
-        mbrNm: authStore.user.mbrNm
-    })
 
-    likeDelYn.value = res.data.deltYn
-    myRcmdYn.value = false
-    rcmd.value = res.data.total
+    try{
+        const res = await proxy.$axios.post('/api/recommend', {
+            rcmdtnSeId: route.params.pstId,
+            menuId: pathStore.menuId,
+            mbrId: authStore.user.mbrId,
+            mbrNm: authStore.user.mbrNm
+        })
+
+        likeDelYn.value = res.data.deltYn
+        myRcmdYn.value = false
+        rcmd.value = res.data.total
+
+    } catch (error) {
+        alert('에러가 발생하였습니다. 관리자에게 문의해주세요.')
+    }
+    
 }
 
+//댓글 등록
+const commentReg = async() => {
+
+    const cmtUser = authStore.user;
+
+    const res = await proxy.$axios.post('/api/bbsWriteCmnt', {
+        pstId: route.params.pstId,
+        cmntMbrId: cmtUser.mbrId,
+        cmntMbrNickNm: cmtUser.nickNm,
+        cn: commentCn.value,
+        mbrId: cmtUser.mbrId,
+        mbrNm: cmtUser.mbrNm
+    })
+
+    if (res.status === 200) {
+        commentCn.value = ''
+        getCommentList()
+    }
+}
+
+//목록으로
 const boardList = () => {
     router.push(`/movieboard/${route.params.boardId}`)
 }
 
+//수정으로
 const boardUpdate = () => {
     router.push(`/movieboardUpt/${route.params.boardId}/${route.params.detailId}`)
 }
