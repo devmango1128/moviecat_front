@@ -90,17 +90,21 @@
                                             <li v-for="clist in commentList" :key="clist.cmntId" class="CommentItem">
                                                 <div class="comment_area" v-if="clist.cmntLyr === 0">
                                                     <div class="comment_thumb">
-                                                        <img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
+                                                        <img :src="clist.profileUrl !== null && clist.profileUrl !== '' ? clist.profileUrl : 'https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77'"
                                                             alt="프로필 사진" width="36" height="36">
                                                     </div>
                                                     <div class="comment_box">
-                                                        <div data-v-326b2d52="" class="comment_nick_box">
-                                                            <div data-v-326b2d52="" class="comment_nick_info">
-                                                                <a data-v-326b2d52="" id="cih78075864" href="#"
-                                                                    role="button" aria-haspopup="true"
-                                                                    aria-expanded="false" class="comment_nickname"> {{ clist.nickNm }}
+                                                        <div class="comment_nick_box">
+                                                            <div class="comment_nick_info">
+                                                                <a href="#" role="button" aria-haspopup="true"
+                                                                    aria-expanded="false" class="comment_nickname">
+                                                                    {{clist.nickNm }}
                                                                 </a>
                                                             </div>
+                                                            <em class="comment_badge_writer"
+                                                                v-if="clist.mvcId === mvcId">
+                                                                작성자
+                                                            </em>
                                                         </div>
                                                         <div class="comment_text_box">
                                                             <p class="comment_text_view">
@@ -109,64 +113,96 @@
                                                         </div>
                                                         <div class="comment_info_box">
                                                             <span class="comment_info_date">{{ clist.rgstDay }}</span>
-                                                            <a href="#" role="button" class="comment_info_button" v-if="isLoggedIn">
+                                                            &nbsp;&nbsp;
+                                                            <a href="#" role="button" class="comment_info_button"
+                                                                v-if="isLoggedIn" @click.prevent="replyShow(clist)">
                                                                 답글쓰기
                                                             </a>
+                                                        </div>
+                                                        <div class="CommentWriter" v-if="replyStates[clist.cmntId]">
+                                                            <div class="comment_inbox">
+                                                                <strong class="blind">댓글을 입력하세요</strong>
+                                                                <em class="comment_inbox_name">{{ sessionMbrNickNm
+                                                                    }}</em>
+                                                                <textarea :placeholder="`${clist.nickNm}님께 답글쓰기`"
+                                                                    rows="1" class="comment_inbox_text"
+                                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
+                                                                    v-model="replyCn"></textarea>
+                                                            </div>
+                                                            <div class="comment_attach">
+                                                                <div class="register_box">
+                                                                    <a href="#" role="button" class="button btn-cancel"
+                                                                        @click.prevent="replyCancel(clist.cmntId)">취소</a>
+                                                                    <a href="#" role="button"
+                                                                        class="button btn-register"
+                                                                        @click.prevent="replyReg(clist.cmntId, 1, clist.cmntGroup)">등록</a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <li class="CommentItem CommentItem--reply" v-if="clist.cmntLyr === 1 || clist.cmntLyr === 2">
+                                                    <li class="CommentItem CommentItem--reply"
+                                                        v-if="clist.cmntLyr === 1 || clist.cmntLyr === 2">
                                                         <div class="comment_area">
-                                                            <a href="/ca-fe/cafes/29835300/members/ml-ILJap4KnFnoBG2z2RBw"
-                                                                class="comment_thumb">
-                                                                <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMTA4MTlfMTg4/MDAxNjI5Mzc3MzM1MTc4.0H5o2BUv__cGRIS7N6t0V7wBLr3YDlJnaPF7c0PBVQ8g.VsT22ACmE734vXJY8dlFHqXx3Xck5rE7ri9OQ-kX61Ig.JPEG.wsg201/profileImage.jpg?type=c77_77"
+                                                            <div class="comment_thumb">
+                                                                <img :src="clist.profileUrl !== null && clist.profileUrl !== '' ? clist.profileUrl : 'https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77'"
                                                                     alt="프로필 사진" width="36" height="36">
-                                                            </a>
+                                                            </div>
                                                             <div class="comment_box">
-                                                                <div data-v-326b2d52="" class="comment_nick_box">
-                                                                    <div data-v-326b2d52="" class="comment_nick_info">
-                                                                        <a data-v-326b2d52="" id="cih78076014" href="#"
-                                                                            role="button" aria-haspopup="true"
+                                                                <div class="comment_nick_box">
+                                                                    <div class="comment_nick_info">
+                                                                        <a href="#" role="button" aria-haspopup="true"
                                                                             aria-expanded="false"
                                                                             class="comment_nickname">
                                                                             {{ clist.nickNm }}
                                                                         </a>
                                                                     </div>
-                                                                    <em data-v-326b2d52="" class="comment_badge_writer">
+                                                                    <em class="comment_badge_writer"
+                                                                        v-if="clist.mvcId === mvcId">
                                                                         작성자
                                                                     </em>
                                                                 </div>
                                                                 <div class="comment_text_box">
                                                                     <p class="comment_text_view">
+                                                                        <a id="" href="#" role="button"
+                                                                            class="text_nickname">{{
+                                                                            clist.upCmntNickNm }}</a>
                                                                         <span class="text_comment">{{ clist.cn }}</span>
                                                                     </p>
                                                                 </div>
                                                                 <div class="comment_info_box">
-                                                                    <span class="comment_info_date">{{ clist.rgstDay }}</span>
-                                                                    <a href="#" role="button" class="comment_info_button" v-if="isLoggedIn">답글쓰기</a>
+                                                                    <span
+                                                                        class="comment_info_date">{{clist.rgstDay}}</span>
+                                                                    &nbsp;&nbsp;
+                                                                    <a href="#" role="button"
+                                                                        class="comment_info_button" v-if="isLoggedIn"
+                                                                        @click.prevent="replyShow(clist)">답글쓰기</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="CommentWriter" v-if="replyStates[clist.cmntId]">
+                                                            <div class="comment_inbox">
+                                                                <strong class="blind">댓글을 입력하세요</strong>
+                                                                <em class="comment_inbox_name">{{ sessionMbrNickNm
+                                                                    }}</em>
+                                                                <textarea :placeholder="`${clist.nickNm}님께 답글쓰기`"
+                                                                    rows="1" class="comment_inbox_text"
+                                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
+                                                                    v-model="replyCn"></textarea>
+                                                            </div>
+                                                            <div class="comment_attach">
+                                                                <div class="register_box">
+                                                                    <a href="#" role="button" class="button btn-cancel"
+                                                                        @click.prevent="replyCancel(clist.cmntId)">취소</a>
+                                                                    <a href="#" role="button"
+                                                                        class="button btn-register"
+                                                                        @click.prevent="replyReg(clist.cmntId, 2, clist.cmntGroup)">등록</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </li>
-                                            <li class="CommentItem CommentItem--reply">
-                                                <div class="CommentWriter">
-                                                    <div class="comment_inbox">
-                                                        <strong class="blind">댓글을 입력하세요</strong>
-                                                        <em class="comment_inbox_name">마동석</em>
-                                                        <textarea placeholder="처기정님께 답글쓰기" rows="1"
-                                                            class="comment_inbox_text"
-                                                            style="overflow: hidden; overflow-wrap: break-word; height: 17px;"></textarea>
-                                                    </div>
-                                                    <div class="comment_attach">
-                                                        <div class="register_box">
-                                                            <a href="#" role="button" class="button btn-cancel">취소</a>
-                                                            <a href="#" role="button" class="button btn-register">등록</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                         </ul>
                                         <div class="CommentWriter">
@@ -264,6 +300,8 @@ const mvcId = ref('')
 const commentLength = ref(0)
 const commentList = ref([])
 const commentCn = ref('')
+const replyStates = ref({})
+const replyCn = ref('')
 
 onMounted(async() => {
 
@@ -395,6 +433,48 @@ const commentReg = async() => {
         commentCn.value = ''
         getCommentList()
     }
+}
+
+//답글 입력창
+const replyShow = (clist) => {
+   
+    for (let key in replyStates.value) {
+        replyStates.value[key] = false;
+    }
+    
+    replyStates.value[clist.cmntId] = !replyStates.value[clist.cmntId]
+}
+
+const replyReg = async (cmntId, lyr, cmntGroup) => {
+
+    const cmtUser = authStore.user;
+
+    const lastComment = commentList.value[commentList.value.length - 1];
+    const lastSeq = lastComment ? lastComment.seq : 0;
+
+    const res = await proxy.$axios.post('/api/bbsWriteReply', {
+        pstId: route.params.pstId,
+        cmntMbrId: cmtUser.mbrId,
+        cmntMbrNickNm: cmtUser.nickNm,
+        cn: replyCn.value,
+        upCmntId: cmntId,
+        mbrId: cmtUser.mbrId,
+        mbrNm: cmtUser.mbrNm,
+        cmntLyr: lyr,
+        cmntGroup: cmntGroup,
+        seq: Number(lastSeq) + 1, // 새 댓글의 seq는 마지막 seq + 1
+    })
+
+    if (res.status === 200) {
+        replyCn.value = ''
+        replyStates.value[cmntId] = false
+        getCommentList()
+    }
+}
+
+const replyCancel = (cmntId) => {
+    replyCn.value = ''
+    replyStates.value[cmntId] = false
 }
 
 //목록으로

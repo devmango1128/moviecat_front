@@ -1853,6 +1853,17 @@ fieldset {
     height: 36px;
 }
 
+.CommentBox .comment_list .comment_thumb::after {
+    content: "";
+    border: 1px solid #e2e2e2;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .CommentBox a {
     color: inherit;
 }
