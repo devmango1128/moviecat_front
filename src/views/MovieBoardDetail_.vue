@@ -102,7 +102,7 @@
                                                                 </a>
                                                             </div>
                                                             <em class="comment_badge_writer"
-                                                                v-if="clist.mvcId === mvcId">
+                                                                v-if="isLoggedIn && clist.mvcId === mvcId">
                                                                 작성자
                                                             </em>
                                                         </div>
@@ -114,9 +114,21 @@
                                                         <div class="comment_info_box">
                                                             <span class="comment_info_date">{{ clist.rgstDay }}</span>
                                                             &nbsp;&nbsp;
-                                                            <a href="#" role="button" class="comment_info_button"
+                                                            <a role="button" class="comment_info_button"
                                                                 v-if="isLoggedIn" @click.prevent="replyShow(clist)">
                                                                 답글쓰기
+                                                            </a>
+                                                            &nbsp;&nbsp;
+                                                            <a role="button" class="comment_info_button"
+                                                                v-if="isLoggedIn && clist.mvcId === mvcId"
+                                                                @click.prevent="replyUpt(clist.cmntId)">
+                                                                수정
+                                                            </a>
+                                                            &nbsp;&nbsp;
+                                                            <a role="button" class="comment_info_button"
+                                                                v-if="isLoggedIn && clist.mvcId === mvcId"
+                                                                @click.prevent="replyDel(clist.cmntId)">
+                                                                삭제
                                                             </a>
                                                         </div>
                                                         <div class="CommentWriter" v-if="replyStates[clist.cmntId]">
@@ -178,6 +190,18 @@
                                                                     <a href="#" role="button"
                                                                         class="comment_info_button" v-if="isLoggedIn"
                                                                         @click.prevent="replyShow(clist)">답글쓰기</a>
+                                                                    &nbsp;&nbsp;
+                                                                    <a role="button" class="comment_info_button"
+                                                                        v-if="isLoggedIn && clist.mvcId === mvcId"
+                                                                        @click.prevent="replyUpt(clist.cmntId)">
+                                                                        수정
+                                                                    </a>
+                                                                    &nbsp;&nbsp;
+                                                                    <a role="button" class="comment_info_button"
+                                                                        v-if="isLoggedIn && clist.mvcId === mvcId"
+                                                                        @click.prevent="replyDel(clist.cmntId)">
+                                                                        삭제
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -282,9 +306,10 @@ const { proxy } = getCurrentInstance()
 const authStore = useAuthStore()
 const pathStore = usePathStore()
 
+const user = computed(() => authStore.getUser || {});
 const isLoggedIn = computed(() => authStore.isLoggedIn)
-const sessionMvcId = computed(() => authStore.getUser.mvcId)
-const sessionMbrNickNm = computed(() => authStore.getUser.nickNm)
+const sessionMvcId = computed(() => user.value.mvcId)
+const sessionMbrNickNm = computed(() => user.value.nickNm)
 
 const ttl = ref('')
 const spoYn = ref('N')
@@ -320,10 +345,11 @@ onMounted(async() => {
         mvcId.value = data.mvcId
 
         if (data.atchFileId) getFileList()
-        getRcmdYn()
+        if (isLoggedIn.value) getRcmdYn()
         getCommentList()
 
     } catch(error) {
+        console.log(error)
         alert('게시글 조회 중 에러가 발생하였습니다.')
     }
 })
@@ -348,7 +374,7 @@ const getRcmdYn = async() => {
         params : {
             menuId: route.params.boardId,
             rcmdtnSeId: route.params.pstId,
-            mbrId: authStore.getUser.mbrId
+            mbrId: user.value.mbrId
         }
     })
 
@@ -397,12 +423,14 @@ const fileDownload = async (fileUrl, fileName) => {
 //좋아요 클릭
 const rcmdClick = async() => {
 
+    if (!isLoginConfirm()) return
+
     try{
         const res = await proxy.$axios.post('/api/recommend', {
             rcmdtnSeId: route.params.pstId,
             menuId: pathStore.menuId,
-            mbrId: authStore.user.mbrId,
-            mbrNm: authStore.user.mbrNm
+            mbrId: user.value.mbrId,
+            mbrNm: user.value.mbrNm
         })
 
         likeDelYn.value = res.data.deltYn
@@ -418,7 +446,9 @@ const rcmdClick = async() => {
 //댓글 등록
 const commentReg = async() => {
 
-    const cmtUser = authStore.user;
+    if (!isLoginConfirm()) return
+
+    const cmtUser = user.value
 
     const res = await proxy.$axios.post('/api/bbsWriteCmnt', {
         pstId: route.params.pstId,
@@ -437,6 +467,8 @@ const commentReg = async() => {
 
 //답글 입력창
 const replyShow = (clist) => {
+
+    if (!isLoginConfirm()) return
    
     for (let key in replyStates.value) {
         replyStates.value[key] = false;
@@ -445,9 +477,12 @@ const replyShow = (clist) => {
     replyStates.value[clist.cmntId] = !replyStates.value[clist.cmntId]
 }
 
+//답글 등록
 const replyReg = async (cmntId, lyr, cmntGroup) => {
 
-    const cmtUser = authStore.user;
+    if(!isLoginConfirm()) return
+
+    const cmtUser = user.value;
 
     const lastComment = commentList.value[commentList.value.length - 1];
     const lastSeq = lastComment ? lastComment.seq : 0;
@@ -472,9 +507,42 @@ const replyReg = async (cmntId, lyr, cmntGroup) => {
     }
 }
 
+const isLoginConfirm = () => {
+    
+    if(!isLoggedIn.value) {
+        alert('로그인 후 이용해주세요.')
+        router.push('/login')
+        return false
+    }
+
+    return true
+}
+
+//답글 취소
 const replyCancel = (cmntId) => {
     replyCn.value = ''
     replyStates.value[cmntId] = false
+}
+
+//답글 수정
+const replyUpt = (cmntId) => {
+
+}
+
+//답글 삭제
+const replyDel = async (cmntId) => {
+    
+    const cmtUser = user.value;
+
+    const res = await proxy.$axios.post('/api/bbsDeleteCmnt', {
+        cmntId: cmntId,
+        mbrId: cmtUser.mbrId,
+        mbrNm: cmtUser.mbrNm
+    })
+
+    if (res.status === 200) {
+        getCommentList()
+    }
 }
 
 //목록으로
