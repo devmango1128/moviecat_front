@@ -140,6 +140,7 @@ const getSnsCode = () => {
 }
 
 const setAuthStore = (res) => {
+  
   authStore.setToken(res.data.token)
 
   authStore.setUser({

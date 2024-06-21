@@ -1688,6 +1688,11 @@ fieldset {
     height: 36px;
 }
 
+.WriterInfo .thumb_area .thumb img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .WriterInfo .thumb_area .thumb:after {
     content: "";
     border: 1px solid #e2e2e2;
@@ -1851,6 +1856,11 @@ fieldset {
     left: 0;
     width: 36px;
     height: 36px;
+}
+
+.CommentBox .comment_list .comment_thumb img {
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .CommentBox .comment_list .comment_thumb::after {
