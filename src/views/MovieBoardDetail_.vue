@@ -89,12 +89,13 @@
                                         <ul class="comment_list" v-if="commentLength > 0">
                                             <li v-for="clist in commentList" :key="clist.cmntId" class="CommentItem">
                                                 <div class="comment_area" v-if="clist.cmntLyr === 0">
-                                                    <div class="comment_thumb" v-if="!isUpt[clist.cmntId]">
+                                                    <div class="comment_thumb"
+                                                        v-if="!isUpt[clist.cmntId] && clist.deltYn === 'N'">
                                                         <img :src="clist.profileUrl !== null && clist.profileUrl !== '' ? clist.profileUrl : 'https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77'"
                                                             alt="프로필 사진" width="36" height="36">
                                                     </div>
                                                     <div class="comment_box">
-                                                        <div class="comment_nick_box">
+                                                        <div class="comment_nick_box" v-if="clist.deltYn === 'N'">
                                                             <div class="comment_nick_info" v-if="!isUpt[clist.cmntId]">
                                                                 <a role="button" aria-haspopup="true"
                                                                     aria-expanded="false" class="comment_nickname">
@@ -108,8 +109,11 @@
                                                         </div>
                                                         <div class="comment_text_box"
                                                             :class="{ 'CommentItem-modify': isUpt[clist.cmntId] }">
-                                                            <p class="comment_text_view" v-if="!isUpt[clist.cmntId]">
-                                                                <span class="text_comment">{{ clist.cn }}</span>
+                                                            <p class="comment_text_view" v-if="!isUpt[clist.cmntId] ">
+                                                                <span class="text_comment"
+                                                                    v-if="clist.deltYn === 'N'">{{ clist.cn }}</span>
+                                                                <span class="text_comment"
+                                                                    v-if="clist.deltYn === 'Y'">삭제 된 댓글입니다.</span>
                                                             </p>
                                                             <div class="CommentWriter" v-else>
                                                                 <div class="comment_inbox">
@@ -122,18 +126,17 @@
                                                                 </div>
                                                                 <div class="comment_attach">
                                                                     <div class="register_box">
-                                                                        <a role="button"
-                                                                            class="button btn-cancel"
+                                                                        <a role="button" class="button btn-cancel"
                                                                             @click.prevent="replyUptCancel(clist.cmntId)">취소</a>
-                                                                        <a role="button"
-                                                                            class="button btn-register"
+                                                                        <a role="button" class="button btn-register"
                                                                             @click.prevent="replyUpt(clist.cmntId)">등록</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="comment_info_box" v-if="!isUpt[clist.cmntId]">
-                                                            <span class="comment_info_date">{{ clist.rgstDay }}</span>
+                                                        <div class="comment_info_box"
+                                                            v-if="!isUpt[clist.cmntId] && clist.deltYn === 'N'">
+                                                            <span class=" comment_info_date">{{ clist.rgstDay }}</span>
                                                             &nbsp;&nbsp;
                                                             <a role="button" class="comment_info_button"
                                                                 v-if="isLoggedIn" @click.prevent="replyShow(clist)">
@@ -152,7 +155,8 @@
                                                                 삭제
                                                             </a>
                                                         </div>
-                                                        <div class="CommentWriter" v-if="replyStates[clist.cmntId]">
+                                                        <div class="CommentWriter"
+                                                            v-if="replyStates[clist.cmntId] && clist.deltYn === 'N'">
                                                             <div class="comment_inbox">
                                                                 <strong class="blind">댓글을 입력하세요</strong>
                                                                 <em class="comment_inbox_name">{{ sessionMbrNickNm
@@ -166,8 +170,7 @@
                                                                 <div class="register_box">
                                                                     <a role="button" class="button btn-cancel"
                                                                         @click.prevent="replyCancel(clist.cmntId)">취소</a>
-                                                                    <a role="button"
-                                                                        class="button btn-register"
+                                                                    <a role="button" class="button btn-register"
                                                                         @click.prevent="replyReg(clist.cmntId, 1, clist.cmntGroup)">등록</a>
                                                                 </div>
                                                             </div>
@@ -201,8 +204,8 @@
                                                                     :class="{ 'CommentItem-modify': isUpt[clist.cmntId] }">
                                                                     <p class="comment_text_view"
                                                                         v-if="!isUpt[clist.cmntId]">
-                                                                        <a id="" role="button"
-                                                                            class="text_nickname">{{ clist.upCmntNickNm }}</a>
+                                                                        <a id="" role="button" class="text_nickname">{{
+                                                                            clist.upCmntNickNm }}</a>
                                                                         <span class="text_comment">{{ clist.cn }}</span>
                                                                     </p>
                                                                     <div class="CommentWriter" v-else>
@@ -231,8 +234,8 @@
                                                                     <span
                                                                         class="comment_info_date">{{clist.rgstDay}}</span>
                                                                     &nbsp;&nbsp;
-                                                                    <a role="button"
-                                                                        class="comment_info_button" v-if="isLoggedIn"
+                                                                    <a role="button" class="comment_info_button"
+                                                                        v-if="isLoggedIn"
                                                                         @click.prevent="replyShow(clist)">답글쓰기</a>
                                                                     &nbsp;&nbsp;
                                                                     <a role="button" class="comment_info_button"
@@ -263,8 +266,7 @@
                                                                 <div class="register_box">
                                                                     <a role="button" class="button btn-cancel"
                                                                         @click.prevent="replyCancel(clist.cmntId)">취소</a>
-                                                                    <a role="button"
-                                                                        class="button btn-register"
+                                                                    <a role="button" class="button btn-register"
                                                                         @click.prevent="replyReg(clist.cmntId, 2, clist.cmntGroup)">등록</a>
                                                                 </div>
                                                             </div>
