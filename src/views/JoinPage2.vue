@@ -258,7 +258,7 @@ const validMbrId = async () => {
     if(isMbrIdValid.value) {
         try {
 
-            const result = await proxy.$axios.get('/mbrIdDupCheck', {params : {mbrId : mbrId.value}});
+            const result = await proxy.$axios.get('/api/mbrIdDupCheck', {params : {mbrId : mbrId.value}});
             
             //사용가능 id
             if (result.status === 200) {
@@ -312,7 +312,7 @@ const validNickNm = async () => {
     if(isNickNmValid.value) {
         try {
 
-            const result = await proxy.$axios.get('/nickNmDupCheck', {params : {nickNm : nickNm.value}})
+            const result = await proxy.$axios.get('/api/nickNmDupCheck', {params : {nickNm : nickNm.value}})
             //사용가능 id
             if (result.status === 200) {
                 isNickNmValid.value = true
