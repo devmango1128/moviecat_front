@@ -110,8 +110,8 @@
                                                         <div class="comment_text_box"
                                                             :class="{ 'CommentItem-modify': isUpt[clist.cmntId] }">
                                                             <p class="comment_text_view" v-if="!isUpt[clist.cmntId] ">
-                                                                <span class="text_comment"
-                                                                    v-if="clist.deltYn === 'N'">{{ clist.cn }}</span>
+                                                                <span class="text_comment" v-if="clist.deltYn === 'N'"
+                                                                    v-html="clist.cn.replace(/\n/g, '<br>') "></span>
                                                                 <span class="text_comment"
                                                                     v-if="clist.deltYn === 'Y'">삭제 된 댓글입니다.</span>
                                                             </p>
@@ -119,10 +119,18 @@
                                                                 <div class="comment_inbox">
                                                                     <em
                                                                         class="comment_inbox_name">{{sessionMbrNickNm}}</em>
-                                                                    <textarea placeholder="댓글을 남겨보세요." rows="1"
+                                                                    <div class="comment_inbox_number">
+                                                                        <span class="blind">현재 입력한 글자수</span>
+                                                                        <strong class="inbox_count">{{ replyCn.length
+                                                                            }}</strong>
+                                                                        <span class="blind">전체 입력 가능한 글자수</span>
+                                                                        <span class="inbox_total">1200</span>
+                                                                    </div>
+                                                                    <textarea placeholder="댓글을 남겨보세요."
                                                                         class="comment_inbox_text"
-                                                                        style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
-                                                                        v-model="replyCn"></textarea>
+                                                                        style="overflow: hidden; overflow-wrap: break-word;"
+                                                                        v-model="replyCn"
+                                                                        @input="validReply"></textarea>
                                                                 </div>
                                                                 <div class="comment_attach">
                                                                     <div class="register_box">
@@ -161,10 +169,17 @@
                                                                 <strong class="blind">댓글을 입력하세요</strong>
                                                                 <em class="comment_inbox_name">{{ sessionMbrNickNm
                                                                     }}</em>
+                                                                <div class="comment_inbox_number">
+                                                                    <span class="blind">현재 입력한 글자수</span>
+                                                                    <strong class="inbox_count">{{ replyCn.length
+                                                                        }}</strong>
+                                                                    <span class="blind">전체 입력 가능한 글자수</span>
+                                                                    <span class="inbox_total">1200</span>
+                                                                </div>
                                                                 <textarea :placeholder="`${clist.nickNm}님께 답글쓰기`"
-                                                                    rows="1" class="comment_inbox_text"
-                                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
-                                                                    v-model="replyCn"></textarea>
+                                                                    class="comment_inbox_text"
+                                                                    style="overflow: hidden; overflow-wrap: break-word;"
+                                                                    v-model="replyCn" @input="validReply"></textarea>
                                                             </div>
                                                             <div class="comment_attach">
                                                                 <div class="register_box">
@@ -206,16 +221,25 @@
                                                                         v-if="!isUpt[clist.cmntId]">
                                                                         <a id="" role="button" class="text_nickname">{{
                                                                             clist.upCmntNickNm }}</a>
-                                                                        <span class="text_comment">{{ clist.cn }}</span>
+                                                                        <span class="text_comment"
+                                                                            v-html="clist.cn.replace(/\n/g, '<br>') "></span>
                                                                     </p>
                                                                     <div class="CommentWriter" v-else>
                                                                         <div class="comment_inbox">
                                                                             <em class="comment_inbox_name">{{
                                                                                 sessionMbrNickNm }}</em>
-                                                                            <textarea placeholder="댓글을 남겨보세요." rows="1"
+                                                                            <div class="comment_inbox_number">
+                                                                                <span class="blind">현재 입력한 글자수</span>
+                                                                                <strong class="inbox_count">{{
+                                                                                    replyCn.length }}</strong>
+                                                                                <span class="blind">전체 입력 가능한 글자수</span>
+                                                                                <span class="inbox_total">1200</span>
+                                                                            </div>
+                                                                            <textarea placeholder="댓글을 남겨보세요."
                                                                                 class="comment_inbox_text"
-                                                                                style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
-                                                                                v-model="replyCn"></textarea>
+                                                                                style="overflow: hidden; overflow-wrap: break-word;"
+                                                                                v-model="replyCn"
+                                                                                @input="validReply"></textarea>
                                                                         </div>
                                                                         <div class="comment_attach">
                                                                             <div class="register_box">
@@ -257,10 +281,17 @@
                                                                 <strong class="blind">댓글을 입력하세요</strong>
                                                                 <em class="comment_inbox_name">{{ sessionMbrNickNm
                                                                     }}</em>
+                                                                <div class="comment_inbox_number">
+                                                                    <span class="blind">현재 입력한 글자수</span>
+                                                                    <strong class="inbox_count">{{ replyCn.length
+                                                                        }}</strong>
+                                                                    <span class="blind">전체 입력 가능한 글자수</span>
+                                                                    <span class="inbox_total">1200</span>
+                                                                </div>
                                                                 <textarea :placeholder="`${clist.nickNm}님께 답글쓰기`"
-                                                                    rows="1" class="comment_inbox_text"
-                                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
-                                                                    v-model="replyCn"></textarea>
+                                                                    class="comment_inbox_text"
+                                                                    style="overflow: hidden; overflow-wrap: break-word;"
+                                                                    v-model="replyCn" @input="validReply"></textarea>
                                                             </div>
                                                             <div class="comment_attach">
                                                                 <div class="register_box">
@@ -279,9 +310,15 @@
                                             <div class="comment_inbox">
                                                 <strong class="blind">댓글을 입력하세요.</strong>
                                                 <em class="comment_inbox_name">{{ sessionMbrNickNm }}</em>
+                                                <div class="comment_inbox_number">
+                                                    <span class="blind">현재 입력한 글자수</span>
+                                                    <strong class="inbox_count">{{ commentCn.length }}</strong>
+                                                    <span class="blind">전체 입력 가능한 글자수</span>
+                                                    <span class="inbox_total">1200</span>
+                                                </div>
                                                 <textarea placeholder="댓글을 남겨보세요" class="comment_inbox_text"
-                                                    style="overflow: hidden; overflow-wrap: break-word; height: 17px;"
-                                                    v-model="commentCn"></textarea>
+                                                    style="overflow: hidden; overflow-wrap: break-word;"
+                                                    @input="validComment" v-model="commentCn"></textarea>
                                             </div>
                                             <div class="comment_attach">
                                                 <div class="register_box">
@@ -494,7 +531,10 @@ const rcmdClick = async() => {
 const commentReg = async() => {
 
     if (!isLoginConfirm()) return
-
+    if (commentCn.value === '') {
+        alert('내용을 입력해주세요.')
+        return
+    }
     const cmtUser = user.value
 
     const res = await proxy.$axios.post('/api/bbsWriteCmnt', {
@@ -522,12 +562,18 @@ const replyShow = (clist) => {
     }
     
     replyStates.value[clist.cmntId] = !replyStates.value[clist.cmntId]
+
+    replyCn.value = ''
 }
 
 //답글 등록
 const replyReg = async (cmntId, lyr, cmntGroup) => {
 
     if(!isLoginConfirm()) return
+    if (replyCn.value === '') {
+        alert('내용을 입력해주세요.')
+        return
+    }
 
     const cmtUser = user.value;
 
@@ -618,6 +664,35 @@ const replyDel = async (cmntId) => {
     if (res.status === 200) {
         getCommentList()
     }
+}
+
+//댓글 valid
+const validComment = (e) => {
+
+    textareaHeight(e.target)
+
+    if (commentCn.value.length > 1200) {
+        commentCn.value = commentCn.value.slice(0, 1200)
+    }
+}
+
+//답글 valid
+const validReply = (e) => {
+
+    const reply = e.target
+
+    textareaHeight(reply)
+
+    if (reply.value.length > 1200) {
+        replyCn.value = reply.value.slice(0, 1200)
+    }
+}
+
+//줄바꿈하거나 글자수 많아지면 textarea창 height 늘어나게 처리하기
+const textareaHeight = (target) => {
+
+    target.style.height = 'auto'
+    target.style.height = `${target.scrollHeight}px`
 }
 
 //목록으로

@@ -1956,6 +1956,7 @@ fieldset {
 .CommentBox .comment_list .comment_text_box .text_nickname {
     margin-right: 3px;
     font-weight: 700;
+    color: #006ae2;
 }
 
 .CommentWriter {
@@ -2041,6 +2042,30 @@ textarea.comment_inbox_text {
     font-weight: 700;
     text-align: center;
     vertical-align: top;
+}
+
+.CommentWriter .comment_inbox_number {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    color: #b7b7b7;
+}
+
+.CommentWriter .blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.CommentWriter .comment_inbox_number .inbox_count {
+    font-weight: 400;
+}
+
+.CommentWriter .comment_inbox_number .inbox_count:after {
+    content: "/";
 }
 
 .btn-area {

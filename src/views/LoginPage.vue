@@ -46,7 +46,7 @@
                   <li>
                     <a href="#" class="kakao border_round sns_shadow" @click.prevent="snsLogin">
                       <span class="kakao_img">
-                        카카오 로그인
+                        카카오 3초 회원가입/로그인
                       </span>
                     </a>
                   </li>
@@ -140,7 +140,7 @@ const getSnsCode = () => {
 }
 
 const setAuthStore = (res) => {
-  
+
   authStore.setToken(res.data.token)
 
   authStore.setUser({
