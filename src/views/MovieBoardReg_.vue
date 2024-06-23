@@ -2,6 +2,9 @@
     <section class="board-contents">
         <div class="inner-wrap">
             <div class="login_box">
+                <div class="title" id="pageCont">
+                    <h1>메뉴명</h1>
+                </div>
                 <div class="contentsWrap">
                     <div class="contents">
                         <form @submit.prevent="boardReg">
@@ -67,7 +70,7 @@ const router = useRouter()
 const { proxy } = getCurrentInstance()
 
 const ttl = ref('')
-const spoYn = ref(false)
+const spoYn = ref('N')
 const editor = ref(null);
 const cn = ref('')
 const files = ref([])

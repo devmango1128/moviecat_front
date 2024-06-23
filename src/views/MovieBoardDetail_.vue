@@ -702,7 +702,7 @@ const boardList = () => {
 
 //수정으로
 const boardUpdate = () => {
-    router.push(`/movieboardUpt/${route.params.boardId}/${route.params.detailId}`)
+    router.push(`/movieboardUpt/${route.params.boardId}/${route.params.pstId}`)
 }
 </script>
 

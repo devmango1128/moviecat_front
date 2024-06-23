@@ -2278,6 +2278,20 @@ textarea.comment_inbox_text {
     vertical-align: baseline;
 }
 
+.FileBox .se-toolbar-icon {
+    background-image: url(https://ca-fe.pstatic.net/web-section/static/img/sp-desktop-editor-custom.png?310f854…=);
+    background-repeat: no-repeat;
+    background-size: 608px 585px;
+    width: 21px;
+    height: 21px;
+    background-position: -368px -496px;
+    display: inline-block;
+    vertical-align: middle;  
+    right: 18px;
+    position: absolute;
+    cursor: pointer;
+}
+
 .p-button {
     color: #ffffff !important;
     background: #10b981 !important;
