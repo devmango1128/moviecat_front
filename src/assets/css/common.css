@@ -501,6 +501,14 @@ fieldset {
     margin-left: 0px !important;
 }
 
+.mg-l5 {
+    margin-left: 5px !important;
+}
+
+.mg-l10 {
+    margin-left: 10px !important;
+}
+
 .mg-l14{
     margin-left: 14px !important;
 }
@@ -2094,6 +2102,19 @@ textarea.comment_inbox_text {
     border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, .05);
     background: #006ae2;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #fff;
+}
+
+.btn-area .del-btn {
+    float: left;
+    width: 80px;
+    padding: 6px 0;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, .05);
+    background: #ff4e59;
     font-size: 14px;
     font-weight: 700;
     line-height: 22px;

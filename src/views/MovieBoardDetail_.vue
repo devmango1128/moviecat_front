@@ -333,6 +333,8 @@
                         </div>
                         <div class="btn-area mg-b50">
                             <button class="list-btn" @click="boardList">목록</button>
+                            <button class="del-btn mg-l5" v-if="isLoggedIn && sessionMvcId === mvcId"
+                                @click="boardDel">삭제</button>
                             <button class="reg-btn" v-if="isLoggedIn && sessionMvcId === mvcId"
                                 @click=" boardUpdate">수정</button>
                         </div>
@@ -531,6 +533,7 @@ const rcmdClick = async() => {
 const commentReg = async() => {
 
     if (!isLoginConfirm()) return
+
     if (commentCn.value === '') {
         alert('내용을 입력해주세요.')
         return
@@ -570,6 +573,7 @@ const replyShow = (clist) => {
 const replyReg = async (cmntId, lyr, cmntGroup) => {
 
     if(!isLoginConfirm()) return
+
     if (replyCn.value === '') {
         alert('내용을 입력해주세요.')
         return
@@ -703,6 +707,35 @@ const boardList = () => {
 //수정으로
 const boardUpdate = () => {
     router.push(`/movieboardUpt/${route.params.boardId}/${route.params.pstId}`)
+}
+
+//삭제
+const boardDel = async () => {
+
+    const isConfirm = confirm('정말 삭제하시겠습니까?')
+    
+    if (isConfirm) {
+        
+        try{
+            const cmtUser = user.value;
+
+            const res = await proxy.$axios.post('/api/bbsDeletePost', {
+                pstId: `${ route.params.pstId }`,
+                mbrId: cmtUser.mbrId,
+                mbrNm: cmtUser.mbrNm
+            })
+
+            if (res.status === 200) {
+                alert('게시글이 삭제되었습니다.')
+                boardList()
+            }
+
+        }catch(err) {
+            alert('게시글 삭제 중 에러가 발생하였습니다.')
+        }
+    } else {
+        return
+    }
 }
 </script>
 
