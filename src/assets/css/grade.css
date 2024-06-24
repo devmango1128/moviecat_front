@@ -1,6 +1,6 @@
 .movie-grade .lego_review_list {
     position: relative;
-    max-height: 900px;
+    /*max-height: 900px;*/
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
@@ -217,7 +217,7 @@
 .movie-grade .cm_sympathy_area [class*="area_button"]:before {
     display: inline-block;
     overflow: hidden;
-    background: url('/src/assets/sp_common_module_new_v03.png') no-repeat;
+    background: url('/src/assets/like.png') no-repeat;
     -webkit-background-size: 200px 700px;
     background-size: 200px 700px;
     vertical-align: top;
@@ -235,6 +235,10 @@
     background-position: -124px -22px;
 }
 
+.movie-grade .cm_sympathy_area .area_button_upvote.state_on:before {
+    background-position: -139px -22px;
+}
+
 .movie-grade .cm_sympathy_area .this_text_number {
     position: relative;
     font-size: 0.8rem;
@@ -243,6 +247,10 @@
     letter-spacing: -0.22px;
     color: #939396;
     vertical-align: middle;
+}
+
+.movie-grade .cm_sympathy_area .area_button_upvote.state_on .this_text_number {
+    color: #555558;
 }
 
 .movie-grade .cm_sympathy_area .area_button_downvote:before {
@@ -342,4 +350,30 @@
     vertical-align: middle;
     opacity: 0.3;
     line-height: 24px;
+}
+
+.grade-title .area-grade-title {
+    display: inline-block;
+}
+
+.grade-title .area-grade-title .tit {
+    font-weight: bold;
+    font-size: 20px;
+    color: #006ae2;
+}
+
+.grade-title .area-grade-title .sub-tit {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.grade-title .area-grade-title .sub-tit .cm-bar {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
+    margin: 11px 6px 0 7px;
+    background-color: #070707;
+    vertical-align: top;
+    opacity: 0.3;
 }

@@ -4,60 +4,65 @@
       <div class="login_box">
         <div class="contentsWrap">
           <div class="contents">
-            <div class="total-cnt">총 100건</div>
+            <div class="total-cnt">총 {{ totalCnt }}건</div>
             <div class="lego_review_list">
               <ul class="dis-show area_card_outer">
-                <li v-for="n in 5" :key="n" class="area_card">
+                <li v-for="grade in gradeList" :key="grade.scrId" class="area_card">
+                  <div class="grade-title">
+                    <div class="area-grade-title">
+                      <span class="tit">{{ grade.vdoNm }}</span>
+                      <span class="sub-tit">
+                        <span class="txt mg-l10">{{ grade.vdoNmEn }} </span>
+                        <span class="cm-bar"></span>
+                        <span class="txt">{{grade.opngYear }}</span>
+                      </span>
+                    </div>
+                  </div>
                   <div class="area_title_box">
                     <div class="lego_movie_pure_star">
                       <div class="area_icon_box">
                         <div class="area_card">
-                          <span class="play_star  state_fill"></span>
-                          <span class="play_star  state_fill"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 1 }"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 2 }"></span>
                         </div>
                         <div class="area_card">
-                          <span class="play_star  state_fill"></span>
-                          <span class="play_star  state_fill"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 3 }"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 4 }"></span>
                         </div>
                         <div class="area_card">
-                          <span class="play_star  state_fill"></span>
-                          <span class="play_star  state_fill"></span>
+                          <span class="play_star" :class=" { 'state_fill' : grade.scr>= 5 }"></span>
+                          <span class="play_star" :class=" { 'state_fill' : grade.scr>= 6 }"></span>
                         </div>
                         <div class="area_card">
-                          <span class="play_star  state_fill"></span>
-                          <span class="play_star  state_fill"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 7 }"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 8 }"></span>
                         </div>
                         <div class="area_card">
-                          <span class="play_star  state_fill"></span>
-                          <span class="play_star "></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr >= 9 }"></span>
+                          <span class="play_star" :class="{ 'state_fill': grade.scr === 10 }"></span>
                         </div>
                       </div>
-                      <div class="area_text_box">9</div>
+                      <div class=" area_text_box">{{ grade.scr }}
+                      </div>
                     </div>
                   </div>
                   <div class="area_review_content">
                     <div class="area_text_expand">
-                      <span class="desc">9점인 이유는 매드맥스 분노의 도로가 10점이기 때문이다 </span>
+                      <span class="desc">{{ grade.vdoEvl}} </span>
                     </div>
                   </div>
                   <dl class="cm_upload_info">
                     <dt class="blind">작성자</dt>
-                    <dd class="this_text_stress _btn_writer" data-writer-id="kbw9****">kbw9****</dd>
+                    <dd class="this_text_stress _btn_writer">{{ grade.nickNm }}</dd>
                     <dt class="blind">작성일</dt>
-                    <dd class="this_text_normal">2024.05.22. 13:10</dd>
+                    <dd class="this_text_normal">{{ grade.rgstDate }}</dd>
                     <dd class="this_text_normal">
-                      <a href="#" class="this_play_btn _btn_report">삭제</a>
-                    </dd>
-                    <dd class="this_text_normal">
-                      <a href="#" class="this_play_btn _btn_report" @click="gradeUpt">수정</a>
+                      <a role="button" class="this_play_btn _btn_report" @click.prevent="gradeDel(grade)">삭제</a>
                     </dd>
                   </dl>
                   <div class="cm_sympathy_area">
-                    <button type="button" class="area_button_upvote  _btn_upvote">
-                      <span class="this_text_number _count_num">921</span>
-                    </button>
-                    <button type="button" class="area_button_downvote  _btn_downvote">
-                      <span class="this_text_number _count_num">70</span>
+                    <button type="button" class="area_button_upvote _btn_upvote" :class="{'state_on' : grade.likeYn}">
+                      <span class="this_text_number _count_num">{{ grade.likeCnt }}</span>
                     </button>
                   </div>
                 </li>
@@ -71,8 +76,9 @@
         </div>
         <!--paging-->
         <div class="mg-b50 cs-p mg-t50">
-          <paginate :page-count="getPageCount" :page-range="3" :margin-pages="2" :click-handler="clickCallback"
-            :prev-text="'＜'" :next-text="'＞'" :container-class="'pagination'" :page-class="'page-item'">
+          <paginate v-model="currentPage" :page-count="pageCount" :page-range="3" :margin-pages="2"
+            :click-handler="clickCallback" :prev-text="'＜'" :next-text="'＞'" :container-class="'pagination'"
+            :page-class="'page-item'">
           </paginate>
         </div>
         <!--search-->
@@ -87,21 +93,68 @@
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { computed } from 'vue'
+import { ref, computed, getCurrentInstance } from 'vue'
 import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+const { proxy } = getCurrentInstance()
+
+const gradeList = ref([])
+const totalCnt = ref(0)
+const currentPage = ref(1)
+const itemsPerPage = ref(5)
+const pageCount = computed(() => Math.ceil(totalCnt.value / itemsPerPage.value))
 
 const isLoggedIn = computed(() => authStore.isLoggedIn)
 
-const gradeReg = () => {
-  router.push(`/moviegradeReg/${route.params.boardId}`)
+const getGradeList = async(page) => {
+
+  try {
+    const res = await proxy.$axios.get(`/api/scrboard/${route.params.boardId}`, {
+      params: { 
+        page: page, 
+        limit: itemsPerPage.value, 
+        mvcId: authStore.getUser.mvcId
+      } 
+    })
+
+    gradeList.value = res.data.data
+    totalCnt.value = res.data.total
+
+  } catch (err) {
+    alert('데이터 조회 중 에러가 발생했습니다')
+  }
 }
 
-const gradeUpt = () => {
-  router.push(`/moviegradeUpt/${route.params.boardId}`)
+const gradeDel = async(grade) => {
+  
+  try {
+    
+    await proxy.$axios.post('/api/scrBbsDelete', {
+        scrId: grade.scrId,
+        mbrId: authStore.getUser.mbrId,
+        mbrNm: authStore.getUser.mbrNm
+    })
+
+    getGradeList(currentPage.value)
+
+  } catch (err) {
+    alert('데이터 삭제 중 에러가 발생했습니다')
+  }
+
+}
+
+getGradeList(currentPage.value)
+
+const clickCallback = (pageNum) => {
+  currentPage.value = pageNum
+  getGradeList(pageNum)
+}
+
+const gradeReg = () => {
+  router.push(`/moviegradeReg/${route.params.boardId}`)
 }
 </script>
 

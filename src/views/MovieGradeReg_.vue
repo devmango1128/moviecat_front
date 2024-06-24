@@ -57,14 +57,16 @@
               <div class="area_form_box type_border_top">
                 <div class="area_textarea_box _input_wrap">
                   <textarea placeholder="평점은 최대 1,000자까지 등록 가능합니다. 영화와 상관 없는 내용은 약관에 의해 제재를 받을 수 있습니다."
-                    class="this_textarea _textarea_box" maxlength="1000" id="cn" v-model="cn" @input="cnInput"></textarea>
-                  <p class="this_numbering _count_num">({{ cn.length }}/1,000)</p>
+                    class="this_textarea _textarea_box" maxlength="240" id="cn" v-model="cn"
+                    @input="cnInput"></textarea>
+                  <p class="this_numbering _count_num">({{ cn.length }}/240)</p>
                 </div>
               </div>
             </div>
           </div>
           <!--등록버튼-->
-          <div class="reg-area">
+          <div class="reg-area btn-area mg-b50">
+            <button class="list-btn" @click.prevent="goList">목록</button>
             <button class="btn-blue" @click.prevent="gradeReg">등록</button>
           </div>
         </div>
@@ -128,10 +130,13 @@ import axios from 'axios';
 import starRate from '@/assets/js/starRate.js'
 import { useAuthStore } from '@/store/auth'
 import { usePathStore } from '@/store/path'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
 const pathStore = usePathStore()
 const { proxy } = getCurrentInstance()
+const router = useRouter()
+
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
 const pageCount = computed(() => Math.ceil(movieListCnt.value / itemsPerPage.value))
@@ -202,8 +207,8 @@ const movieSelect = () => {
 
 //글쓰기 체크
 const cnInput = () => {
-  if (cn.value.length > 1000) {
-    cn.value = cn.value.slice(0, 1000)
+  if (cn.value.length > 240) {
+    cn.value = cn.value.slice(0, 240)
   }
 }
 
@@ -225,24 +230,29 @@ const gradeReg = async () => {
   const data = movieVal.value
 
   try {
-
+    
     const res = await proxy.$axios.post('/api/scrBbsWrite', {
         menuId: pathStore.menuId,
-        vdoId: data.movieCd,
+        vdoCode: data.movieCd,
         vdoNm: data.movieNm,
-        vdoEnNm: data.movieEnNm,
-        opngDay: data.prdtYear,
+        vdoNmEn:  data.movieNmEn,
+        opngYear: data.prdtYear,
         scr: ele.length,
         vdoEvl : cn.value,
         mbrId: authStore.getUser.mbrId,
         mbrNm: authStore.getUser.mbrNm
     })
 
-    console.log(res)
+    if(res.status === 200) goList()
 
   } catch (err) {
     alert('데이터 등록 중 에러가 발생하였습니다.')
   }
+}
+
+//목록
+const goList = () => {
+  router.push(pathStore.currentPath)
 }
 </script>
 

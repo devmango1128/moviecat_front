@@ -10,7 +10,6 @@ import MovieBoardDetail from '../views/MovieBoardDetail_.vue'
 import MovieBoardReg from '../views/MovieBoardReg_.vue'
 import MovieBoardUpt from '../views/MovieBoardUpt_.vue'
 import MovieGradeReg from '../views/MovieGradeReg_.vue'
-import MovieGradeUpt from '../views/MovieGradeUpt_.vue'
 import MyPage from '../views/MyPage.vue'
 import MemberInfo from '../views/MemberInfo.vue'
 import MyPost from '../views/MyPost.vue'
@@ -85,10 +84,6 @@ const routes = [
   {
     path:'/moviegradeReg/:boardId',
     component : MovieGradeReg
-  },
-  {
-    path:'/moviegradeUpt/:boardId',
-    component : MovieGradeUpt
   },
   {
     path:'/totalSearch',

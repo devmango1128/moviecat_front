@@ -114,7 +114,7 @@ const fetchBoardData = async(page) => {
     totalCnt.value = res.data.total
 
   }catch(error) {
-    console.log(error)
+    alert('데이터 조회 중 에러가 발생했습니다')
   } finally {
     isLoading.value = false // 데이터 로드가 완료되면 로딩 상태를 false로 설정
   }
