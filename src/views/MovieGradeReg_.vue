@@ -210,6 +210,24 @@ const cnInput = () => {
 //등록
 const gradeReg = () => {
   
+  if (movieNm.value === '') {
+    alert('영화를 선택해주세요.')
+    return
+  }
+
+  const ele = document.getElementsByClassName('filled')
+
+  if(ele.length === 0) {
+    alert('평점을 등록해주세요.')
+    return
+  }
+
+  if(cn.value === '') {
+    alert('영화평을 입력해주세요.')
+    document.getElementById('cn').focus()
+    return
+  }
+
 }
 </script>
 
