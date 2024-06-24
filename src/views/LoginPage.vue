@@ -50,10 +50,6 @@
                       </span>
                     </a>
                   </li>
-                  <!-- <li>
-                    <a href="#" class="naver border_round sns_shadow">
-                      <span class="naver_img">네이버 로그인</span></a>
-                  </li> -->
                 </ul>
               </div>
             </div>
