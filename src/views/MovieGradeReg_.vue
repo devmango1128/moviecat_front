@@ -57,7 +57,7 @@
               <div class="area_form_box type_border_top">
                 <div class="area_textarea_box _input_wrap">
                   <textarea placeholder="평점은 최대 1,000자까지 등록 가능합니다. 영화와 상관 없는 내용은 약관에 의해 제재를 받을 수 있습니다."
-                    class="this_textarea _textarea_box" maxlength="1000" v-model="cn" @input="cnInput"></textarea>
+                    class="this_textarea _textarea_box" maxlength="1000" id="cn" v-model="cn" @input="cnInput"></textarea>
                   <p class="this_numbering _count_num">({{ cn.length }}/1,000)</p>
                 </div>
               </div>
@@ -126,11 +126,11 @@
 import { ref, onMounted, onUpdated, getCurrentInstance, computed } from 'vue'
 import axios from 'axios';
 import starRate from '@/assets/js/starRate.js'
-import { useRoute } from 'vue-router'
-//import { useAuthStore } from '@/store/auth'
+import { useAuthStore } from '@/store/auth'
+import { usePathStore } from '@/store/path'
 
-//const authStore = useAuthStore()
-const route = useRoute()
+const authStore = useAuthStore()
+const pathStore = usePathStore()
 const { proxy } = getCurrentInstance()
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
@@ -208,17 +208,10 @@ const cnInput = () => {
 }
 
 //등록
-const gradeReg = () => {
+const gradeReg = async () => {
   
   if (movieNm.value === '') {
     alert('영화를 선택해주세요.')
-    return
-  }
-
-  const ele = document.getElementsByClassName('filled')
-
-  if(ele.length === 0) {
-    alert('평점을 등록해주세요.')
     return
   }
 
@@ -228,6 +221,28 @@ const gradeReg = () => {
     return
   }
 
+  const ele = document.getElementsByClassName('filled')
+  const data = movieVal.value
+
+  try {
+
+    const res = await proxy.$axios.post('/api/scrBbsWrite', {
+        menuId: pathStore.menuId,
+        vdoId: data.movieCd,
+        vdoNm: data.movieNm,
+        vdoEnNm: data.movieEnNm,
+        opngDay: data.prdtYear,
+        scr: ele.length,
+        vdoEvl : cn.value,
+        mbrId: authStore.getUser.mbrId,
+        mbrNm: authStore.getUser.mbrNm
+    })
+
+    console.log(res)
+
+  } catch (err) {
+    alert('데이터 등록 중 에러가 발생하였습니다.')
+  }
 }
 </script>
 
