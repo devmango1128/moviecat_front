@@ -45,11 +45,11 @@
                     <dd class="this_text_stress _btn_writer" data-writer-id="kbw9****">kbw9****</dd>
                     <dt class="blind">작성일</dt>
                     <dd class="this_text_normal">2024.05.22. 13:10</dd>
-                    <dt class="blind">신고여부</dt>
+                    <!-- <dt class="blind">신고여부</dt>
                     <dd class="this_text_normal">
                       <a href="#" class="this_play_btn _btn_report" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">신고</a>
-                    </dd>
+                    </dd> -->
                     <dd class="this_text_normal">
                       <a href="#" class="this_play_btn _btn_report">삭제</a>
                     </dd>
@@ -71,7 +71,7 @@
           </div>
           <!--등록버튼-->
           <div class="reg-area">
-            <button class="btn-blue" @click="gradeReg">등록</button>
+            <button class="btn-blue" @click="gradeReg" v-if="isLoggedIn">등록</button>
           </div>
         </div>
         <!--paging-->
@@ -90,7 +90,7 @@
   </section>
 
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -119,14 +119,19 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
+import { useAuthStore } from '@/store/auth'
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
+const authStore = useAuthStore()
+
+const isLoggedIn = computed(() => authStore.isLoggedIn)
 
 const gradeReg = () => {
   router.push(`/moviegradeReg/${route.params.boardId}`)

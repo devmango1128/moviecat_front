@@ -192,9 +192,9 @@ const boardUpdate = async () => {
     formData.append('cn', cn.value)
 
     // 파일 추가
-    files.value.forEach((file, index) => {
-        formData.append(`files_${index}`, file)
-    })
+    for (let i = 0; i < files.value.length; i++) {
+        formData.append('files', files.value[i])
+    }
 
     // 삭제할 파일 리스트 추가
     delFileList.value.forEach((item, index) => {

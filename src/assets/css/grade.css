@@ -298,3 +298,44 @@
     letter-spacing: 0px;
     color: #939396;
 }
+
+.movie-tit {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.movie-list .radio-btn{
+    float:left;
+    line-height: 20px;
+    height: 24px;
+}
+
+.deco-movie-list {
+    line-height: 24px;
+    height: 27px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.movie-list span {
+    line-height: 24px;
+}
+
+.movie-list span.movie-tit {
+    margin-left:5px;
+}
+
+.movie-list span.movie-eng-tit {
+    font-weight: normal;
+}
+
+.movie-list span.cm-bar {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
+    margin: 10px 6px 0 7px;
+    background-color: #000000;
+    vertical-align: middle;
+    opacity: 0.3;
+    line-height: 24px;
+}

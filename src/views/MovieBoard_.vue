@@ -84,9 +84,9 @@
 </template>
 
 <script setup>
-import { ref, computed, getCurrentInstance, watch } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { useAuthStore } from '@/store/auth';
+import { ref, computed, getCurrentInstance, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
 const route = useRoute()

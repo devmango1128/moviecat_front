@@ -530,6 +530,10 @@ fieldset {
     padding-right: 10px !important;
 }
 
+.pd-1 {
+    padding: 1px !important
+}
+
 .pd-20 {
     padding : 20px !important
 }
@@ -634,6 +638,10 @@ fieldset {
     font-size: 15px;
 }
 
+.fs-16 {
+    font-size: 16px;
+}
+
 .fs-20 {
     font-size: 20px;
 }
@@ -642,9 +650,28 @@ fieldset {
     font-size: 25px;
 }
 
+
 /*height*/
 .h_48 {
     height:48px !important;
+}
+
+/*background*/
+.bc-gray {
+   background-color:#f6f4f4 !important;
+}
+
+.bc-white {
+    background-color: #fff !important;
+}
+
+/*float*/
+.fl-l {
+    float:left !important;
+}
+
+.fl-r {
+    float:right !important
 }
 
 
