@@ -57,7 +57,8 @@
                     <dt class="blind">작성일</dt>
                     <dd class="this_text_normal">{{ grade.rgstDate }}</dd>
                     <dd class="this_text_normal">
-                      <a role="button" class="this_play_btn _btn_report" @click.prevent="gradeDel(grade)">삭제</a>
+                      <a role="button" class="this_play_btn _btn_report"
+                        v-if="isLoggedIn && grade.mvcId === sessionMvcId" @click.prevent="gradeDel(grade)">삭제</a>
                     </dd>
                   </dl>
                   <div class="cm_sympathy_area">
@@ -107,7 +108,9 @@ const currentPage = ref(1)
 const itemsPerPage = ref(5)
 const pageCount = computed(() => Math.ceil(totalCnt.value / itemsPerPage.value))
 
+const user = computed(() => authStore.getUser || {});
 const isLoggedIn = computed(() => authStore.isLoggedIn)
+const sessionMvcId = computed(() => user.value.mvcId)
 
 const getGradeList = async(page) => {
 
