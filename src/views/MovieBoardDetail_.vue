@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="CommentBox">
                                         <div class="comment_option">
-                                            <h3 class="comment_title"> 댓글 </h3>
+                                            <h3 class="comment_title"> 댓글 {{ commentLength }}</h3>
                                         </div>
                                         <ul class="comment_list" v-if="commentLength > 0">
                                             <li v-for="clist in commentList" :key="clist.cmntId" class="CommentItem">

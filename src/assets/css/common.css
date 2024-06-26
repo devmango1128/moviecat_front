@@ -1008,9 +1008,12 @@ fieldset {
     border-bottom-color: rgba(196, 196, 196, 0.6);
 }
 
-.board-contents .board-content table tbody tr td.writer,
-.board-contents .board-content table tbody tr td.ro {
+.board-contents .board-content table tbody tr td.writer {
     text-align: left;
+}
+
+.board-contents .board-content table tbody tr td.ro {
+    text-align: center;
 }
 
 .board-contents .board-content table tbody tr td .board-tag {
@@ -2389,4 +2392,8 @@ textarea.comment_inbox_text {
 .highlight {
     color: #006ae2;
     font-weight: bold;
+}
+
+.vdo-nm-color {
+    color: #006ae2 !important;
 }
