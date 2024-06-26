@@ -62,7 +62,7 @@
                     </dd>
                   </dl>
                   <div class="cm_sympathy_area">
-                    <button type="button" class="area_button_upvote _btn_upvote" :class="{'state_on' : grade.likeYn}">
+                    <button type="button" class="area_button_upvote _btn_upvote" :class="{'state_on' : grade.likeYn === 'Y'}" @click="likeClick(grade.scrId)">
                       <span class="this_text_number _count_num">{{ grade.likeCnt }}</span>
                     </button>
                   </div>
@@ -96,10 +96,12 @@
 import { useRouter, useRoute } from 'vue-router'
 import { ref, computed, getCurrentInstance } from 'vue'
 import { useAuthStore } from '@/store/auth'
+import { usePathStore } from '@/store/path'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+const pathStore = usePathStore()
 const { proxy } = getCurrentInstance()
 
 const gradeList = ref([])
@@ -115,11 +117,12 @@ const sessionMvcId = computed(() => user.value.mvcId)
 const getGradeList = async(page) => {
 
   try {
+
     const res = await proxy.$axios.get(`/api/scrboard/${route.params.boardId}`, {
       params: { 
         page: page, 
         limit: itemsPerPage.value, 
-        mvcId: authStore.getUser.mvcId
+        mbrId: authStore.getUser.mbrId
       } 
     })
 
@@ -132,6 +135,8 @@ const getGradeList = async(page) => {
 }
 
 const gradeDel = async(grade) => {
+
+  if (!isLoginConfirm()) return
   
   try {
     
@@ -146,7 +151,38 @@ const gradeDel = async(grade) => {
   } catch (err) {
     alert('데이터 삭제 중 에러가 발생했습니다')
   }
+}
 
+const likeClick = async(scrId) => {
+  
+  if (!isLoginConfirm()) return
+
+  try {
+    
+    await proxy.$axios.post('/api/recommend', {
+      rcmdtnSeId: scrId,
+      menuId: pathStore.menuId,
+      mbrId: user.value.mbrId,
+      mbrNm: user.value.mbrNm
+    })
+
+    clickCallback(currentPage.value)
+
+  } catch (error) {
+    alert('에러가 발생하였습니다. 관리자에게 문의해주세요.')
+  }
+}
+
+//로그인 체크
+const isLoginConfirm = () => {
+
+  if (!isLoggedIn.value) {
+    alert('로그인 후 이용해주세요.')
+    router.push('/login')
+    return false
+  }
+
+  return true
 }
 
 getGradeList(currentPage.value)
