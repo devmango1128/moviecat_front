@@ -1,5 +1,5 @@
 <template>
-  <section class="board-contents movie-grade">
+  <section id="top" class="board-contents movie-grade">
     <div class="inner-wrap">
       <div class="login_box">
         <div class="contentsWrap">

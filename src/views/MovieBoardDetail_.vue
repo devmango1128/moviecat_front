@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-    <section class="board-contents">
+    <section id="top" class="board-contents">
         <div class="inner-wrap">
             <div class="login_box">
                 <div class="contentsWrap">

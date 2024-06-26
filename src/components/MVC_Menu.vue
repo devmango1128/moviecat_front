@@ -26,13 +26,14 @@
           </router-link>
         </h1>
         <ul class="gnb-area" id="gnb">
-          <li v-for="menu in menuList" :key="menu.menu_id" class="gnb_menu menu1" :class="{ active: $route.params.boardId == menu.menu_id }">
+          <li v-for="menu in menuList" :key="menu.menu_id" class="gnb_menu menu1"
+            :class="{ active: $route.params.boardId == menu.menu_id }">
             <router-link :to="`${menu.menu_path}/${menu.menu_id}`">{{ menu.menu_nm }}</router-link>
           </li>
         </ul>
         <div class="input-search">
-          <input type="text" class="main-input-search-pc" name="" id="" placeholder="검색어를 입력하세요." title="검색어 입력"
-            autocomplete="off">
+          <input type="text" class="main-input-search-pc" placeholder="검색어를 입력하세요." title="검색어 입력"
+            v-model="srchWord" autocomplete="off">
           <button type="submit" class="btn-search" @click="totalSearch">검색버튼</button>
         </div>
       </div>
@@ -60,6 +61,8 @@ const menuList = ref({})
 const user = computed(() => authStore.getUser)
 const isLoggedIn = computed(() => authStore.isLoggedIn)
 
+const srchWord = ref('')
+
 const goLogout = async () => {
     
     authStore.clearToken()
@@ -70,7 +73,10 @@ const goLogout = async () => {
 
 const totalSearch = () => {
   router.push({
-    path: '/totalSearch'
+    path: '/totalSearch',
+    query : {
+      srchWord : srchWord.value 
+    }
   })
 }
 
@@ -95,6 +101,10 @@ watch(() => route.fullPath, (newPath) => {
     if (route.name === 'movieBoard' || route.name === 'movieGrade') {
       pathStore.setCurrentPath(newPath)
       pathStore.setMenuId(route.params.boardId)
+    }
+
+    if(!newPath.includes('totalSearch')) {
+      srchWord.value = ''
     }
 })
 </script>

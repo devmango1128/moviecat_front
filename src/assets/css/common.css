@@ -2071,7 +2071,7 @@ textarea.comment_inbox_text {
     height: 34px;
     line-height: 36px;
     font-size: 13px;
-    color: #b7b7b7;
+    color: #006ae2;
     border-radius: 6px;
     box-sizing: border-box;
     font-weight: 700;
@@ -2384,4 +2384,9 @@ textarea.comment_inbox_text {
 .withDrawal-area {
     display: flex;
     justify-content: center;
+}
+
+.highlight {
+    color: #006ae2;
+    font-weight: bold;
 }
