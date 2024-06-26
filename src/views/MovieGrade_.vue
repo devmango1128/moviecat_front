@@ -62,7 +62,8 @@
                     </dd>
                   </dl>
                   <div class="cm_sympathy_area">
-                    <button type="button" class="area_button_upvote _btn_upvote" :class="{'state_on' : grade.likeYn === 'Y'}" @click="likeClick(grade.scrId)">
+                    <button type="button" class="area_button_upvote _btn_upvote"
+                      :class="{'state_on' : grade.likeYn === 'Y'}" @click="likeClick(grade.scrId)">
                       <span class="this_text_number _count_num">{{ grade.likeCnt }}</span>
                     </button>
                   </div>
@@ -84,8 +85,9 @@
         </div>
         <!--search-->
         <div class="search-box mg-b50 cs-p">
-          <input type="text" class="input-inbox" placeholder="영화제목을 입력하세요.">
-          <button class="btn-blue">검색</button>
+          <input type="text" class="input-inbox" placeholder="영화제목을 입력하세요." id="searchText" v-model="searchText"
+            maxlength="200">
+          <button class="btn-blue" @click.prevent="searchClick(1)">검색</button>
         </div>
       </div>
     </div>
@@ -113,17 +115,30 @@ const pageCount = computed(() => Math.ceil(totalCnt.value / itemsPerPage.value))
 const user = computed(() => authStore.getUser || {});
 const isLoggedIn = computed(() => authStore.isLoggedIn)
 const sessionMvcId = computed(() => user.value.mvcId)
+const searchText = ref('')
+const isSearch = ref('N')
+
+const searchClick = (page) => {
+  isSearch.value = searchText.value !== '' ? 'Y' : 'N'
+  getGradeList(page)
+}
 
 const getGradeList = async(page) => {
+
+  const params = {
+    page: page,
+    limit: itemsPerPage.value,
+    mbrId: authStore.getUser.mbrId
+  };
+
+  if (isSearch.value === 'Y') {
+    params.srchWord = searchText.value
+  }
 
   try {
 
     const res = await proxy.$axios.get(`/api/scrboard/${route.params.boardId}`, {
-      params: { 
-        page: page, 
-        limit: itemsPerPage.value, 
-        mbrId: authStore.getUser.mbrId
-      } 
+      params: params
     })
 
     gradeList.value = res.data.data
@@ -134,6 +149,7 @@ const getGradeList = async(page) => {
   }
 }
 
+//삭제
 const gradeDel = async(grade) => {
 
   if (!isLoginConfirm()) return
@@ -153,6 +169,7 @@ const gradeDel = async(grade) => {
   }
 }
 
+//좋아요클릭
 const likeClick = async(scrId) => {
   
   if (!isLoginConfirm()) return

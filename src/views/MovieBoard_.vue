@@ -62,19 +62,20 @@
             </div>
             <!--paging-->
             <div class="mg-b50 cs-p">
-              <paginate v-model="currentPage" :page-count="pageCount" :page-range="3" :margin-pages="2" :click-handler="clickCallback"
-                :prev-text="'＜'" :next-text="'＞'" :container-class="'pagination'" :page-class="'page-item'">
+              <paginate v-model="currentPage" :page-count="pageCount" :page-range="3" :margin-pages="2"
+                :click-handler="clickCallback" :prev-text="'＜'" :next-text="'＞'" :container-class="'pagination'"
+                :page-class="'page-item'">
               </paginate>
             </div>
             <!--search-->
             <div class="search-box mg-b50 cs-p">
-              <select class="form-select">
-                <option>제목</option>
-                <option>제목 + 내용</option>
-                <option>작성자</option>
+              <select class="form-select" v-model="searchSelect">
+                <option value="1">제목</option>
+                <option value="2">제목 + 내용</option>
+                <option value="3">작성자</option>
               </select>
-              <input type="text" class="input-inbox" placeholder=" 검색어를 입력하세요.">
-              <button class="btn-blue">검색</button>
+              <input type="text" class="input-inbox" placeholder="검색어를 입력하세요." id="searchText" v-model="searchText" maxlength="240">
+              <button class="btn-blue" @click.prevent="searchClick(1)">검색</button>
             </div>
           </div>
         </div>
@@ -103,11 +104,31 @@ const currentPage = ref(1)
 const itemsPerPage = ref(10)
 const pageCount = computed(() => Math.ceil(totalCnt.value / itemsPerPage.value))
 
+const searchSelect = ref(1)
+const searchText = ref('')
+const isSearch = ref('N')
+
+const searchClick = (page) => {
+  isSearch.value = searchText.value !== '' ? 'Y' : 'N'
+  fetchBoardData(page)
+}
+
 const fetchBoardData = async(page) => {
+  
   try{
 
+    const params = {
+      page: page,
+      limit: itemsPerPage.value
+    };
+
+    if (isSearch.value === 'Y') {
+      params.div = searchSelect.value
+      params.srchWord = searchText.value
+    }
+
     const res = await proxy.$axios.get(`/api/movieboard/${route.params.boardId}`,{
-      params: { page: page, limit: itemsPerPage.value }
+      params: params
     })
 
     boardList.value = res.data.data
