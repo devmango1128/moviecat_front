@@ -46,7 +46,7 @@
                                         </div>
                                     </td>
                                     <td class="writer">
-                                        TODO
+                                        {{ hot.nickNm }}
                                     </td>
                                     <td class="ro">
                                         <span class="rcmdtn">{{ hot.rcmdTotal }}</span>
@@ -86,7 +86,7 @@
                                         </div>
                                     </td>
                                     <td class="writer">
-                                        TODO
+                                        {{ gen.nickNm }}
                                     </td>
                                     <td class="ro">
                                         <span class="rcmdtn">{{ gen.rcmdTotal }}</span>
@@ -143,7 +143,7 @@
                                         </div>
                                     </td>
                                     <td class="writer">
-                                        TODO
+                                        {{ hot.nickNm }}
                                     </td>
                                     <td class="ro">
                                         <span class="rcmdtn">{{ hot.rcmdTotal }}</span>
@@ -183,7 +183,7 @@
                                         </div>
                                     </td>
                                     <td class="writer">
-                                        TODO
+                                        {{ gen.nickNm }}
                                     </td>
                                     <td class="ro">
                                         <span class="rcmdtn">{{ gen.rcmdTotal }}</span>

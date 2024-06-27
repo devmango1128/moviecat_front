@@ -128,7 +128,7 @@ const getGradeList = async(page) => {
   const params = {
     page: page,
     limit: itemsPerPage.value,
-    mbrId: authStore.getUser.mbrId
+    mbrId: authStore.getUser && authStore.getUser.mbrId ? authStore.getUser.mbrId : ''
   };
 
   if (isSearch.value === 'Y') {

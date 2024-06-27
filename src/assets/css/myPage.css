@@ -95,3 +95,9 @@
     top: 30%;
     text-align: center;
 }
+
+.sns-info {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ff4e59
+}
