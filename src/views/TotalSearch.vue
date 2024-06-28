@@ -31,7 +31,7 @@
                                         <th scope="col" class="hide-cell">작성일</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-if="resultList.length > 0">
                                     <tr v-for="result in resultList" :key="result.pstId">
                                         <td class="hide-cell">{{ result.menuNm }}</td>
                                         <td class="tit">
@@ -52,6 +52,13 @@
                                         </td>
                                         <td class="hide-cell">{{ result.nickNm }}</td>
                                         <td class="hide-cell">{{ result.rgstDate }}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-else>
+                                    <tr>
+                                        <td class="ta-c" colspan="4">
+                                            조회 된 데이터가 없습니다.
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
